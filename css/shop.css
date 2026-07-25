@@ -1,0 +1,150 @@
+/* ============================================================
+   SHOP.CSS — Styles for shop.html and category.html
+   (filter sidebar itself reuses .filter-card from pages.css)
+   ============================================================ */
+
+.shop-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.filter-clear-btn {
+  font-size: 0.82rem;
+  color: var(--color-terracotta);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.filter-clear-btn:hover {
+  color: var(--color-terracotta-dark);
+}
+
+.filter-toggle-mobile {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1.5px solid var(--color-brown);
+  border-radius: var(--radius-full);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+
+.filter-toggle-mobile svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Pagination ---------- */
+.shop-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 56px;
+}
+
+.page-btn {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.page-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--color-cream-dark);
+}
+
+.page-btn.is-active {
+  background: var(--color-terracotta);
+  color: var(--color-white);
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* ---------- Mobile filter drawer ---------- */
+@media (max-width: 1024px) {
+  .filter-toggle-mobile {
+    display: flex;
+  }
+
+  .filter-card {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 84vw);
+    z-index: 250;
+    border-radius: 0;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform var(--transition-medium);
+  }
+
+  .filter-card.is-open {
+    transform: translateX(0);
+  }
+
+  .filter-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(75, 54, 33, 0.4);
+    z-index: 240;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-fast);
+  }
+
+  .filter-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .filter-close-mobile {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+
+  .filter-close-mobile button {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    color: var(--color-brown);
+  }
+
+  .filter-close-mobile svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .filter-close-mobile {
+    display: none;
+  }
+}

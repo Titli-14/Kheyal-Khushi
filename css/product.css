@@ -1,0 +1,305 @@
+/* ============================================================
+   PRODUCT.CSS — Styles for product.html (Product Details)
+   ============================================================ */
+
+.product-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* ---------- Gallery ---------- */
+.gallery-main {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  cursor: zoom-in;
+  background: var(--color-cream-dark);
+}
+
+.gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.25s ease-out;
+  transform-origin: center center;
+}
+
+.gallery-main.is-zooming img {
+  transform: scale(1.9);
+  transition: none;
+}
+
+.gallery-zoom-hint {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(255, 248, 242, 0.92);
+  color: var(--color-brown);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.gallery-zoom-hint svg {
+  width: 13px;
+  height: 13px;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.gallery-thumb {
+  width: 78px;
+  height: 78px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast), border-color var(--transition-fast);
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-thumb:hover {
+  opacity: 1;
+}
+
+.gallery-thumb.is-active {
+  opacity: 1;
+  border-color: var(--color-terracotta);
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 30, 18, 0.92);
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-medium);
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 248, 242, 0.15);
+  color: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 248, 242, 0.28);
+}
+
+.lightbox-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---------- Product info panel ---------- */
+.product-detail-info .eyebrow {
+  margin-bottom: 10px;
+}
+
+.product-detail-info h1 {
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+}
+
+.product-detail-info .product-rating {
+  margin: 14px 0;
+}
+
+.product-detail-price {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.product-detail-price .current {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+
+.product-detail-price .original {
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+  text-decoration: line-through;
+}
+
+.product-detail-price .save-badge {
+  background: rgba(140, 166, 140, 0.18);
+  color: var(--color-sage-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.product-detail-desc {
+  color: var(--color-text-light);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.product-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.product-detail-actions .btn-primary {
+  flex: 1;
+  min-width: 200px;
+}
+
+.product-trust-badges {
+  display: flex;
+  gap: 24px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-cream-dark);
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.84rem;
+  color: var(--color-text-light);
+}
+
+.trust-badge svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-terracotta);
+  flex-shrink: 0;
+}
+
+/* ---------- Tabs ---------- */
+.detail-tabs {
+  margin-top: 80px;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--color-cream-dark);
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  padding: 14px 22px;
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--color-text-light);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab-btn:hover {
+  color: var(--color-brown);
+}
+
+.tab-btn.is-active {
+  color: var(--color-terracotta);
+  border-color: var(--color-terracotta);
+}
+
+.tab-panel {
+  display: none;
+  max-width: 760px;
+  color: var(--color-text-light);
+  line-height: 1.75;
+}
+
+.tab-panel.is-active {
+  display: block;
+}
+
+.tab-panel ul {
+  margin-top: 12px;
+  margin-left: 20px;
+}
+
+.tab-panel li {
+  margin-bottom: 8px;
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  max-width: 520px;
+}
+
+.spec-table tr {
+  border-bottom: 1px solid var(--color-cream-dark);
+}
+
+.spec-table td {
+  padding: 12px 0;
+  font-size: 0.92rem;
+}
+
+.spec-table td:first-child {
+  color: var(--color-text-light);
+  width: 40%;
+}
+
+.spec-table td:last-child {
+  color: var(--color-brown);
+  font-weight: 500;
+}
+
+/* ---------- Recently viewed strip ---------- */
+.recently-viewed-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}

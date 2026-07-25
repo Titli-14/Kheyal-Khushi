@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kheyal Khusi — Handmade Art &amp; Craft, Made with Heart</title>
+  <meta name="description" content="Kheyal Khusi is a home for handmade art and craft — pottery, textiles, wall art, jewellery, and home decor made by artisans across Bengal.">
+
+  <!-- ============================================================
+       STYLESHEETS
+       Order matters: global.css first (tokens + shared components),
+       then the page-specific file, then responsive.css last so its
+       media queries can override both at smaller screens.
+       ============================================================ -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Replace with your own favicon in assets/icons/ -->
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+       This same header markup should be copied to every other
+       page so navigation stays consistent across the site.
+       ============================================================ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Kheyal<span>Khusi</span></a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html" class="active">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="category.html">Categories</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" data-search-open aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+          <span class="icon-badge" data-wishlist-badge style="display:none;">0</span>
+        </a>
+        <a href="cart.html" class="icon-btn" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="icon-badge" data-cart-badge style="display:none;">0</span>
+        </a>
+        <a href="login.html" class="icon-btn" aria-label="Account" data-account-link>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke-linecap="round"/></svg>
+        </a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search overlay -->
+  <div class="search-overlay">
+    <form class="search-box" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+      <input type="text" id="site-search-input" name="q" placeholder="Search for pottery, wall art, jewellery..." aria-label="Search products" autocomplete="off">
+      <button type="button" class="search-close" data-search-close aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <main>
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <section class="hero">
+      <!-- Full-bleed hero photo. Replace src with a real studio/artisan photo
+           in assets/images/ before launch — keep the same 1920x1080-ish
+           proportions and warm, low-key lighting for the best overlay contrast. -->
+      <div class="hero-media">
+        <img
+          src="https://picsum.photos/seed/kheyalkhusi-studio/1920/1080"
+          alt="Warm, sunlit artisan craft studio with handmade pottery, candles, dried flowers, and textile pieces arranged on wooden shelves"
+          loading="eager"
+          class="ph-warm">
+      </div>
+
+      <svg class="hero-stitch-ring" viewBox="0 0 130 130" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="65" cy="65" r="60"/>
+      </svg>
+
+      <div class="container hero-content">
+        <div class="hero-text" data-reveal>
+          <p class="eyebrow">Handmade across Bengal</p>
+          <h1 class="hero-title">
+            Art that carries<br>the maker's <em>kheyal</em>
+          </h1>
+          <svg class="hero-underline" viewBox="0 0 200 14" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 10c30-12 60-12 90 0s70 8 106-2" stroke-linecap="round"/>
+          </svg>
+          <p class="hero-desc">
+            Every piece at Kheyal Khusi is shaped, painted, stitched, or thrown
+            by an artisan's hand — never mass-produced. Bring home pottery,
+            textile, and art with a story behind it.
+          </p>
+          <div class="hero-cta-row">
+            <a href="shop.html" class="btn btn-primary">
+              Explore the Collection
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="about.html" class="btn btn-outline on-dark">Our Story</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <strong>120+</strong>
+              <span>Partner Artisans</span>
+            </div>
+            <div class="hero-stat">
+              <strong>4.8/5</strong>
+              <span>Customer Rating</span>
+            </div>
+            <div class="hero-stat">
+              <strong>15k+</strong>
+              <span>Handmade Pieces Sold</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-badge" data-reveal data-reveal-delay="150">
+        <div class="icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <strong>100% Handcrafted</strong>
+          <span>No two pieces are alike</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="stitch-divider">
+        <svg viewBox="0 0 1200 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 10 H1200"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         MARQUEE — a warm, scrolling strip of the values behind the brand
+         ============================================================ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Handmade in small batches</span>
+        <span>Fair wages for artisans</span>
+        <span>Natural materials</span>
+        <span>Rooted in Bengal's craft heritage</span>
+        <span>Handmade in small batches</span>
+        <span>Fair wages for artisans</span>
+        <span>Natural materials</span>
+        <span>Rooted in Bengal's craft heritage</span>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         CATEGORIES
+         ============================================================ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head-row" data-reveal>
+          <div>
+            <p class="eyebrow">Browse by craft</p>
+            <h2 class="section-heading">Find the piece that speaks to you</h2>
+          </div>
+          <a href="category.html" class="btn-text">
+            View all categories
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="category-grid" data-reveal>
+          <a href="category.html?c=wall-art" class="category-card">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-wall-art/450/600" alt="Wall art and prints category" loading="lazy">
+            <span>Wall Art &amp; Prints</span>
+          </a>
+          <a href="category.html?c=pottery" class="category-card">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-pottery-cat/450/600" alt="Pottery and ceramics category" loading="lazy">
+            <span>Pottery &amp; Ceramics</span>
+          </a>
+          <a href="category.html?c=textile" class="category-card">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-textile-cat/450/600" alt="Textile and embroidery category" loading="lazy">
+            <span>Textile &amp; Embroidery</span>
+          </a>
+          <a href="category.html?c=jewellery" class="category-card">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-jewellery-cat/450/600" alt="Jewellery and accessories category" loading="lazy">
+            <span>Jewellery &amp; Accessories</span>
+          </a>
+          <a href="category.html?c=home-decor" class="category-card">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-decor-cat/450/600" alt="Home decor category" loading="lazy">
+            <span>Home Decor</span>
+          </a>
+          <a href="category.html?c=gifts" class="category-card">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-gifts-cat/450/600" alt="Gift hampers category" loading="lazy">
+            <span>Gift Hampers</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         FEATURED PRODUCTS
+         ============================================================ -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-head-row" data-reveal>
+          <div>
+            <p class="eyebrow">Fresh from the workshop</p>
+            <h2 class="section-heading">Featured handmade pieces</h2>
+          </div>
+          <a href="shop.html" class="btn-text">
+            Visit the shop
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="product-grid" data-reveal>
+
+          <!-- Product 1 -->
+          <div class="product-card">
+            <div class="product-media">
+              <span class="product-tag">New</span>
+              <button class="wishlist-btn" data-product-id="p1" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-vase/500/525" alt="Hand-thrown terracotta vase" loading="lazy">
+              <button class="product-quickadd" data-product-id="p1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Pottery</p>
+              <h3 class="product-name">Hand-thrown Terracotta Vase</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(48)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹1,450</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="product-card">
+            <div class="product-media">
+              <span class="product-tag sale">Sale</span>
+              <button class="wishlist-btn" data-product-id="p2" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-stole/500/525" alt="Hand-embroidered kantha stole" loading="lazy">
+              <button class="product-quickadd" data-product-id="p2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Textile</p>
+              <h3 class="product-name">Hand-embroidered Kantha Stole</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.3"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(31)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹980</span>
+                <span class="original">₹1,300</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="product-card">
+            <div class="product-media">
+              <button class="wishlist-btn" data-product-id="p3" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-earrings/500/525" alt="Handcrafted dokra metal earrings" loading="lazy">
+              <button class="product-quickadd" data-product-id="p3">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Jewellery</p>
+              <h3 class="product-name">Dokra Metal Craft Earrings</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(76)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹650</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="product-card">
+            <div class="product-media">
+              <span class="product-tag">New</span>
+              <button class="wishlist-btn" data-product-id="p4" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-madhubani/500/525" alt="Hand-painted Madhubani wall art" loading="lazy">
+              <button class="product-quickadd" data-product-id="p4">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Wall Art</p>
+              <h3 class="product-name">Hand-painted Madhubani Canvas</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(19)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹2,200</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="product-card">
+            <div class="product-media">
+              <button class="wishlist-btn" data-product-id="p5" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-basket/500/525" alt="Hand-woven bamboo storage basket" loading="lazy">
+              <button class="product-quickadd" data-product-id="p5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Home Decor</p>
+              <h3 class="product-name">Hand-woven Bamboo Basket</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.3"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(24)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹890</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="product-card">
+            <div class="product-media">
+              <span class="product-tag sale">Sale</span>
+              <button class="wishlist-btn" data-product-id="p6" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-diyas/500/525" alt="Set of hand-painted clay diyas" loading="lazy">
+              <button class="product-quickadd" data-product-id="p6">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Gift Hampers</p>
+              <h3 class="product-name">Hand-painted Clay Diya Set</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(102)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹420</span>
+                <span class="original">₹550</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 7 -->
+          <div class="product-card">
+            <div class="product-media">
+              <button class="wishlist-btn" data-product-id="p7" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-jutebag/500/525" alt="Hand-stitched jute tote bag" loading="lazy">
+              <button class="product-quickadd" data-product-id="p7">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Textile</p>
+              <h3 class="product-name">Hand-stitched Jute Tote Bag</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.3"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(58)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹550</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 8 -->
+          <div class="product-card">
+            <div class="product-media">
+              <button class="wishlist-btn" data-product-id="p8" aria-label="Add to wishlist">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+              <img class="ph-warm" src="https://picsum.photos/seed/kk-mirror/500/525" alt="Hand-carved wooden mirror frame" loading="lazy">
+              <button class="product-quickadd" data-product-id="p8">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Quick Add
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-category">Home Decor</p>
+              <h3 class="product-name">Hand-carved Wooden Mirror</h3>
+              <div class="product-rating">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 7 1-5 4.9 1.2 6.9L12 17.8 5.7 21l1.2-6.9-5-4.9 7-1L12 2Z"/></svg>
+                <span>(37)</span>
+              </div>
+              <div class="product-price">
+                <span class="current">₹1,850</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         BRAND STORY
+         ============================================================ -->
+    <section class="section story">
+      <div class="container story-inner">
+        <div class="story-visual" data-reveal>
+          <!-- Replace with a real photo of an artisan or workshop -->
+          <img class="ph-warm" src="https://picsum.photos/seed/kk-artisans/700/780" alt="An artisan working at a pottery wheel in a Bengal workshop" loading="lazy">
+        </div>
+        <div data-reveal data-reveal-delay="150">
+          <p class="eyebrow">Why Kheyal Khusi</p>
+          <h2 class="section-heading">Behind every piece, a pair of hands you'll never see — until now</h2>
+          <p class="section-sub">
+            We work directly with artisan families across West Bengal — potters,
+            embroiderers, metal-casters, and weavers — so their craft reaches
+            your home exactly as they intended it: unhurried, and one of a kind.
+          </p>
+
+          <div class="story-points">
+            <div class="story-point">
+              <div class="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <h4>Made by hand, always</h4>
+                <p>No factories, no molds cut short — just skilled hands and time-tested technique.</p>
+              </div>
+            </div>
+            <div class="story-point">
+              <div class="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <h4>Fair pay for the maker</h4>
+                <p>Artisans set their own prices — we simply help their work travel further.</p>
+              </div>
+            </div>
+            <div class="story-point">
+              <div class="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4-4 8-8.5 8-13a8 8 0 1 0-16 0c0 4.5 4 9 8 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              </div>
+              <div>
+                <h4>Rooted in Bengal</h4>
+                <p>From Kolkata's lanes to villages across the state — every region has a craft of its own.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="about.html" class="btn btn-primary" style="margin-top: 36px;">Read Our Full Story</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIALS
+         ============================================================ -->
+    <section class="section testimonials">
+      <div class="container">
+        <div class="testimonial-track-wrap">
+          <div class="testimonial-track">
+
+            <div class="testimonial-slide">
+              <svg class="testimonial-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 5C6 6.5 4 9.5 4 13.5c0 2.5 1.7 4.5 4 4.5s4-2 4-4.5c0-2-1.2-3.5-3-4 .3-1.5 1.5-2.7 3-3.5L9.5 5Zm9 0c-3.5 1.5-5.5 4.5-5.5 8.5 0 2.5 1.7 4.5 4 4.5s4-2 4-4.5c0-2-1.2-3.5-3-4 .3-1.5 1.5-2.7 3-3.5L18.5 5Z"/></svg>
+              <p class="testimonial-text">The kantha stole I ordered looked exactly like the photos — even better in person. You can feel that a real person stitched every line.</p>
+              <p class="testimonial-author">Ananya Bose</p>
+              <p class="testimonial-role">Kolkata</p>
+            </div>
+
+            <div class="testimonial-slide">
+              <svg class="testimonial-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 5C6 6.5 4 9.5 4 13.5c0 2.5 1.7 4.5 4 4.5s4-2 4-4.5c0-2-1.2-3.5-3-4 .3-1.5 1.5-2.7 3-3.5L9.5 5Zm9 0c-3.5 1.5-5.5 4.5-5.5 8.5 0 2.5 1.7 4.5 4 4.5s4-2 4-4.5c0-2-1.2-3.5-3-4 .3-1.5 1.5-2.7 3-3.5L18.5 5Z"/></svg>
+              <p class="testimonial-text">I bought the dokra earrings as a gift and ended up ordering a second pair for myself. Beautiful, unique work — and quick shipping too.</p>
+              <p class="testimonial-author">Ritu Sharma</p>
+              <p class="testimonial-role">Delhi</p>
+            </div>
+
+            <div class="testimonial-slide">
+              <svg class="testimonial-quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M9.5 5C6 6.5 4 9.5 4 13.5c0 2.5 1.7 4.5 4 4.5s4-2 4-4.5c0-2-1.2-3.5-3-4 .3-1.5 1.5-2.7 3-3.5L9.5 5Zm9 0c-3.5 1.5-5.5 4.5-5.5 8.5 0 2.5 1.7 4.5 4 4.5s4-2 4-4.5c0-2-1.2-3.5-3-4 .3-1.5 1.5-2.7 3-3.5L18.5 5Z"/></svg>
+              <p class="testimonial-text">Kheyal Khusi's packaging alone told me they care about the craft — and the terracotta vase has become the centerpiece of my living room.</p>
+              <p class="testimonial-author">Debjani Sen</p>
+              <p class="testimonial-role">Bhatpara</p>
+            </div>
+
+          </div>
+        </div>
+        <div class="testimonial-dots">
+          <button class="is-active" aria-label="Show testimonial 1"></button>
+          <button aria-label="Show testimonial 2"></button>
+          <button aria-label="Show testimonial 3"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INSTAGRAM / SOCIAL GALLERY
+         ============================================================ -->
+    <section class="section" style="padding-bottom: 60px;">
+      <div class="container">
+        <div class="section-head-row" data-reveal>
+          <div>
+            <p class="eyebrow">Follow along</p>
+            <h2 class="section-heading">@kheyalkhusi on Instagram</h2>
+          </div>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="btn-text">
+            Follow us
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="gallery-grid" data-reveal>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="gallery-item">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-insta1/400/400" alt="Instagram post from Kheyal Khusi" loading="lazy">
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="gallery-item">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-insta2/400/400" alt="Instagram post from Kheyal Khusi" loading="lazy">
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="gallery-item">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-insta3/400/400" alt="Instagram post from Kheyal Khusi" loading="lazy">
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="gallery-item">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-insta4/400/400" alt="Instagram post from Kheyal Khusi" loading="lazy">
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="gallery-item">
+            <img class="ph-warm" src="https://picsum.photos/seed/kk-insta5/400/400" alt="Instagram post from Kheyal Khusi" loading="lazy">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         NEWSLETTER
+         ============================================================ -->
+    <div class="container">
+      <div class="newsletter" data-reveal>
+        <div class="newsletter-text">
+          <h3>Get 10% off your first order</h3>
+          <p>Join our list for new arrivals, artisan stories, and early access to limited pieces.</p>
+        </div>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email" required aria-label="Email address">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+       Copy this same footer to every other page.
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Kheyal<span>Khusi</span></a>
+          <p class="footer-tagline">Handmade art and craft from artisans across Bengal — made with kheyal, delivered with khusi.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 17c1-3 1.5-5 1.5-5m0 0c-.5-1 0-3 2-3s2.5 2 2 3.5c-.4 1.5-1.5 2.5-3 2.2m1-2.2c.5-2 1-4.5-1-4.5" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="category.html?c=pottery">Pottery</a></li>
+            <li><a href="category.html?c=textile">Textile</a></li>
+            <li><a href="category.html?c=jewellery">Jewellery</a></li>
+            <li><a href="category.html?c=gifts">Gift Hampers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="returns.html">Returns Policy</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <ul class="footer-contact">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4-4 8-8.5 8-13a8 8 0 1 0-16 0c0 4.5 4 9 8 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span>Bhatpara, West Bengal, India</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.9.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>+91 00000 00000</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>hello@kheyalkhusi.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span data-current-year>2026</span> Kheyal Khusi. All rights reserved.</p>
+        <div class="payment-icons">
+          <span>UPI</span>
+          <span>Cards</span>
+          <span>Razorpay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script src="js/app.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

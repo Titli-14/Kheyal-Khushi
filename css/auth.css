@@ -1,0 +1,355 @@
+/* ============================================================
+   AUTH.CSS — Login, Signup, Forgot Password, and the
+   account-sidebar shared by Profile + Order History.
+   ============================================================ */
+
+/* ---------- Split auth layout ---------- */
+.auth-page {
+  min-height: calc(100vh - 73px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.auth-visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, rgba(43, 30, 18, 0.15) 0%, rgba(43, 30, 18, 0.65) 100%);
+}
+
+.auth-visual-quote {
+  position: absolute;
+  left: 48px;
+  right: 48px;
+  bottom: 56px;
+  z-index: 1;
+  color: var(--color-cream);
+}
+
+.auth-visual-quote p {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.auth-visual-quote span {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: rgba(255, 248, 242, 0.75);
+}
+
+.auth-form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 32px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-card .logo {
+  font-size: 1.7rem;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.auth-card h1 {
+  font-size: 1.7rem;
+}
+
+.auth-card > p.auth-subtitle {
+  color: var(--color-text-light);
+  margin-top: 8px;
+  margin-bottom: 32px;
+}
+
+/* ---------- Form fields ---------- */
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--color-brown);
+  margin-bottom: 8px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--color-cream-dark);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-size: 0.94rem;
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: var(--color-terracotta);
+}
+
+.form-field.has-error input,
+.form-field.has-error textarea {
+  border-color: var(--color-terracotta-dark);
+}
+
+.form-field-error {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--color-terracotta-dark);
+  margin-top: 7px;
+}
+
+.form-field.has-error .form-field-error {
+  display: flex;
+}
+
+.form-field-error svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.password-field-wrap {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-light);
+  width: 20px;
+  height: 20px;
+}
+
+.password-toggle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.form-row-split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 0.86rem;
+}
+
+.form-remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-light);
+}
+
+.form-remember input {
+  accent-color: var(--color-terracotta);
+  width: 15px;
+  height: 15px;
+}
+
+.form-row-split a {
+  color: var(--color-terracotta);
+  font-weight: 500;
+}
+
+.form-row-split a:hover {
+  color: var(--color-terracotta-dark);
+}
+
+.auth-card .btn-primary {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 26px;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.auth-switch a {
+  color: var(--color-terracotta);
+  font-weight: 600;
+}
+
+.auth-switch a:hover {
+  color: var(--color-terracotta-dark);
+}
+
+/* ---------- Form-level banners (success / demo-mode notice) ---------- */
+.form-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  margin-bottom: 24px;
+}
+
+.form-banner.info {
+  background: rgba(140, 166, 140, 0.15);
+  color: var(--color-sage-dark);
+}
+
+.form-banner.warning {
+  background: rgba(201, 162, 39, 0.15);
+  color: #9a7c1c;
+}
+
+.form-banner.error {
+  background: rgba(200, 107, 74, 0.12);
+  color: var(--color-terracotta-dark);
+}
+
+.form-banner svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.form-banner strong {
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* ---------- Account layout (Profile + Order History) ---------- */
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.account-sidebar {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  position: sticky;
+  top: 100px;
+}
+
+.account-avatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-cream-dark);
+}
+
+.account-avatar .avatar-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  background: var(--color-terracotta);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.account-avatar strong {
+  display: block;
+  font-size: 0.94rem;
+  color: var(--color-brown);
+}
+
+.account-avatar span {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+}
+
+.account-nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 4px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.account-nav a svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-text-light);
+  flex-shrink: 0;
+}
+
+.account-nav a:hover,
+.account-nav a.active {
+  background: var(--color-cream-dark);
+  color: var(--color-terracotta);
+}
+
+.account-nav a.active svg,
+.account-nav a:hover svg {
+  color: var(--color-terracotta);
+}
+
+.account-nav .logout-link {
+  color: var(--color-terracotta-dark);
+}
+
+.account-content-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 32px;
+}
+
+.account-content-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 24px;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 20px;
+}

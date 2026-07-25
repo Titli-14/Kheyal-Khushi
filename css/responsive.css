@@ -1,0 +1,328 @@
+/* ============================================================
+   RESPONSIVE.CSS — Breakpoints for laptop, tablet, and mobile.
+   Load this AFTER global.css and the page-specific stylesheet
+   so these rules can override them at smaller widths.
+   ============================================================ */
+
+/* ---------- Laptop / small desktop (<=1200px) ---------- */
+@media (max-width: 1200px) {
+  :root {
+    --section-spacing: 96px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .gallery-item:last-child {
+    display: none;
+  }
+}
+
+/* ---------- Tablet (<=1024px) ---------- */
+@media (max-width: 1024px) {
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    background: var(--color-cream);
+    padding: 16px 20px 24px;
+    border-bottom: 1px solid rgba(75, 54, 33, 0.08);
+    box-shadow: var(--shadow-md);
+  }
+
+  .main-nav.is-open {
+    display: flex;
+  }
+
+  .main-nav a {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(75, 54, 33, 0.06);
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 640px;
+  }
+
+  .hero-badge {
+    left: 24px;
+    right: 24px;
+    max-width: none;
+  }
+
+  .story-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .story-visual {
+    order: -1;
+    max-width: 480px;
+  }
+
+  .cart-layout,
+  .search-layout,
+  .product-detail-layout,
+  .checkout-layout,
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-visual {
+    display: none;
+  }
+
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .account-sidebar {
+    position: static;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+
+  .filter-card {
+    position: static;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .success-steps {
+    flex-wrap: wrap;
+  }
+
+  .success-step {
+    flex: 1 1 45%;
+  }
+
+  .newsletter {
+    flex-direction: column;
+    text-align: center;
+    padding: 48px 32px;
+  }
+
+  .newsletter-text h3,
+  .newsletter-text p {
+    max-width: 100%;
+  }
+}
+
+/* ---------- Mobile / large phone (<=768px) ---------- */
+@media (max-width: 768px) {
+  :root {
+    --section-spacing: 72px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .section-head-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .hero {
+    min-height: 560px;
+  }
+
+  .hero-content {
+    padding: 70px 0;
+  }
+
+  .hero-stats {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stitch-ring {
+    display: none;
+  }
+
+  .hero-badge {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .product-quickadd {
+    display: none;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-item:nth-last-child(-n+2) {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 24px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .testimonial-slide {
+    padding: 0 12px;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .recently-viewed-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-thumb {
+    width: 60px;
+    height: 60px;
+  }
+
+  .product-detail-actions .btn-primary {
+    min-width: 100%;
+  }
+
+  .cart-row {
+    grid-template-columns: 64px 1fr;
+    row-gap: 12px;
+  }
+
+  .cart-row-img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .cart-qty-stepper,
+  .cart-row-price {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .cart-row-price {
+    text-align: left;
+  }
+
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-form-side {
+    padding: 48px 20px;
+  }
+
+  .order-meta {
+    gap: 18px;
+  }
+
+  .address-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-card-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-card-foot {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Small phone (<=480px) ---------- */
+@media (max-width: 480px) {
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta-row .btn {
+    width: 100%;
+  }
+
+  .category-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-item:nth-last-child(-n+3) {
+    display: none;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    border-radius: var(--radius-md);
+    padding: 10px;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+  }
+
+  .back-to-top {
+    bottom: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+  }
+}

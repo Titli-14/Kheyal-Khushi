@@ -1,0 +1,736 @@
+/* ============================================================
+   HOME.CSS — Styles used only on index.html
+   ============================================================ */
+
+/* ---------- Warm placeholder-photo filter ----------
+   Applied to every placeholder <img> on the site so generic
+   stock/placeholder photography reads as one cohesive, warm
+   boutique aesthetic instead of a grab-bag of random photos.
+   Safe to remove per-image once real product photography is in. */
+.ph-warm {
+  filter: sepia(0.22) saturate(1.15) brightness(0.97) hue-rotate(-6deg);
+}
+
+/* ---------- Hero (full-bleed photo) ---------- */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--color-cream);
+}
+
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  /* Slow, subtle "Ken Burns" drift so the hero never feels static */
+  animation: hero-ken-burns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-ken-burns {
+  from { transform: scale(1.02) translate(0, 0); }
+  to   { transform: scale(1.12) translate(-1%, -1%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media img {
+    animation: none;
+  }
+}
+
+/* Dark, warm-toned gradient so light text stays readable over any photo */
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(43, 30, 18, 0.55) 0%, rgba(43, 30, 18, 0.35) 35%, rgba(43, 30, 18, 0.78) 100%),
+    linear-gradient(100deg, rgba(43, 30, 18, 0.75) 0%, rgba(43, 30, 18, 0.25) 55%, rgba(43, 30, 18, 0.15) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 100px 0 90px;
+  width: 100%;
+}
+
+.hero-text {
+  max-width: 620px;
+}
+
+.hero-text .eyebrow {
+  margin-bottom: 20px;
+  color: var(--color-gold);
+}
+
+.hero-text .eyebrow::before {
+  background: var(--color-gold);
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.08;
+  color: var(--color-cream);
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--color-gold);
+  position: relative;
+}
+
+.hero-underline {
+  display: block;
+  width: 200px;
+  max-width: 60%;
+  height: auto;
+  margin-top: 6px;
+}
+
+.hero-underline path {
+  fill: none;
+  stroke: var(--color-gold);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.hero-desc {
+  margin-top: 24px;
+  font-size: 1.1rem;
+  color: rgba(255, 248, 242, 0.88);
+  max-width: 460px;
+}
+
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 38px;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 56px;
+  flex-wrap: wrap;
+}
+
+.hero-stat strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--color-cream);
+}
+
+.hero-stat span {
+  font-size: 0.82rem;
+  color: rgba(255, 248, 242, 0.7);
+}
+
+/* Floating "handmade" badge sitting on top of the photo */
+.hero-badge {
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  z-index: 1;
+  background: rgba(255, 248, 242, 0.96);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 230px;
+}
+
+.hero-badge .icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-badge .icon-circle svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-white);
+}
+
+.hero-badge strong {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--color-brown);
+}
+
+.hero-badge span {
+  font-size: 0.76rem;
+  color: var(--color-text-light);
+}
+
+/* Decorative kantha-stitch ring, tucked in the top-right corner of the photo */
+.hero-stitch-ring {
+  position: absolute;
+  top: 28px;
+  right: 5%;
+  width: 110px;
+  height: 110px;
+  z-index: 1;
+  animation: spin-slow 26s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-stitch-ring circle {
+  fill: none;
+  stroke: var(--color-cream);
+  stroke-width: 2;
+  stroke-dasharray: 1 9;
+  opacity: 0.6;
+}
+
+/* ---------- Marquee strip ---------- */
+.marquee {
+  background: var(--color-brown);
+  padding: 16px 0;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 60px;
+  width: max-content;
+  animation: marquee-scroll 28s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track span {
+  color: var(--color-cream);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.marquee-track span::after {
+  content: "✺";
+  color: var(--color-gold);
+  font-style: normal;
+}
+
+/* ---------- Categories ---------- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.category-card:hover img {
+  transform: scale(1.08);
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(75, 54, 33, 0.78) 0%, rgba(75, 54, 33, 0.05) 55%);
+}
+
+.category-card span {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  right: 14px;
+  color: var(--color-cream);
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+/* ---------- Product grid ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.product-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
+}
+
+.product-media {
+  position: relative;
+  aspect-ratio: 1 / 1.05;
+  overflow: hidden;
+  background: var(--color-cream-dark);
+}
+
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.product-card:hover .product-media img {
+  transform: scale(1.06);
+}
+
+.product-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--color-sage);
+  color: var(--color-white);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 5px 11px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.product-tag.sale {
+  background: var(--color-terracotta);
+}
+
+.wishlist-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 248, 242, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.wishlist-btn:hover {
+  transform: scale(1.08);
+}
+
+.wishlist-btn svg {
+  width: 17px;
+  height: 17px;
+  color: var(--color-brown);
+  transition: color var(--transition-fast);
+}
+
+.wishlist-btn.is-active svg {
+  color: var(--color-terracotta);
+  fill: var(--color-terracotta);
+}
+
+.product-quickadd {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -50px;
+  background: var(--color-brown);
+  color: var(--color-cream);
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: bottom var(--transition-medium), background var(--transition-fast);
+}
+
+.product-quickadd svg {
+  width: 15px;
+  height: 15px;
+}
+
+.product-card:hover .product-quickadd {
+  bottom: 12px;
+}
+
+.product-quickadd:hover {
+  background: var(--color-terracotta);
+}
+
+.product-info {
+  padding: 18px 18px 22px;
+}
+
+.product-category {
+  font-size: 0.74rem;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.product-name {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.product-rating svg {
+  width: 13px;
+  height: 13px;
+  color: var(--color-gold);
+}
+
+.product-rating span {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  margin-left: 4px;
+}
+
+.product-price {
+  margin-top: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.product-price .current {
+  font-weight: 600;
+  color: var(--color-brown);
+  font-size: 1.05rem;
+}
+
+.product-price .original {
+  font-size: 0.86rem;
+  color: var(--color-text-light);
+  text-decoration: line-through;
+}
+
+/* ---------- Brand story ---------- */
+.story {
+  background: var(--color-cream-dark);
+}
+
+.story-inner {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.story-visual {
+  position: relative;
+}
+
+.story-visual img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.story-visual::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--color-terracotta);
+  opacity: 0.4;
+  border-radius: var(--radius-lg);
+  z-index: -1;
+}
+
+.story-points {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 32px;
+}
+
+.story-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.story-point .icon-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.story-point .icon-circle svg {
+  width: 20px;
+  height: 20px;
+  color: var(--color-terracotta);
+}
+
+.story-point h4 {
+  font-size: 1.02rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.story-point p {
+  color: var(--color-text-light);
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
+
+/* ---------- Testimonials ---------- */
+.testimonials {
+  background: var(--color-brown);
+  color: var(--color-text-on-dark);
+  position: relative;
+}
+
+.testimonial-track-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-track {
+  display: flex;
+  transition: transform var(--transition-slow);
+}
+
+.testimonial-slide {
+  min-width: 100%;
+  text-align: center;
+  padding: 0 60px;
+}
+
+.testimonial-quote-icon {
+  width: 34px;
+  height: 34px;
+  color: var(--color-gold);
+  margin: 0 auto 24px;
+}
+
+.testimonial-text {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.testimonial-author {
+  margin-top: 28px;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.testimonial-role {
+  font-size: 0.82rem;
+  color: rgba(255, 248, 242, 0.55);
+  margin-top: 2px;
+}
+
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.testimonial-dots button {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 248, 242, 0.3);
+  transition: background var(--transition-fast), width var(--transition-fast);
+}
+
+.testimonial-dots button.is-active {
+  background: var(--color-gold);
+  width: 26px;
+  border-radius: var(--radius-full);
+}
+
+/* ---------- Instagram gallery ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-medium);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(75, 54, 33, 0.15);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Newsletter ---------- */
+.newsletter {
+  background: var(--color-sage);
+  border-radius: var(--radius-lg);
+  padding: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-image: linear-gradient(to right, var(--color-cream) 50%, transparent 0);
+  background-size: 14px 3px;
+  opacity: 0.5;
+}
+
+.newsletter-text h3 {
+  color: var(--color-white);
+  font-size: 1.9rem;
+  max-width: 380px;
+}
+
+.newsletter-text p {
+  color: rgba(255, 248, 242, 0.85);
+  margin-top: 10px;
+  max-width: 380px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  background: var(--color-white);
+  padding: 6px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px 18px;
+  font-size: 0.94rem;
+  color: var(--color-text);
+}
+
+.newsletter-form input:focus {
+  outline: none;
+}
+
+.newsletter-form button {
+  background: var(--color-brown);
+  color: var(--color-cream);
+  padding: 12px 26px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+}
+
+.newsletter-form button:hover {
+  background: var(--color-terracotta);
+}

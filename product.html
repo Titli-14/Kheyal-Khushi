@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Kheyal Khusi</title>
+  <meta name="description" content="Handmade product details from Kheyal Khusi.">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" href="assets/icons/favicon.png" type="image/png">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Kheyal<span>Khusi</span></a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="category.html">Categories</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" data-search-open aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+        </button>
+        <a href="wishlist.html" class="icon-btn" aria-label="Wishlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+          <span class="icon-badge" data-wishlist-badge style="display:none;">0</span>
+        </a>
+        <a href="cart.html" class="icon-btn" aria-label="Shopping cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="icon-badge" data-cart-badge style="display:none;">0</span>
+        </a>
+        <a href="login.html" class="icon-btn" aria-label="Account" data-account-link>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke-linecap="round"/></svg>
+        </a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay">
+    <form class="search-box" role="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+      <input type="text" id="site-search-input" name="q" placeholder="Search for pottery, wall art, jewellery..." aria-label="Search products" autocomplete="off">
+      <button type="button" class="search-close" data-search-close aria-label="Close search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <main>
+    <div class="page-banner" style="padding: 28px 0;">
+      <div class="container">
+        <nav class="breadcrumb">
+          <a href="index.html">Home</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <a href="shop.html">Shop</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="current" data-detail-breadcrumb>Product</span>
+        </nav>
+      </div>
+    </div>
+
+    <section class="section" style="padding-top: 44px;" data-product-detail-page>
+      <div class="container">
+
+        <div class="product-detail-layout">
+
+          <!-- Gallery -->
+          <div>
+            <div class="gallery-main" data-gallery-main>
+              <img data-gallery-main-img src="" alt="">
+              <span class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg>
+                Hover to zoom · Click to enlarge
+              </span>
+            </div>
+            <div class="gallery-thumbs" data-gallery-thumbs></div>
+          </div>
+
+          <!-- Info -->
+          <div class="product-detail-info">
+            <p class="eyebrow" data-detail-category>Category</p>
+            <h1 data-detail-name>Product Name</h1>
+
+            <div class="product-rating" data-detail-rating></div>
+
+            <div class="product-detail-price" data-detail-price></div>
+
+            <p class="product-detail-desc" data-detail-desc></p>
+
+            <div class="product-detail-actions">
+              <div class="cart-qty-stepper">
+                <button type="button" data-detail-qty-decrease aria-label="Decrease quantity">−</button>
+                <span data-detail-qty-value>1</span>
+                <button type="button" data-detail-qty-increase aria-label="Increase quantity">+</button>
+              </div>
+              <button type="button" class="btn btn-primary" data-detail-add-to-cart>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Add to Cart
+              </button>
+              <button type="button" class="icon-btn wishlist-btn" data-detail-wishlist aria-label="Add to wishlist" style="position: static; width:52px; height:52px; background: var(--color-cream-dark);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+
+            <div class="product-trust-badges">
+              <div class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                100% Handmade
+              </div>
+              <div class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h3l3 3v5h-6V8Z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/></svg>
+                Ships in 2–3 days
+              </div>
+              <div class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c-4-1.5-8-5.5-8-11V5l8-3 8 3v6c0 5.5-4 9.5-8 11Z"/></svg>
+                7-day returns
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Tabs -->
+        <div class="detail-tabs">
+          <div class="tab-buttons">
+            <button class="tab-btn is-active" data-tab="description">Description</button>
+            <button class="tab-btn" data-tab="specifications">Specifications</button>
+            <button class="tab-btn" data-tab="shipping">Shipping &amp; Returns</button>
+          </div>
+          <div class="tab-panel is-active" data-tab-panel="description"></div>
+          <div class="tab-panel" data-tab-panel="specifications"></div>
+          <div class="tab-panel" data-tab-panel="shipping"></div>
+        </div>
+
+        <!-- Related products -->
+        <div style="margin-top: 90px;" data-related-section>
+          <div class="section-head-row">
+            <div>
+              <p class="eyebrow">You might also like</p>
+              <h2 class="section-heading">Related Pieces</h2>
+            </div>
+          </div>
+          <div class="product-grid" data-related-products></div>
+        </div>
+
+        <!-- Recently viewed -->
+        <div style="margin-top: 90px;" data-recently-viewed-section>
+          <div class="section-head-row">
+            <div>
+              <p class="eyebrow">Your history</p>
+              <h2 class="section-heading">Recently Viewed</h2>
+            </div>
+          </div>
+          <div class="recently-viewed-strip" data-recently-viewed></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Lightbox for full-size image viewing -->
+    <div class="lightbox" data-lightbox>
+      <button class="lightbox-close" data-lightbox-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/></svg>
+      </button>
+      <img data-lightbox-img src="" alt="">
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Kheyal<span>Khusi</span></a>
+          <p class="footer-tagline">Handmade art and craft from artisans across Bengal — made with kheyal, delivered with khusi.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2Z" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 17c1-3 1.5-5 1.5-5m0 0c-.5-1 0-3 2-3s2.5 2 2 3.5c-.4 1.5-1.5 2.5-3 2.2m1-2.2c.5-2 1-4.5-1-4.5" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="category.html?c=pottery">Pottery</a></li>
+            <li><a href="category.html?c=textile">Textile</a></li>
+            <li><a href="category.html?c=jewellery">Jewellery</a></li>
+            <li><a href="category.html?c=gifts">Gift Hampers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="returns.html">Returns Policy</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Get in Touch</h4>
+          <ul class="footer-contact">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4-4 8-8.5 8-13a8 8 0 1 0-16 0c0 4.5 4 9 8 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span>Bhatpara, West Bengal, India</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.9.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>+91 00000 00000</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>hello@kheyalkhusi.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span data-current-year>2026</span> Kheyal Khusi. All rights reserved.</p>
+        <div class="payment-icons">
+          <span>UPI</span>
+          <span>Cards</span>
+          <span>Razorpay</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="js/app.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>
