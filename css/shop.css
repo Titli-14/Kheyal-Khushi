@@ -3,6 +3,22 @@
    (filter sidebar itself reuses .filter-card from pages.css)
    ============================================================ */
 
+/* ---------- Product grid (sidebar layout) ----------
+   home.css's base .product-grid is `repeat(4, 1fr)`, tuned for
+   full-width homepage sections. Here the grid sits in the narrower
+   "results" column next to the 240px filter sidebar (see
+   .search-layout in pages.css), so reusing that fixed 4-column
+   count squeezed every card. This scoped selector is more specific
+   than the plain `.product-grid` rules in home.css/responsive.css,
+   so it wins without needing !important. auto-fit/minmax sizes
+   columns off the real available width at every breakpoint —
+   4 cards per row on desktop, stepping down to 3, then 2, then 1
+   as the sidebar+content column narrows. */
+.search-layout .product-grid {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
 .shop-toolbar {
   display: flex;
   align-items: center;
@@ -84,6 +100,17 @@
 }
 
 /* ---------- Mobile filter drawer ---------- */
+.filter-backdrop {
+  /* Hidden by default on desktop. It's the first child inside
+     .search-layout (a grid container), so without this it was
+     rendering as an unstyled block-level div and being placed as
+     an actual grid item — stealing the sidebar's 240px column and
+     pushing .filter-card into the wide column instead, which then
+     shoved .product-grid into a squeezed leftover row. Only give it
+     layout again inside the mobile drawer media query below. */
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .filter-toggle-mobile {
     display: flex;
@@ -107,6 +134,7 @@
   }
 
   .filter-backdrop {
+    display: block;
     position: fixed;
     inset: 0;
     background: rgba(75, 54, 33, 0.4);
