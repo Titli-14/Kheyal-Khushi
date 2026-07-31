@@ -38,19 +38,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('[data-checkout-page]');
   if (!page) return;
 
-  const totals = computeCartTotals();
+  console.log('[Checkout] Waiting for cart to load...');
 
-  // An empty cart has nothing to check out — send them back.
-  if (totals.items.length === 0) {
-    window.location.href = 'cart.html';
-    return;
-  }
+  window.addEventListener('kkCartReady', () => {
+    console.log('[Checkout] Cart ready:', getCart());
 
-  renderOrderSummary(page, totals);
-  prefillSavedAddress(page);
-  initPaymentMethodToggle(page);
-  initPlaceOrder(page, totals);
+    const totals = computeCartTotals();
+
+    console.log('[Checkout] Totals:', totals);
+
+    if (totals.items.length === 0) {
+      console.warn('[Checkout] Cart is genuinely empty');
+      window.location.href = 'cart.html';
+      return;
+    }
+
+    renderOrderSummary(page, totals);
+    prefillSavedAddress(page);
+    initPaymentMethodToggle(page);
+    initPlaceOrder(page, totals);
+  }, { once: true });
 });
+
+
 
 /* ---------- Order summary sidebar ---------- */
 function renderOrderSummary(page, totals) {
@@ -212,12 +222,54 @@ async function saveOrder(address, totals, paymentMethod, paymentId) {
 }
 
 async function completeOrder(page, address, totals, paymentMethod, paymentId) {
+  const {
+    auth,
+    db,
+    doc,
+    setDoc,
+    serverTimestamp,
+    isFirebaseConfigured
+  } = window.kkFirebase;
+
+  // Always save locally so checkout can be pre-filled next time
   localStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(address));
+
+  // Save/update customer details in Firestore
+  if (isFirebaseConfigured && auth?.currentUser?.uid) {
+    const uid = auth.currentUser.uid;
+
+    try {
+      await setDoc(
+        doc(db, 'users', uid),
+        {
+          name: address.fullName,
+          phone: address.phone,
+          city: address.city,
+          address: {
+            addressLine1: address.addressLine1,
+            addressLine2: address.addressLine2 || '',
+            city: address.city,
+            state: address.state,
+            pincode: address.pincode
+          },
+          updatedAt: serverTimestamp()
+        },
+        { merge: true }
+      );
+
+      console.log('[Firestore] Customer details updated');
+    } catch (error) {
+      console.error('[Firestore] Failed to update customer:', error);
+      throw error;
+    }
+  }
+
+  // Save actual order
   await saveOrder(address, totals, paymentMethod, paymentId);
+
   clearCart();
   window.location.href = 'thank-you.html';
 }
-
 /* ---------- Place Order button ---------- */
 function initPlaceOrder(page, totals) {
   const placeOrderBtn = page.querySelector('[data-place-order]');

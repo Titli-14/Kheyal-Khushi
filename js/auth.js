@@ -181,7 +181,7 @@ function initSignupForm() {
         try {
           // merge: true so a retry after a previous partial failure
           // doesn't clobber any fields that did make it through.
-          await setDoc(doc(db, "users", credential.user.uid), {
+          setDoc(doc(db, "users", credential.user.uid), {
             name: name,
             email: email,
             phone: "",

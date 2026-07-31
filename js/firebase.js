@@ -31,7 +31,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 import {
-  initializeFirestore, doc, getDoc, setDoc, addDoc, collection, query, where, getDocs, serverTimestamp
+  getFirestore, doc, getDoc, setDoc, addDoc, collection, query, where, getDocs, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-storage.js";
 
@@ -65,11 +65,8 @@ const auth = getAuth(app);
    setups. If you never saw the reconnect-loop issue, this is
    still safe to leave in.
    ------------------------------------------------------------ */
-const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true,
-  experimentalAutoDetectLongPolling: false,
-  useFetchStreams: false
-});
+const db = getFirestore(app,"default");
+
 
 const storage = getStorage(app);
 

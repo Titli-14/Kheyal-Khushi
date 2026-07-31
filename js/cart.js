@@ -173,8 +173,10 @@ async function loadCartForUser(uid) {
   }
 
   cartCache = remoteCart;
-  updateCartBadge();
-  renderCartPage();
+updateCartBadge();
+renderCartPage();
+
+window.dispatchEvent(new CustomEvent('kkCartReady'));
 }
 
 /** Called when someone signs out — cart cache goes back to (empty) localStorage-backed. */
@@ -183,7 +185,10 @@ function loadCartForGuest() {
   cartCache = readLocalCart();
   updateCartBadge();
   renderCartPage();
+
+  window.dispatchEvent(new CustomEvent('kkCartReady'));
 }
+
 
 function initCartAuthSync() {
   const { auth, onAuthStateChanged, isFirebaseConfigured } = window.kkFirebase;
@@ -191,11 +196,24 @@ function initCartAuthSync() {
     loadCartForGuest();
     return;
   }
-  onAuthStateChanged(auth, (user) => {
-    if (user) loadCartForUser(user.uid);
-    else loadCartForGuest();
-  });
+  onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    try {
+      await loadCartForUser(user.uid);
+    } catch (err) {
+      console.error('[Cart] Could not load Firestore cart:', err);
+
+      cartCurrentUid = null;
+      cartCache = readLocalCart();
+      updateCartBadge();
+      renderCartPage();
+    }
+  } else {
+    loadCartForGuest();
+  }
+});
 }
+
 
 /** Adds a product to the cart, or increases its quantity if already present. */
 function addToCart(productId, qty = 1) {

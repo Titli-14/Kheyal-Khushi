@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Account — Kheyal Khusi</title>
+  <title>My Account — Kheyal Khushi</title>
   <meta name="description" content="Manage your Kheyal Khusi account details.">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/home.css">
@@ -149,7 +149,7 @@
     </section>
 
     <script type="module">
-      console.log('%c[Kheyal Khusi] profile.html — build v4 (retry-wrapped save) loaded', 'color:#C86B4A;font-weight:bold;');
+      console.log('%c[Kheyal Khusi] profile.html loaded', 'color:#C86B4A;font-weight:bold;');
 
       import { auth, db, isFirebaseConfigured } from './js/firebase.js';
       import { requireAuth, demoCurrentUser } from './js/auth.js';
@@ -220,9 +220,9 @@
         }
 
         try {
-          console.log('[Kheyal Khusi] Save clicked. isFirebaseConfigured:', isFirebaseConfigured, '| auth.currentUser:', auth.currentUser?.uid || null);
+          console.log('[Kheyal Khushi] Save clicked. isFirebaseConfigured:', isFirebaseConfigured, '| auth.currentUser:', auth.currentUser?.uid || null);
           if (isFirebaseConfigured && auth.currentUser) {
-            await updateProfile(auth.currentUser, { displayName: newName });
+            updateProfile(auth.currentUser, { displayName: newName });
             // merge: true — only touches name/phone/city, leaves
             // addresses/role/createdAt (written at signup) untouched.
             // Awaited directly (no retry wrapper): withOfflineRetry exists
@@ -231,7 +231,7 @@
             // succeed or surface a real error — silently retrying it here
             // would just hide that error behind extra delay.
             console.log('[Firestore] Saving profile');
-            await setDoc(doc(db, 'users', auth.currentUser.uid), {
+            setDoc(doc(db, 'users', auth.currentUser.uid), {
               name: newName,
               phone: newPhone,
               city: newCity,

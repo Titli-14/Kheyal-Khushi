@@ -80,7 +80,7 @@
             </div>
             <div class="row">
               <span>Payment Method</span>
-              <span data-order-payment>Razorpay (UPI)</span>
+              <span data-order-payment></span>
             </div>
             <div class="row">
               <span>Order Total</span>
@@ -121,29 +121,18 @@
       // Fills in the real order details if someone just checked out;
       // otherwise leaves the sample numbers above so the page still
       // looks right if visited directly.
-      document.addEventListener('DOMContentLoaded', () => {
-        const orderId = localStorage.getItem('kheyalkhusi_last_order_id');
-        if (!orderId) return;
+     const paymentEl = document.querySelector('[data-order-payment]');
 
-        const orders = JSON.parse(localStorage.getItem('kheyalkhusi_orders') || '[]');
-        const order = orders.find((o) => o.id === orderId);
-        if (!order) return;
+const paymentMethod =
+  localStorage.getItem('kheyalkhusi_last_payment_method');
 
-        const setText = (selector, value) => {
-          const el = document.querySelector(selector);
-          if (el) el.textContent = value;
-        };
-
-        const paymentLabels = { razorpay: 'Razorpay', cod: 'Cash on Delivery' };
-
-        setText('[data-order-id]', `#${order.id}`);
-        setText('[data-order-payment]', paymentLabels[order.paymentMethod] || order.paymentMethod);
-        setText('[data-order-total]', `₹${order.total.toLocaleString('en-IN')}`);
-
-        // Clear it so refreshing/revisiting this page later (e.g. from
-        // a bookmark) doesn't keep showing the same order indefinitely.
-        localStorage.removeItem('kheyalkhusi_last_order_id');
-      });
+if (paymentEl) {
+  if (paymentMethod === 'cod') {
+    paymentEl.textContent = 'Cash on Delivery (COD)';
+  } else if (paymentMethod === 'razorpay') {
+    paymentEl.textContent = 'Razorpay (Online Payment)';
+  }
+}
     </script>
 
   </main>
