@@ -1,0 +1,294 @@
+/* ============================================================
+   CATEGORY.CSS — Visual collection landing page
+   Loaded only by category.html so Shop keeps its own layout.
+   ============================================================ */
+
+.category-page {
+  background: var(--color-cream);
+}
+
+.category-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 70px 0 76px;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(200, 107, 74, 0.14), transparent 27%),
+    radial-gradient(circle at 8% 90%, rgba(140, 166, 140, 0.16), transparent 25%),
+    var(--color-cream-dark);
+}
+
+.category-hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background-image: linear-gradient(to right, var(--color-terracotta) 50%, transparent 0);
+  background-size: 14px 3px;
+  opacity: 0.32;
+}
+
+.category-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.category-hero .breadcrumb {
+  margin-bottom: 34px;
+}
+
+.category-hero h1 {
+  max-width: 760px;
+  font-size: clamp(2.7rem, 6vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.category-hero p {
+  max-width: 650px;
+  margin-top: 24px;
+  color: var(--color-text-light);
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+.category-collections.section {
+  padding-top: 84px;
+}
+
+.category-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 38px;
+}
+
+.category-intro h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.category-intro > p {
+  max-width: 470px;
+  color: var(--color-text-light);
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: 245px;
+  gap: 20px;
+}
+
+.collection-card {
+  position: relative;
+  grid-column: span 4;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  background: var(--color-brown);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-white);
+}
+
+.collection-card--wide {
+  grid-column: span 8;
+}
+
+.collection-card--tall {
+  grid-row: span 2;
+}
+
+.collection-card-media,
+.collection-card-media img,
+.collection-card-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.collection-card-media {
+  z-index: -2;
+}
+
+.collection-card-media img {
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collection-card-overlay {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(35, 24, 15, 0.04) 20%, rgba(35, 24, 15, 0.76) 100%);
+  transition: background var(--transition-medium);
+}
+
+.collection-card-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px;
+}
+
+.collection-number {
+  display: inline-block;
+  margin-bottom: 9px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgba(255, 248, 242, 0.72);
+}
+
+.collection-card h3 {
+  color: var(--color-white);
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  margin-bottom: 7px;
+}
+
+.collection-card p {
+  max-width: 440px;
+  color: rgba(255, 248, 242, 0.82);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.collection-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 248, 242, 0.7);
+  padding-bottom: 2px;
+}
+
+.collection-link span {
+  transition: transform var(--transition-fast);
+}
+
+.collection-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.collection-card:hover .collection-card-media img {
+  transform: scale(1.055);
+}
+
+.collection-card:hover .collection-card-overlay {
+  background:
+    linear-gradient(180deg, rgba(35, 24, 15, 0.02) 10%, rgba(35, 24, 15, 0.84) 100%);
+}
+
+.collection-card:hover .collection-link span {
+  transform: translateX(5px);
+}
+
+.category-shop-all {
+  margin-top: 54px;
+  padding: 30px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border: 1px solid rgba(75, 54, 33, 0.09);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+.category-shop-all > span {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--color-brown);
+}
+
+@media (max-width: 1024px) {
+  .category-hero {
+    padding: 58px 0 62px;
+  }
+
+  .category-intro {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 330px;
+  }
+
+  .collection-card,
+  .collection-card--wide {
+    grid-column: span 1;
+  }
+
+  .collection-card--tall {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-collections.section {
+    padding-top: 62px;
+  }
+
+  .category-hero .breadcrumb {
+    margin-bottom: 24px;
+  }
+
+  .collection-grid {
+    grid-auto-rows: 285px;
+    gap: 14px;
+  }
+
+  .collection-card {
+    border-radius: 20px;
+  }
+
+  .collection-card-content {
+    padding: 22px;
+  }
+
+  .collection-card p {
+    font-size: 0.8rem;
+  }
+
+  .category-shop-all {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .category-hero {
+    padding: 42px 0 50px;
+  }
+
+  .category-hero h1 {
+    font-size: clamp(2.4rem, 13vw, 3.6rem);
+  }
+
+  .collection-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 360px;
+  }
+
+  .collection-card,
+  .collection-card--wide {
+    grid-column: 1;
+  }
+
+  .category-shop-all {
+    padding: 24px;
+  }
+
+  .category-shop-all .btn {
+    width: 100%;
+  }
+}
