@@ -1,1772 +1,852 @@
 /* ==========================================================
-   KHEYAL KHUSI ADMIN PANEL
-   Dashboard Stylesheet
-   Theme: Luxury Handmade
+   KHEYAL KHUSI ADMIN PANEL — DASHBOARD STYLESHEET
+   Page-specific styles for dashboard.html only.
+
+   Everything shared across admin pages (reset, scrollbar,
+   :root design tokens, .admin-layout / .main-content /
+   .sidebar / .sidebar-overlay / .topbar / .page-title /
+   .page-subtitle, reduced-motion) already lives in
+   admin-global.css — it is NOT redefined here. Load order
+   should be admin-global.css first, then dashboard.css, so
+   these page rules can win ties where needed.
+
+   All colors/spacing/radius below reference the --admin-*
+   tokens defined in admin-global.css so the two files never
+   drift out of sync again.
 ========================================================== */
+
 
 
 /* ==========================================================
-   1. DESIGN TOKENS
+   1. DASHBOARD-ONLY TOKENS
+   (accents with no equivalent in the shared token set)
 ========================================================== */
 
-:root{
-
-    /* Brand Colors */
-
-    --color-primary:#7A5C46;
-    --color-primary-dark:#5F4634;
-
-    --color-bg:#F8F3EC;
-    --color-surface:#FFFFFF;
-
-    --color-border:#E8DDD1;
-
-    --color-heading:#3D2B1F;
-    --color-text:#6F6257;
-    --color-muted:#A79A8E;
-
-    --color-success:#4F8A5B;
-    --color-success-bg:#EAF3EC;
-
-    --color-warning:#D39A32;
-    --color-warning-bg:#FBF1DF;
-
-    --color-danger:#C75C5C;
-    --color-danger-bg:#FBEAEA;
-
-    --color-info:#5B7AA6;
-    --color-info-bg:#E9EFF7;
-
-
-
-    /* Typography */
-
-    --font-heading:'Playfair Display', serif;
-    --font-body:'Poppins', sans-serif;
-
-
-
-    /* Radius */
-
-    --radius-sm:10px;
-    --radius-md:16px;
-    --radius-lg:22px;
-    --radius-pill:999px;
-
-
-
-    /* Shadow */
-
-    --shadow-sm:0 2px 10px rgba(61,43,31,.05);
-
-    --shadow-md:0 8px 24px rgba(61,43,31,.08);
-
-    --shadow-lg:0 16px 40px rgba(61,43,31,.12);
-
-
-
-    /* Layout */
-
-    --sidebar-width:260px;
-
-    --topbar-height:82px;
-
-
-
-    /* Animation */
-
-    --transition:.25s ease;
-
+:root {
+  --dash-purple: #7354C7;
+  --dash-purple-bg: #EFE8FC;
 }
 
 
 
 /* ==========================================================
-   2. RESET
+   2. SIDEBAR BRAND
+   (dashboard.html's logo block — admin-global's .logo/.logo-text
+   belong to a different sidebar markup, so no clash)
 ========================================================== */
 
-*,
-*::before,
-*::after{
-
-    margin:0;
-    padding:0;
-
-    box-sizing:border-box;
-
-}
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
-body{
-
-    font-family:var(--font-body);
-
-    background:var(--color-bg);
-
-    color:var(--color-text);
-
-    line-height:1.5;
-
-    font-size:14px;
-
-    overflow-x:hidden;
-
-    -webkit-font-smoothing:antialiased;
-
-    text-rendering:optimizeLegibility;
-
-}
-
-img{
-
-    display:block;
-
-    width:100%;
-
-    max-width:100%;
-
-}
-
-a{
-
-    text-decoration:none;
-
-    color:inherit;
-
-}
-
-button{
-
-    border:none;
-
-    background:none;
-
-    cursor:pointer;
-
-    font:inherit;
-
-}
-
-input,
-textarea,
-select{
-
-    font:inherit;
-
-    outline:none;
-
-    border:none;
-
-    background:none;
-
-}
-
-ul{
-
-    list-style:none;
-
-}
-
-
-
-/* ==========================================================
-   3. TYPOGRAPHY
-========================================================== */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6{
-
-    font-family:var(--font-heading);
-
-    color:var(--color-heading);
-
-    font-weight:600;
-
-    letter-spacing:-.02em;
-
-}
-
-p{
-
-    color:var(--color-text);
-
-}
-
-small{
-
-    color:var(--color-muted);
-
-}
-
-
-
-/* ==========================================================
-   4. COMMON ELEMENTS
-========================================================== */
-
-svg{
-
-    flex-shrink:0;
-
-}
-
-i{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-button,
-a,
-input{
-
-    transition:var(--transition);
-
-}
-
-button:focus-visible,
-input:focus-visible,
-a:focus-visible{
-
-    outline:2px solid var(--color-primary);
-
-    outline-offset:2px;
-
-    border-radius:6px;
-
-}
-
-::selection{
-
-    background:var(--color-primary);
-
-    color:#fff;
-
-}
-
-
-
-/* ==========================================================
-   5. CUSTOM SCROLLBAR
-========================================================== */
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-    height:8px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:transparent;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#D5C5B7;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#B08C70;
-
-}
-
-
-
-/* ==========================================================
-   6. REDUCED MOTION
-========================================================== */
-
-@media (prefers-reduced-motion:reduce){
-
-*,
-*::before,
-*::after{
-
-    animation:none !important;
-
-    transition:none !important;
-
-    scroll-behavior:auto !important;
-
-}
-
-}
-/* ==========================================================
-   7. LAYOUT
-========================================================== */
-
-.admin-layout{
-
-    display:flex;
-
-    min-height:100vh;
-
-    background:var(--color-bg);
-
-}
-
-.main-content{
-
-    flex:1;
-
-    margin-left:var(--sidebar-width);
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-
-
-/* ==========================================================
-   8. SIDEBAR
-========================================================== */
-
-.sidebar{
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    width:var(--sidebar-width);
-
-    height:100vh;
-
-    background:var(--color-surface);
-
-    border-right:1px solid var(--color-border);
-
-    display:flex;
-
-    flex-direction:column;
-
-    z-index:100;
-
-    transition:transform .35s ease;
-
-}
-
-
-
-/* ======================
-      Brand
-====================== */
-
-.sidebar-brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    padding:24px;
-
-    border-bottom:1px solid var(--color-border);
-
-}
-
-.brand-logo{
-
-    width:48px;
-
-    height:48px;
-
-    object-fit:cover;
-
-    border-radius:50%;
-
-}
-
-.brand-text{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.brand-text h2{
-
-    font-size:22px;
-
-    line-height:1.2;
-
-}
-
-.brand-text span{
-
-    font-size:11px;
-
-    letter-spacing:3px;
-
-    color:var(--color-muted);
-
-}
-
-
-
-/* ======================
-      Navigation
-====================== */
-
-.sidebar-nav{
-
-    flex:1;
-
-    overflow-y:auto;
-
-    padding:18px 14px;
-
-}
-
-.sidebar-nav ul{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:6px;
-
-}
-
-.nav-item a{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    padding:14px 18px;
-
-    border-radius:14px;
-
-    font-weight:500;
-
-    color:var(--color-text);
-
-    transition:var(--transition);
-
-}
-
-.nav-item i{
-
-    width:20px;
-
-    height:20px;
-
-}
-
-.nav-item:hover a{
-
-    background:#F5EFE7;
-
-    color:var(--color-heading);
-
-}
-
-.nav-item.active a{
-
-    background:var(--color-primary);
-
-    color:#fff;
-
-    box-shadow:var(--shadow-sm);
-
-}
-
-.nav-item.active svg,
-
-.nav-item.active i{
-
-    color:#fff;
-
-}
-
-
-
-/* ======================
-      Footer
-====================== */
-
-.sidebar-footer{
-
-    padding:20px;
-
-    border-top:1px solid var(--color-border);
-
-}
-
-
-
-/* ======================
-      Logout Button
-====================== */
-
-.logout-btn{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:12px;
-
-    padding:14px;
-
-    border-radius:14px;
-
-    background:#FFF4F4;
-
-    color:var(--color-danger);
-
-    font-weight:600;
-
-    transition:var(--transition);
-
-}
-
-.logout-btn:hover{
-
-    background:var(--color-danger);
-
-    color:#fff;
-
-}
-
-.logout-btn i{
-
-    width:20px;
-
-    height:20px;
-
-}
-
-
-
-/* ======================
-      Overlay
-====================== */
-
-.sidebar-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.35);
-
-    z-index:90;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.3s ease;
-
-}
-
-.sidebar-overlay.show{
-
-    opacity:1;
-
-    visibility:visible;
-
-}
-
-
-
-/* ======================
-      Mobile Sidebar
-====================== */
-
-.sidebar.open{
-
-    transform:translateX(0);
-
-}
-/* ==========================================================
-   9. TOPBAR
-========================================================== */
-
-.topbar{
-
-    height:var(--topbar-height);
-
-    background:var(--color-bg);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 32px;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:50;
-
-}
-
-
-
-/* ======================
-      Left Section
-====================== */
-
-.topbar-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.menu-btn,
-.sidebar-toggle{
-
-    width:44px;
-
-    height:44px;
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:12px;
-
-    background:var(--color-surface);
-
-    box-shadow:var(--shadow-sm);
-
-}
-
-.menu-btn:hover,
-.sidebar-toggle:hover{
-
-    background:#F3ECE5;
-
-}
-
-
-
-/* ======================
-      Page Title
-====================== */
-
-.page-title{
-
-    font-size:28px;
-
-    line-height:1.2;
-
-}
-
-.page-subtitle{
-
-    margin-top:4px;
-
-    color:var(--color-muted);
-
-    font-size:13px;
-
-}
-
-
-
-/* ======================
-      Right Section
-====================== */
-
-.topbar-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-
-
-/* ======================
-      Search Box
-====================== */
-
-.search-box,
-.topbar-search{
-
-    width:300px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:12px 18px;
-
-    background:var(--color-surface);
-
-    border:1px solid var(--color-border);
-
-    border-radius:999px;
-
-    transition:var(--transition);
-
-}
-
-.search-box:focus-within,
-.topbar-search:focus-within{
-
-    border-color:var(--color-primary);
-
-    box-shadow:0 0 0 3px rgba(122,92,70,.12);
-
-}
-
-.search-box input,
-.topbar-search input{
-
-    width:100%;
-
-    font-size:14px;
-
-}
-
-.search-box svg,
-.search-box i,
-
-.topbar-search svg{
-
-    width:18px;
-
-    height:18px;
-
-    color:var(--color-muted);
-
-}
-
-
-
-/* ======================
-      Icon Buttons
-====================== */
-
-.icon-btn{
-
-    position:relative;
-
-    width:44px;
-
-    height:44px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:var(--color-surface);
-
-    box-shadow:var(--shadow-sm);
-
-    transition:var(--transition);
-
-}
-
-.icon-btn:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:var(--shadow-md);
-
-}
-
-
-
-/* Notification Badge */
-
-.notification-badge,
-.badge-count{
-
-    position:absolute;
-
-    top:-3px;
-
-    right:-3px;
-
-    min-width:18px;
-
-    height:18px;
-
-    padding:0 5px;
-
-    border-radius:999px;
-
-    background:var(--color-danger);
-
-    color:#fff;
-
-    font-size:10px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-
-
-/* ======================
-      Profile
-====================== */
-
-.profile-menu{
-
-    position:relative;
-
-}
-
-.profile-trigger{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:6px;
-
-    border-radius:999px;
-
-    background:var(--color-surface);
-
-    box-shadow:var(--shadow-sm);
-
-    transition:var(--transition);
-
-}
-
-.profile-trigger:hover{
-
-    box-shadow:var(--shadow-md);
-
-}
-
-.profile-trigger img,
-
-.profile-avatar {
+.sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding-bottom: 20px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--color-cream-dark);
+  gap: var(--admin-space-3);
+  padding: var(--admin-space-6);
+  border-bottom: 1px solid var(--admin-color-border);
 }
 
-.profile-info{
-
-    display:flex;
-
-    flex-direction:column;
-
-    text-align:left;
-
+.brand-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
-.profile-info h4,
-
-.profile-name{
-
-    font-size:14px;
-
-    font-family:var(--font-body);
-
-    font-weight:600;
-
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.profile-info span,
+.brand-text h2 {
+  font-family: var(--admin-font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--admin-color-primary);
+  line-height: 1.2;
+  white-space: nowrap;
+}
 
-.profile-role{
-
-    font-size:12px;
-
-    color:var(--color-muted);
-
+.brand-text span {
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  color: var(--admin-color-text-soft);
 }
 
 
 
-/* ======================
-      Dropdown
-====================== */
+/* ==========================================================
+   3. SIDEBAR NAVIGATION
+   (dashboard.html puts icon + label directly inside <a>,
+   unlike admin-global's .nav-link/.nav-icon/.nav-label split)
+========================================================== */
 
-.profile-dropdown{
-
-    position:absolute;
-
-    top:calc(100% + 12px);
-
-    right:0;
-
-    width:220px;
-
-    background:var(--color-surface);
-
-    border-radius:16px;
-
-    box-shadow:var(--shadow-lg);
-
-    overflow:hidden;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transform:translateY(-8px);
-
-    transition:.25s ease;
-
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--admin-space-5) var(--admin-space-4);
 }
 
-.profile-dropdown.open{
+.sidebar-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
-    opacity:1;
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  padding: 11px var(--admin-space-3);
+  border-radius: var(--admin-radius-md);
+  color: var(--admin-color-text-muted);
+  font-size: 14.5px;
+  font-weight: 500;
+  transition: background-color var(--admin-transition-fast), color var(--admin-transition-fast);
+}
 
-    visibility:visible;
+.nav-item i {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
 
-    transform:translateY(0);
+.nav-item:hover a {
+  background-color: var(--admin-color-accent);
+  color: var(--admin-color-primary);
+}
 
+.nav-item.active a {
+  background-color: var(--admin-color-primary);
+  color: var(--admin-color-text-on-primary);
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.sidebar-footer {
+  padding: var(--admin-space-5);
+  border-top: 1px solid var(--admin-color-border);
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--admin-space-3);
+  padding: var(--admin-space-4);
+  border-radius: var(--admin-radius-md);
+  background-color: var(--admin-color-danger-bg);
+  color: var(--admin-color-danger);
+  font-weight: 600;
+  transition: background-color var(--admin-transition-fast), color var(--admin-transition-fast);
+}
+
+.logout-btn:hover {
+  background-color: var(--admin-color-danger);
+  color: #FFFFFF;
+}
+
+.logout-btn i {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+/* ==========================================================
+   4. MOBILE SIDEBAR TOGGLE
+   (dashboard.js drives .sidebar.open / .sidebar-overlay.show
+   directly — kept as-is rather than admin-global's
+   .is-open/.is-visible naming, to avoid breaking existing JS)
+========================================================== */
+
+.sidebar-overlay.show {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.menu-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--admin-radius-md);
+  background-color: var(--admin-color-card);
+  box-shadow: var(--admin-shadow-sm);
+  color: var(--admin-color-text);
+  transition: background-color var(--admin-transition-fast);
+}
+
+.menu-btn:hover {
+  background-color: var(--admin-color-accent);
+}
+
+@media (max-width: 992px) {
+  .menu-btn {
+    display: flex;
+  }
+}
+
+
+
+/* ==========================================================
+   5. TOPBAR — SEARCH, ICON BUTTONS, PROFILE
+   (.topbar itself, .topbar-left/right, .page-title/subtitle
+   are already styled by admin-global.css)
+========================================================== */
+
+.search-box {
+  width: 300px;
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  padding: 11px var(--admin-space-4);
+  background-color: var(--admin-color-bg);
+  border: 1px solid var(--admin-color-border);
+  border-radius: var(--admin-radius-pill);
+  transition: border-color var(--admin-transition-fast), box-shadow var(--admin-transition-fast);
+}
+
+.search-box:focus-within {
+  border-color: var(--admin-color-primary);
+  background-color: var(--admin-color-card);
+  box-shadow: var(--admin-shadow-focus);
+}
+
+.search-box input {
+  width: 100%;
+  font-size: 14px;
+}
+
+.search-box i {
+  width: 18px;
+  height: 18px;
+  color: var(--admin-color-text-soft);
+}
+
+.icon-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  box-shadow: var(--admin-shadow-sm);
+  transition: background-color var(--admin-transition-fast), border-color var(--admin-transition-fast), color var(--admin-transition-fast);
+}
+
+.icon-btn:hover {
+  background-color: var(--admin-color-accent);
+  color: var(--admin-color-primary);
+  border-color: var(--admin-color-secondary);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--admin-radius-pill);
+  background-color: var(--admin-color-danger);
+  color: #FFFFFF;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-menu {
+  position: relative;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  padding: 6px;
+  border-radius: var(--admin-radius-pill);
+  background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  box-shadow: var(--admin-shadow-sm);
+  transition: box-shadow var(--admin-transition-fast);
+}
+
+.profile-trigger:hover {
+  box-shadow: var(--admin-shadow-md);
+}
+
+.profile-trigger img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.profile-info h4 {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.profile-info span {
+  font-size: 12px;
+  color: var(--admin-color-text-muted);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 220px;
+  background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow-lg);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity var(--admin-transition-base), visibility var(--admin-transition-base), transform var(--admin-transition-base);
+  z-index: 60;
+}
+
+.profile-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .profile-dropdown a,
-
-.profile-dropdown button{
-
-    width:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:14px 18px;
-
-    color:var(--color-text);
-
+.profile-dropdown button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  padding: var(--admin-space-4);
+  color: var(--admin-color-text);
+  font-size: 13.5px;
 }
 
 .profile-dropdown a:hover,
-
-.profile-dropdown button:hover{
-
-    background:#F5EFE7;
-
+.profile-dropdown button:hover {
+  background-color: var(--admin-color-accent);
 }
 
-.profile-dropdown button{
-
-    color:var(--color-danger);
-
+.profile-dropdown button {
+  color: var(--admin-color-danger);
 }
+
+
+
 /* ==========================================================
-   10. DASHBOARD CONTENT
+   6. DASHBOARD CONTENT WRAPPER
 ========================================================== */
 
-.dashboard-content,
-.page-content{
-
-    flex:1;
-
-    padding:28px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:24px;
-
+.dashboard-content {
+  flex: 1;
+  padding: var(--admin-space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-6);
 }
 
 
 
 /* ==========================================================
-   11. REUSABLE CARD
+   7. STAT CARDS
 ========================================================== */
 
-.card,
-.dashboard-card,
-.panel,
-.stat-card{
-
-    background:var(--color-surface);
-
-    border-radius:var(--radius-lg);
-
-    box-shadow:var(--shadow-sm);
-
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--admin-space-5);
 }
 
-.dashboard-card,
-.panel{
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-5);
+  padding: var(--admin-space-6);
+  background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow-sm);
+  transition: box-shadow var(--admin-transition-base), transform var(--admin-transition-base);
+}
 
-    padding:24px;
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--admin-shadow-md);
+}
 
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--admin-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon i {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-icon.brown {
+  background-color: var(--admin-color-accent);
+  color: var(--admin-color-primary);
+}
+
+.stat-icon.green {
+  background-color: var(--admin-color-success-bg);
+  color: var(--admin-color-success);
+}
+
+.stat-icon.orange {
+  background-color: var(--admin-color-warning-bg);
+  color: var(--admin-color-warning);
+}
+
+.stat-icon.purple {
+  background-color: var(--dash-purple-bg);
+  color: var(--dash-purple);
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.stat-title {
+  font-size: 12.5px;
+  color: var(--admin-color-text-muted);
+  font-weight: 500;
+}
+
+.stat-content h2 {
+  font-family: var(--admin-font-heading);
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.stat-content small {
+  font-size: 12px;
+  color: var(--admin-color-text-soft);
 }
 
 
 
 /* ==========================================================
-   CARD HEADER
+   8. DASHBOARD CARDS (Recent Orders, Low Stock, etc.)
 ========================================================== */
 
-.card-header,
-.panel-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--admin-space-6);
 }
 
-.card-header h3,
-.panel-header h3{
-
-    font-size:18px;
-
+.dashboard-card {
+  background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow-sm);
+  padding: var(--admin-space-6);
 }
 
-.card-header a,
-.panel-header a{
-
-    font-size:13px;
-
-    color:var(--color-primary);
-
-    font-weight:600;
-
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--admin-space-5);
 }
 
-.card-header a:hover,
-.panel-header a:hover{
+.card-header h3 {
+  font-family: var(--admin-font-heading);
+  font-size: 17px;
+  font-weight: 600;
+}
 
-    text-decoration:underline;
+.card-header a {
+  font-size: 13px;
+  color: var(--admin-color-primary);
+  font-weight: 600;
+}
 
+.card-header a:hover {
+  text-decoration: underline;
 }
 
 
 
 /* ==========================================================
-   DASHBOARD GRID
+   9. TABLES (Recent Orders / Low Stock)
 ========================================================== */
 
-.dashboard-grid{
-
-    display:grid;
-
-    gap:24px;
-
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
 }
 
-.dashboard-grid:first-of-type{
-
-    grid-template-columns:2fr 1fr;
-
+.table-wrapper table {
+  width: 100%;
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 13.5px;
 }
 
-.bottom-grid{
+.table-wrapper thead th {
+  text-align: left;
+  padding: var(--admin-space-3) var(--admin-space-3);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--admin-color-text-soft);
+  border-bottom: 1px solid var(--admin-color-border);
+  white-space: nowrap;
+}
 
-    grid-template-columns:2fr 1fr;
+.table-wrapper tbody td {
+  padding: var(--admin-space-4) var(--admin-space-3);
+  border-bottom: 1px solid var(--admin-color-border);
+  color: var(--admin-color-text);
+  vertical-align: middle;
+}
 
+.table-wrapper tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-wrapper tbody tr {
+  transition: background-color var(--admin-transition-fast);
+}
+
+.table-wrapper tbody tr:hover td {
+  background-color: var(--admin-color-bg);
+}
+
+.table-thumb {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--admin-radius-sm);
+  object-fit: cover;
+  border: 1px solid var(--admin-color-border);
+}
+
+.table-wrapper .row-action {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--admin-color-text-muted);
+  transition: background-color var(--admin-transition-fast), color var(--admin-transition-fast);
+}
+
+.table-wrapper .row-action:hover {
+  background-color: var(--admin-color-accent);
+  color: var(--admin-color-primary);
 }
 
 
 
 /* ==========================================================
-   STATISTICS
+   10. STATUS & STOCK BADGES
+   NOTE: class names below (status-badge / stock-badge + state
+   modifiers) are a best guess — dashboard.js wasn't provided,
+   so confirm these match what it actually renders and adjust
+   the modifier names if needed.
 ========================================================== */
 
-.stats-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:20px;
-
+.status-badge,
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--admin-radius-pill);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.stat-card{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-    padding:24px;
-
-    transition:var(--transition);
-
+.status-badge::before,
+.stock-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  flex-shrink: 0;
 }
 
-.stat-card:hover{
+.status-badge.pending,
+.stock-badge.low {
+  background-color: var(--admin-color-warning-bg);
+  color: var(--admin-color-warning);
+}
 
-    transform:translateY(-4px);
+.status-badge.processing {
+  background-color: var(--admin-color-info-bg);
+  color: var(--admin-color-info);
+}
 
-    box-shadow:var(--shadow-md);
+.status-badge.completed,
+.stock-badge.in-stock {
+  background-color: var(--admin-color-success-bg);
+  color: var(--admin-color-success);
+}
 
+.status-badge.cancelled,
+.stock-badge.out {
+  background-color: var(--admin-color-danger-bg);
+  color: var(--admin-color-danger);
+}
+
+.status-badge.refunded {
+  background-color: var(--admin-color-draft-bg);
+  color: var(--admin-color-draft);
 }
 
 
 
 /* ==========================================================
-   STAT ICON
+   11. LATEST PRODUCTS LIST
 ========================================================== */
 
-.stat-icon{
-
-    width:58px;
-
-    height:58px;
-
-    border-radius:18px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    flex-shrink:0;
-
+.latest-products {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-2);
 }
 
-.stat-icon svg,
-.stat-icon i{
-
-    width:24px;
-
-    height:24px;
-
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: var(--admin-space-3);
+  padding: var(--admin-space-3);
+  border-radius: var(--admin-radius-md);
+  transition: background-color var(--admin-transition-fast);
 }
 
-
-
-/* Background Variants */
-
-.brown{
-
-    background:#F3E8DC;
-
-    color:var(--color-primary);
-
+.product-item:hover {
+  background-color: var(--admin-color-bg);
 }
 
-.green{
-
-    background:var(--color-success-bg);
-
-    color:var(--color-success);
-
+.product-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--admin-radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid var(--admin-color-border);
 }
 
-.orange{
-
-    background:var(--color-warning-bg);
-
-    color:var(--color-warning);
-
+.product-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.purple{
+.product-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--admin-color-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
-    background:#EFE8FC;
+.product-meta {
+  font-size: 12px;
+  color: var(--admin-color-text-muted);
+}
 
-    color:#7354C7;
-
+.product-price {
+  font-family: var(--admin-font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--admin-color-primary);
+  white-space: nowrap;
 }
 
 
 
 /* ==========================================================
-   STAT CONTENT
+   12. RECENT ACTIVITY LIST
 ========================================================== */
 
-.stat-content{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:4px;
-
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-2);
 }
 
-.stat-title{
-
-    font-size:13px;
-
-    color:var(--color-muted);
-
-    font-weight:500;
-
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--admin-space-3);
+  padding: var(--admin-space-3);
+  border-radius: var(--admin-radius-md);
+  transition: background-color var(--admin-transition-fast);
 }
 
-.stat-content h2{
-
-    font-size:28px;
-
-    line-height:1.2;
-
+.activity-item:hover {
+  background-color: var(--admin-color-bg);
 }
 
-.stat-content small{
+.activity-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: var(--admin-color-accent);
+  color: var(--admin-color-primary);
+}
 
-    font-size:12px;
+.activity-icon i {
+  width: 16px;
+  height: 16px;
+}
 
-    color:var(--color-muted);
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
 
+.activity-text {
+  font-size: 13px;
+  color: var(--admin-color-text);
+  line-height: 1.4;
+}
+
+.activity-text strong {
+  font-weight: 600;
+}
+
+.activity-time {
+  font-size: 11.5px;
+  color: var(--admin-color-text-soft);
 }
 
 
 
 /* ==========================================================
-   LOADING STATE
+   13. LOADING / EMPTY STATES
 ========================================================== */
 
 .loading,
-.loading-state,
-.panel-loading{
+.loading-state {
+  text-align: center;
+  padding: var(--admin-space-8) var(--admin-space-4);
+  color: var(--admin-color-text-muted);
+  font-size: 14px;
+}
 
-    text-align:center;
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--admin-space-2);
+  padding: var(--admin-space-10) var(--admin-space-5);
+  text-align: center;
+}
 
-    padding:32px 16px;
+.empty-state i {
+  width: 40px;
+  height: 40px;
+  color: var(--admin-color-text-soft);
+}
 
-    color:var(--color-muted);
+.empty-state h4 {
+  font-family: var(--admin-font-heading);
+  font-size: 17px;
+}
 
-    font-size:14px;
-
+.empty-state p {
+  color: var(--admin-color-text-muted);
+  max-width: 300px;
+  font-size: 13px;
 }
 
 
 
 /* ==========================================================
-   EMPTY STATE
+   14. RESPONSIVE BREAKPOINTS
+   (mirrors admin-global.css's 1200 / 992 / 768 / 576 scale)
 ========================================================== */
 
-.empty-state{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    padding:40px 20px;
-
-    text-align:center;
-
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.empty-state svg,
-.empty-state i{
-
-    width:40px;
-
-    height:40px;
-
-    color:var(--color-muted);
-
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.empty-state h4{
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: var(--admin-space-5);
+    gap: var(--admin-space-5);
+  }
 
-    font-size:18px;
+  .topbar-right .search-box {
+    display: none;
+  }
 
+  .table-wrapper table {
+    min-width: 420px;
+  }
 }
 
-.empty-state p{
-
-    color:var(--color-muted);
-
-    max-width:300px;
-
-}
-
-/* ==========================================================
-   12. DASHBOARD TABLES
-========================================================== */
-
-.table-wrapper{
-
-    width:100%;
-
-    overflow-x:auto;
-
-    border-radius:var(--radius-md);
-
-    border:1px solid var(--color-border);
-
-}
-
-.table-wrapper table{
-
-    width:100%;
-
-    min-width:560px;
-
-    border-collapse:collapse;
-
-    font-size:13.5px;
-
-}
-
-
-
-/* ======================
-      Table Head
-====================== */
-
-.table-wrapper thead th{
-
-    text-align:left;
-
-    padding:14px 18px;
-
-    font-family:var(--font-body);
-
-    font-size:11px;
-
-    font-weight:600;
-
-    letter-spacing:.06em;
-
-    text-transform:uppercase;
-
-    color:var(--color-muted);
-
-    background:#FAF5EE;
-
-    border-bottom:1px solid var(--color-border);
-
-    white-space:nowrap;
-
-}
-
-.table-wrapper thead th:first-child{
-
-    border-top-left-radius:var(--radius-md);
-
-}
-
-.table-wrapper thead th:last-child{
-
-    border-top-right-radius:var(--radius-md);
-
-}
-
-
-
-/* ======================
-      Table Body
-====================== */
-
-.table-wrapper tbody td{
-
-    padding:14px 18px;
-
-    border-bottom:1px solid var(--color-border);
-
-    color:var(--color-text);
-
-    vertical-align:middle;
-
-}
-
-.table-wrapper tbody tr{
-
-    transition:background var(--transition);
-
-}
-
-.table-wrapper tbody tr:hover{
-
-    background:#FBF8F4;
-
-}
-
-.table-wrapper tbody tr:last-child td{
-
-    border-bottom:none;
-
-}
-
-.table-wrapper tbody td:first-child{
-
-    font-weight:600;
-
-    color:var(--color-heading);
-
-}
-
-
-
-/* ======================
-      Product / Order Cell
-====================== */
-
-.table-cell-media{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-.table-thumb{
-
-    width:40px;
-
-    height:40px;
-
-    border-radius:var(--radius-sm);
-
-    object-fit:cover;
-
-    border:1px solid var(--color-border);
-
-    flex-shrink:0;
-
-}
-
-
-
-/* ======================
-      Status Badges
-====================== */
-
-.status-badge{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:6px;
-
-    padding:5px 12px;
-
-    border-radius:var(--radius-pill);
-
-    font-size:11.5px;
-
-    font-weight:600;
-
-    letter-spacing:.02em;
-
-    white-space:nowrap;
-
-}
-
-.status-badge::before{
-
-    content:"";
-
-    width:6px;
-
-    height:6px;
-
-    border-radius:50%;
-
-    background:currentColor;
-
-}
-
-.status-badge.success,
-.status-badge.completed,
-.status-badge.delivered{
-
-    background:var(--color-success-bg);
-
-    color:var(--color-success);
-
-}
-
-.status-badge.warning,
-.status-badge.pending,
-.status-badge.low{
-
-    background:var(--color-warning-bg);
-
-    color:var(--color-warning);
-
-}
-
-.status-badge.danger,
-.status-badge.cancelled,
-.status-badge.out{
-
-    background:var(--color-danger-bg);
-
-    color:var(--color-danger);
-
-}
-
-.status-badge.info,
-.status-badge.processing,
-.status-badge.shipped{
-
-    background:var(--color-info-bg);
-
-    color:var(--color-info);
-
-}
-
-
-
-/* ======================
-      Row Actions
-====================== */
-
-.table-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:flex-end;
-
-    gap:6px;
-
-}
-
-.table-action-btn{
-
-    width:32px;
-
-    height:32px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:10px;
-
-    color:var(--color-muted);
-
-    background:transparent;
-
-    transition:var(--transition);
-
-}
-
-.table-action-btn svg,
-.table-action-btn i{
-
-    width:16px;
-
-    height:16px;
-
-}
-
-.table-action-btn:hover{
-
-    background:#F3ECE5;
-
-    color:var(--color-primary);
-
-}
-
-.table-action-btn.danger:hover{
-
-    background:var(--color-danger-bg);
-
-    color:var(--color-danger);
-
-}
-
-
-
-/* ======================
-      Table Loading / Empty
-====================== */
-
-.table-wrapper .loading{
-
-    padding:36px 16px;
-
-}
-
-
-
-/* ======================
-      Responsive Tables
-====================== */
-
-@media (max-width:768px){
-
-    .table-wrapper{
-
-        border:none;
-
-        overflow:visible;
-
-    }
-
-    .table-wrapper table,
-    .table-wrapper thead,
-    .table-wrapper tbody,
-    .table-wrapper tr,
-    .table-wrapper td{
-
-        display:block;
-
-        width:100%;
-
-    }
-
-    .table-wrapper thead{
-
-        display:none;
-
-    }
-
-    .table-wrapper tbody tr{
-
-        margin-bottom:12px;
-
-        padding:14px 16px;
-
-        border:1px solid var(--color-border);
-
-        border-radius:var(--radius-md);
-
-    }
-
-    .table-wrapper tbody tr:last-child{
-
-        margin-bottom:0;
-
-    }
-
-    .table-wrapper tbody td{
-
-        display:flex;
-
-        align-items:center;
-
-        justify-content:space-between;
-
-        gap:12px;
-
-        padding:8px 0;
-
-        border-bottom:none;
-
-        text-align:right;
-
-    }
-
-    .table-wrapper tbody td:first-child{
-
-        padding-top:0;
-
-    }
-
-    .table-wrapper tbody td:last-child{
-
-        padding-bottom:0;
-
-    }
-
-    .table-wrapper tbody td::before{
-
-        content:attr(data-label);
-
-        font-size:11.5px;
-
-        font-weight:600;
-
-        letter-spacing:.03em;
-
-        text-transform:uppercase;
-
-        color:var(--color-muted);
-
-        text-align:left;
-
-    }
-
-    .table-wrapper tbody td[data-label=""]::before,
-    .table-wrapper tbody td:not([data-label])::before{
-
-        content:none;
-
-    }
-
-    .table-actions{
-
-        justify-content:flex-end;
-
-        width:100%;
-
-    }
-
+@media (max-width: 576px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-content {
+    padding: var(--admin-space-4);
+  }
+
+  .dashboard-card {
+    padding: var(--admin-space-5);
+  }
+
+  .profile-info {
+    display: none;
+  }
 }
