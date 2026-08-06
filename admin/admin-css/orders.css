@@ -23,6 +23,8 @@
 
     gap:16px;
 
+    margin-bottom:24px;
+
 }
 
 .page-header h2{
@@ -37,7 +39,7 @@
 
     margin-top:4px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
     font-size:13.5px;
 
@@ -59,6 +61,8 @@
 
     gap:14px;
 
+    margin-bottom:24px;
+
 }
 
 .filter-bar .search-box{
@@ -77,15 +81,15 @@
 
     padding:0 40px 0 18px;
 
-    background-color:var(--color-surface);
+    background-color:var(--admin-color-card);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
     border-radius:999px;
 
     font-size:13.5px;
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
     cursor:pointer;
 
@@ -97,19 +101,19 @@
 
     background-position:right 16px center;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .filter-bar select:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
 }
 
 .filter-bar select:focus{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
     box-shadow:0 0 0 3px rgba(122,92,70,.12);
 
@@ -155,9 +159,9 @@
 
     text-transform:uppercase;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
     white-space:nowrap;
 
@@ -167,9 +171,9 @@
 
     padding:16px;
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
     vertical-align:middle;
 
@@ -177,7 +181,7 @@
 
 #ordersTable tbody tr{
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -199,7 +203,7 @@
 
     padding:32px 16px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -207,7 +211,7 @@
 
     font-weight:600;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -215,7 +219,7 @@
 
     font-weight:500;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -227,7 +231,7 @@
 
     font-size:11.5px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -235,7 +239,7 @@
 
     font-weight:600;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -285,17 +289,17 @@
 
 .status-pending{
 
-    background:var(--color-warning-bg);
+    background:var(--admin-color-warning-bg);
 
-    color:var(--color-warning);
+    color:var(--admin-color-warning);
 
 }
 
 .status-processing{
 
-    background:var(--color-info-bg);
+    background:var(--admin-color-info-bg);
 
-    color:var(--color-info);
+    color:var(--admin-color-info);
 
 }
 
@@ -309,41 +313,41 @@
 
 .status-delivered{
 
-    background:var(--color-success-bg);
+    background:var(--admin-color-success-bg);
 
-    color:var(--color-success);
+    color:var(--admin-color-success);
 
 }
 
 .status-cancelled{
 
-    background:var(--color-danger-bg);
+    background:var(--admin-color-danger-bg);
 
-    color:var(--color-danger);
+    color:var(--admin-color-danger);
 
 }
 
 .payment-paid{
 
-    background:var(--color-success-bg);
+    background:var(--admin-color-success-bg);
 
-    color:var(--color-success);
+    color:var(--admin-color-success);
 
 }
 
 .payment-pending{
 
-    background:var(--color-warning-bg);
+    background:var(--admin-color-warning-bg);
 
-    color:var(--color-warning);
+    color:var(--admin-color-warning);
 
 }
 
 .payment-failed{
 
-    background:var(--color-danger-bg);
+    background:var(--admin-color-danger-bg);
 
-    color:var(--color-danger);
+    color:var(--admin-color-danger);
 
 }
 
@@ -359,15 +363,15 @@
 
     border-radius:999px;
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    background-color:var(--color-surface);
+    background-color:var(--admin-color-card);
 
     font-size:12px;
 
     font-weight:500;
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
     cursor:pointer;
 
@@ -379,14 +383,14 @@
 
     background-position:right 10px center;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .status-select:hover,
 .status-select:focus{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
 }
 
@@ -422,11 +426,11 @@
 
     border-radius:10px;
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -443,15 +447,15 @@
 
     background:#F3E8DC;
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
 .row-action-btn.danger:hover{
 
-    background:var(--color-danger-bg);
+    background:var(--admin-color-danger-bg);
 
-    color:var(--color-danger);
+    color:var(--admin-color-danger);
 
 }
 
@@ -493,13 +497,13 @@
 
     font-weight:500;
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -514,9 +518,9 @@
 
 .pagination-btn:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
@@ -530,9 +534,9 @@
 
 .pagination-btn:disabled:hover{
 
-    border-color:var(--color-border);
+    border-color:var(--admin-color-border);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
 }
 
@@ -560,29 +564,29 @@
 
     font-weight:500;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .page-number:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
 .page-number.active{
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
     color:#fff;
 
@@ -620,9 +624,9 @@
 
     max-width:92vw;
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    box-shadow:var(--shadow-lg);
+    box-shadow:var(--admin-shadow-lg);
 
     z-index:200;
 
@@ -652,7 +656,7 @@
 
     padding:22px 24px;
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
 }
 
@@ -676,17 +680,17 @@
 
     border-radius:50%;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 #closeDrawer:hover{
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -739,7 +743,7 @@
 
     text-transform:uppercase;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -759,7 +763,7 @@
 
 .drawer-row span:first-child{
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -767,7 +771,7 @@
 
     font-weight:500;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
     text-align:right;
 
@@ -783,7 +787,7 @@
 
     padding:10px 0;
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
 }
 
@@ -821,7 +825,7 @@
 
     font-weight:500;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
     white-space:nowrap;
 
@@ -835,7 +839,7 @@
 
     font-size:12px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
     margin-top:2px;
 
@@ -847,7 +851,7 @@
 
     font-weight:600;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
     flex-shrink:0;
 
@@ -857,7 +861,7 @@
 
     height:1px;
 
-    background:var(--color-border);
+    background:var(--admin-color-border);
 
     border:none;
 
@@ -869,7 +873,7 @@
 
     padding:20px 24px;
 
-    border-top:1px solid var(--color-border);
+    border-top:1px solid var(--admin-color-border);
 
     display:flex;
 
@@ -889,13 +893,13 @@
 
     font-size:13.5px;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .drawer-save-btn{
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
     color:#fff;
 
@@ -903,7 +907,7 @@
 
 .drawer-save-btn:hover{
 
-    background:var(--color-primary-dark);
+    background:var(--admin-color-primary-hover);
 
 }
 

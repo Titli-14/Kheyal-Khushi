@@ -175,35 +175,9 @@
   transform: translateX(0) !important;
 }
 
-.menu-btn {
-  display: none;
-  width: 44px;
-  height: 44px;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--admin-radius-md);
-  background-color: var(--admin-color-card);
-  border: 1px solid var(--admin-color-border);
-  box-shadow: var(--admin-shadow-sm);
-  color: var(--admin-color-text);
-  flex-shrink: 0;
-  transition: background-color var(--admin-transition-fast);
-}
-
-.menu-btn i {
-  width: 20px;
-  height: 20px;
-}
-
-.menu-btn:hover {
-  background-color: var(--admin-color-accent);
-}
-
-@media (max-width: 992px) {
-  .menu-btn {
-    display: flex !important;
-  }
-}
+/* .menu-btn / .sidebar-toggle (the mobile hamburger button) is now
+   styled once, for every page, in admin-global.css — removed here
+   to avoid two files defining the same button differently. */
 
 
 

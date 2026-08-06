@@ -33,7 +33,7 @@
 
     white-space:nowrap;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -52,43 +52,43 @@
 
 .primary-btn{
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
     color:#fff;
 
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--admin-shadow-sm);
 
 }
 
 .primary-btn:hover{
 
-    background:var(--color-primary-dark);
+    background:var(--admin-color-primary-hover);
 
-    box-shadow:var(--shadow-md);
+    box-shadow:var(--admin-shadow-md);
 
 }
 
 .secondary-btn{
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
 }
 
 .secondary-btn:hover{
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    border-color:var(--color-muted);
+    border-color:var(--admin-color-text-muted);
 
 }
 
 .danger-btn{
 
-    background:var(--color-danger);
+    background:var(--admin-color-danger);
 
     color:#fff;
 
@@ -118,6 +118,8 @@
 
     gap:16px;
 
+    margin-bottom:24px;
+
 }
 
 .page-header h2{
@@ -132,7 +134,7 @@
 
     margin-top:4px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
     font-size:13.5px;
 
@@ -154,6 +156,8 @@
 
     gap:14px;
 
+    margin-bottom:24px;
+
 }
 
 .filter-bar .search-box{
@@ -172,15 +176,15 @@
 
     padding:0 40px 0 18px;
 
-    background-color:var(--color-surface);
+    background-color:var(--admin-color-card);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
     border-radius:999px;
 
     font-size:13.5px;
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
     cursor:pointer;
 
@@ -192,19 +196,19 @@
 
     background-position:right 16px center;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .filter-bar select:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
 }
 
 .filter-bar select:focus{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
     box-shadow:0 0 0 3px rgba(122,92,70,.12);
 
@@ -250,9 +254,9 @@
 
     text-transform:uppercase;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
     white-space:nowrap;
 
@@ -262,9 +266,9 @@
 
     padding:14px 16px;
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
     vertical-align:middle;
 
@@ -272,7 +276,7 @@
 
 #productsTable tbody tr{
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -294,7 +298,7 @@
 
     padding:32px 16px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -308,11 +312,11 @@
 
     object-fit:cover;
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
     cursor:pointer;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -320,7 +324,7 @@
 
     transform:scale(1.06);
 
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--admin-shadow-sm);
 
 }
 
@@ -328,7 +332,7 @@
 
     font-weight:500;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -340,7 +344,7 @@
 
     font-size:11.5px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -348,7 +352,7 @@
 
     font-weight:600;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -360,7 +364,7 @@
 
     font-size:11.5px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
     text-decoration:line-through;
 
@@ -374,13 +378,13 @@
 
 .stock-low{
 
-    color:var(--color-warning);
+    color:var(--admin-color-warning);
 
 }
 
 .stock-out{
 
-    color:var(--color-danger);
+    color:var(--admin-color-danger);
 
 }
 
@@ -428,9 +432,9 @@
 
 .status-active{
 
-    background:var(--color-success-bg);
+    background:var(--admin-color-success-bg);
 
-    color:var(--color-success);
+    color:var(--admin-color-success);
 
 }
 
@@ -438,15 +442,15 @@
 
     background:#EEE9E3;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
 .status-hidden{
 
-    background:var(--color-danger-bg);
+    background:var(--admin-color-danger-bg);
 
-    color:var(--color-danger);
+    color:var(--admin-color-danger);
 
 }
 
@@ -480,11 +484,11 @@
 
     border-radius:10px;
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -501,15 +505,15 @@
 
     background:#F3E8DC;
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
 .row-action-btn.danger:hover{
 
-    background:var(--color-danger-bg);
+    background:var(--admin-color-danger-bg);
 
-    color:var(--color-danger);
+    color:var(--admin-color-danger);
 
 }
 
@@ -551,13 +555,13 @@
 
     font-weight:500;
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
@@ -572,9 +576,9 @@
 
 .pagination-btn:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
@@ -588,9 +592,9 @@
 
 .pagination-btn:disabled:hover{
 
-    border-color:var(--color-border);
+    border-color:var(--admin-color-border);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
 }
 
@@ -618,29 +622,29 @@
 
     font-weight:500;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .page-number:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
 .page-number.active{
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
     color:#fff;
 
@@ -700,11 +704,11 @@
 
     max-width:400px;
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    border-radius:var(--radius-lg);
+    border-radius:var(--admin-radius-lg);
 
-    box-shadow:var(--shadow-lg);
+    box-shadow:var(--admin-shadow-lg);
 
     padding:32px;
 
@@ -728,9 +732,9 @@
 
     border-radius:50%;
 
-    background:var(--color-warning-bg);
+    background:var(--admin-color-warning-bg);
 
-    color:var(--color-warning);
+    color:var(--admin-color-warning);
 
     display:flex;
 
@@ -759,7 +763,7 @@
 
 .modal-content p{
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
     font-size:13.5px;
 
@@ -809,9 +813,9 @@
 
     width:auto;
 
-    border-radius:var(--radius-md);
+    border-radius:var(--admin-radius-md);
 
-    box-shadow:var(--shadow-lg);
+    box-shadow:var(--admin-shadow-lg);
 
 }
 
@@ -829,9 +833,9 @@
 
     border-radius:50%;
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
     display:flex;
 
@@ -839,15 +843,15 @@
 
     justify-content:center;
 
-    box-shadow:var(--shadow-md);
+    box-shadow:var(--admin-shadow-md);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .close-modal:hover{
 
-    background:var(--color-danger);
+    background:var(--admin-color-danger);
 
     color:#fff;
 

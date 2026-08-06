@@ -248,6 +248,48 @@ h3.admin-heading {
    SIDEBAR
 ========================================================== */
 
+/* ==========================================================
+   MOBILE SIDEBAR TOGGLE BUTTON
+   Different pages use different class names for the exact same
+   hamburger button (.sidebar-toggle on most pages, .menu-btn on
+   dashboard.html). Both are styled identically here so neither
+   page renders an unstyled default <button>.
+========================================================== */
+
+.sidebar-toggle,
+.menu-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--admin-radius-md);
+  background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  box-shadow: var(--admin-shadow-sm);
+  color: var(--admin-color-text);
+  flex-shrink: 0;
+  transition: background-color var(--admin-transition-fast);
+}
+
+.sidebar-toggle i,
+.menu-btn i {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-toggle:hover,
+.menu-btn:hover {
+  background-color: var(--admin-color-accent);
+}
+
+@media (max-width: 992px) {
+  .sidebar-toggle,
+  .menu-btn {
+    display: flex;
+  }
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -263,7 +305,7 @@ h3.admin-heading {
 }
 
 .admin-layout.is-sidebar-collapsed .sidebar {
-  width: var(--admin-sidebar-width-collapsed);
+  width: min(280px,85vw);
 }
 
 .sidebar-header {

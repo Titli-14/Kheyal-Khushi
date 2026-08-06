@@ -29,11 +29,11 @@
 
 .form-card{
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    border-radius:var(--radius-lg);
+    border-radius:var(--admin-radius-lg);
 
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--admin-shadow-sm);
 
     padding:28px;
 
@@ -45,7 +45,7 @@
 
     padding-bottom:18px;
 
-    border-bottom:1px solid var(--color-border);
+    border-bottom:1px solid var(--admin-color-border);
 
 }
 
@@ -99,7 +99,7 @@
 
     font-weight:500;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -121,24 +121,24 @@
 
     padding:13px 16px;
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    border-radius:var(--radius-md);
+    border-radius:var(--admin-radius-md);
 
     font-size:14px;
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder{
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
 }
 
@@ -148,7 +148,7 @@
 
     line-height:1.6;
 
-    font-family:var(--font-body);
+    font-family:var(--admin-font-body);
 
 }
 
@@ -156,9 +156,9 @@
 .form-group textarea:focus,
 .form-group select:focus{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
     box-shadow:0 0 0 3px rgba(122,92,70,.12);
 
@@ -192,27 +192,27 @@
 
     padding:12px 16px;
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    border:1.5px dashed var(--color-border);
+    border:1.5px dashed var(--admin-color-border);
 
-    border-radius:var(--radius-md);
+    border-radius:var(--admin-radius-md);
 
     font-size:13px;
 
-    color:var(--color-muted);
+    color:var(--admin-color-text-muted);
 
     cursor:pointer;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .form-group input[type="file"]:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
-    color:var(--color-primary);
+    color:var(--admin-color-primary);
 
 }
 
@@ -224,7 +224,7 @@
 
     border-radius:999px;
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
     color:#fff;
 
@@ -234,13 +234,13 @@
 
     cursor:pointer;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .form-group input[type="file"]::file-selector-button:hover{
 
-    background:var(--color-primary-dark);
+    background:var(--admin-color-primary-hover);
 
 }
 
@@ -270,21 +270,21 @@
 
     padding:16px 18px;
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
-    border-radius:var(--radius-md);
+    border-radius:var(--admin-radius-md);
 
     cursor:pointer;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .checkbox-card:hover{
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
 }
 
@@ -294,7 +294,7 @@
 
     font-weight:500;
 
-    color:var(--color-heading);
+    color:var(--admin-color-text);
 
 }
 
@@ -308,11 +308,11 @@
 
     flex-shrink:0;
 
-    border:1.5px solid var(--color-border);
+    border:1.5px solid var(--admin-color-border);
 
     border-radius:7px;
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
     display:flex;
 
@@ -322,15 +322,15 @@
 
     cursor:pointer;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .checkbox-card input[type="checkbox"]:checked{
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' viewBox='0 0 12 10'%3E%3Cpath d='M1 5L4.3 8.3L11 1' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 
@@ -342,7 +342,7 @@
 
 .checkbox-card:has(input:checked){
 
-    border-color:var(--color-primary);
+    border-color:var(--admin-color-primary);
 
     background:#F8F1E9;
 
@@ -377,43 +377,43 @@
 
     font-weight:600;
 
-    transition:var(--transition);
+    transition:var(--admin-transition-base);
 
 }
 
 .secondary-btn{
 
-    background:var(--color-surface);
+    background:var(--admin-color-card);
 
-    color:var(--color-text);
+    color:var(--admin-color-text);
 
-    border:1px solid var(--color-border);
+    border:1px solid var(--admin-color-border);
 
 }
 
 .secondary-btn:hover{
 
-    background:var(--color-bg);
+    background:var(--admin-color-bg);
 
-    border-color:var(--color-muted);
+    border-color:var(--admin-color-text-muted);
 
 }
 
 .primary-btn{
 
-    background:var(--color-primary);
+    background:var(--admin-color-primary);
 
     color:#fff;
 
-    box-shadow:var(--shadow-sm);
+    box-shadow:var(--admin-shadow-sm);
 
 }
 
 .primary-btn:hover{
 
-    background:var(--color-primary-dark);
+    background:var(--admin-color-primary-hover);
 
-    box-shadow:var(--shadow-md);
+    box-shadow:var(--admin-shadow-md);
 
 }
 

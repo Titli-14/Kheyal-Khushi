@@ -194,9 +194,9 @@ function setupSidebar(){
 
     elements.sidebarToggle.addEventListener("click",()=>{
 
-        elements.sidebar.classList.toggle("open");
+        elements.sidebar.classList.toggle("is-open");
 
-        elements.sidebarOverlay.classList.toggle("show");
+        elements.sidebarOverlay.classList.toggle("is-visible");
 
     });
 
@@ -204,9 +204,9 @@ function setupSidebar(){
 
     elements.sidebarOverlay.addEventListener("click",()=>{
 
-        elements.sidebar.classList.remove("open");
+        elements.sidebar.classList.remove("is-open");
 
-        elements.sidebarOverlay.classList.remove("show");
+        elements.sidebarOverlay.classList.remove("is-visible");
 
     });
 
@@ -216,7 +216,7 @@ function setupSidebar(){
 
         if(window.innerWidth>992){
 
-            elements.sidebar.classList.remove("open");
+            elements.sidebar.classList.remove("is-open");
 
             elements.sidebarOverlay.classList.remove("show");
 

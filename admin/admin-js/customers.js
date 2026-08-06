@@ -317,6 +317,11 @@ function renderCustomers() {
 
     filteredCustomers.forEach((customer) => {
 
+        // Status: "new" until the customer places their first
+        // real order, at which point loadCustomers should be
+        // updated to pull actual order counts and flip this.
+        const status = customer.status || "new";
+
         customersTableBody.innerHTML += `
 
         <tr>
@@ -336,6 +341,14 @@ function renderCustomers() {
                     ? new Date(customer.createdAt.seconds * 1000).toLocaleDateString()
                     : "-"
             }</td>
+
+            <td>
+
+                <span class="status-badge status-${status}">
+                    ${status.charAt(0).toUpperCase() + status.slice(1)}
+                </span>
+
+            </td>
 
             <td>
 
