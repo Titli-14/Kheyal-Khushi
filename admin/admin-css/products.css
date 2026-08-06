@@ -652,10 +652,8 @@
    8. EMPTY STATE (extends dashboard.css .empty-state)
 ========================================================== */
 
-.empty-state .primary-btn{
-
-    margin-top:6px;
-
+.empty-state[hidden]{
+    display: none !important;
 }
 
 
