@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kheyal Khusi Admin Dashboard</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="admin-css/dashboard.css">
+    <link rel="stylesheet" href="admin-css/admin-global.css">
+    
+</head>
+
+<body>
+
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-layout">
+
+        <!-- ======================================================
+                            SIDEBAR
+        ======================================================= -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <!-- Logo -->
+
+            <div class="sidebar-brand">
+
+                <img
+                    src="../assets/logo/logo.png"
+                    alt="Kheyal Khusi Logo"
+                    class="brand-logo">
+
+                <div class="brand-text">
+                    <h2>Kheyal Khusi</h2>
+                    <span>ADMIN PANEL</span>
+                </div>
+
+            </div>
+
+            <!-- Navigation -->
+
+            <nav class="sidebar-nav">
+
+                <ul>
+
+                    <li class="nav-item active">
+                        <a href="dashboard.html">
+                            <i data-lucide="layout-dashboard"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="products.html">
+                            <i data-lucide="package"></i>
+                            <span>Products</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="add-product.html">
+                            <i data-lucide="plus-circle"></i>
+                            <span>Add Product</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="orders.html">
+                            <i data-lucide="shopping-bag"></i>
+                            <span>Orders</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="customers.html">
+                            <i data-lucide="users"></i>
+                            <span>Customers</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="admin-categories.html">
+                            <i data-lucide="folder-tree"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="settings.html">
+                            <i data-lucide="settings"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <!-- Sidebar Footer -->
+
+            <div class="sidebar-footer">
+
+                <button
+                    id="logoutBtn"
+                    class="logout-btn">
+
+                    <i data-lucide="log-out"></i>
+
+                    <span>Logout</span>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ======================================================
+                        MAIN CONTENT
+        ======================================================= -->
+
+        <main class="main-content">
+
+            <!-- ======================================================
+                            TOP BAR
+            ======================================================= -->
+
+            <header class="topbar">
+
+                <!-- Left -->
+
+                <div class="topbar-left">
+
+                    <button
+                        class="menu-btn"
+                        id="sidebarToggle">
+
+                        <i data-lucide="menu"></i>
+
+                    </button>
+
+                    <div>
+
+                        <h1 class="page-title">
+                            Dashboard
+                        </h1>
+
+                        <p class="page-subtitle">
+                            Welcome back,
+                            <span id="adminName">
+                                Loading...
+                            </span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Right -->
+
+                <div class="topbar-right">
+
+                    <!-- Search -->
+
+                    <div class="search-box">
+
+                        <i data-lucide="search"></i>
+
+                        <input
+                            id="dashboardSearch"
+                            type="text"
+                            placeholder="Search products or orders">
+
+                    </div>
+
+                    <!-- Notification -->
+
+                    <button
+                        class="icon-btn"
+                        id="notificationBtn">
+
+                        <i data-lucide="bell"></i>
+
+                        <span
+                            class="notification-badge"
+                            id="notificationCount">
+                            0
+                        </span>
+
+                    </button>
+
+                    <!-- Profile -->
+
+                    <div class="profile-menu">
+
+                        <button
+                            id="profileTrigger"
+                            class="profile-trigger">
+
+                            <div class="profile-info">
+
+                                <h4 id="profileName">
+                                    Loading...
+                                </h4>
+
+                                <span>
+                                    Administrator
+                                </span>
+
+                            </div>
+
+                            <i data-lucide="chevron-down"></i>
+
+                        </button>
+
+                        <!-- Dropdown -->
+
+                        <div
+                            class="profile-dropdown"
+                            id="profileDropdown">
+
+                            <a href="admin-profile.html">
+                                <i data-lucide="user"></i>
+                                My Profile
+                            </a>
+
+                            <a href="settings.html">
+                                <i data-lucide="settings"></i>
+                                Settings
+                            </a>
+
+                            <button id="dropdownLogout">
+
+                                <i data-lucide="log-out"></i>
+
+                                Logout
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- ======================================================
+                    PAGE CONTENT STARTS HERE
+            ======================================================= -->
+
+            <section class="dashboard-content">
+            <!-- ======================================================
+                    DASHBOARD STATS
+======================================================= -->
+
+<section class="stats-grid">
+
+    <!-- Products -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon brown">
+            <i data-lucide="package"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+                Total Products
+            </span>
+
+            <h2 id="totalProducts">
+                --
+            </h2>
+
+            <small>
+                Products currently listed
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- Orders -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon green">
+            <i data-lucide="shopping-cart"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+                Total Orders
+            </span>
+
+            <h2 id="totalOrders">
+                --
+            </h2>
+
+            <small>
+                All customer orders
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- Pending -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon orange">
+            <i data-lucide="clock-3"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+                Pending Orders
+            </span>
+
+            <h2 id="pendingOrders">
+                --
+            </h2>
+
+            <small>
+                Awaiting processing
+            </small>
+
+        </div>
+
+    </div>
+
+    <!-- Revenue -->
+
+    <div class="stat-card">
+
+        <div class="stat-icon purple">
+            <i data-lucide="indian-rupee"></i>
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+                Revenue
+            </span>
+
+            <h2 id="totalRevenue">
+                ₹0
+            </h2>
+
+            <small>
+                Completed sales only
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+                DASHBOARD GRID
+======================================================= -->
+
+<section class="dashboard-grid">
+
+    <!-- ===========================================
+                    RECENT ORDERS
+    ============================================ -->
+
+    <div class="dashboard-card large">
+
+        <div class="card-header">
+
+            <h3>
+                Recent Orders
+            </h3>
+
+            <a href="orders.html">
+
+                View All
+
+            </a>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="recentOrdersTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order</th>
+
+                        <th>Customer</th>
+
+                        <th>Amount</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th></th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td colspan="6" class="loading">
+
+                            Loading Orders...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===========================================
+                    LOW STOCK
+    ============================================ -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>
+
+                Low Stock Products
+
+            </h3>
+
+            <a href="products.html">
+
+                View All
+
+            </a>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table id="lowStockTable">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Product</th>
+
+                        <th>Stock</th>
+
+                        <th>Status</th>
+
+                        <th></th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td colspan="4" class="loading">
+
+                            Loading Products...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================================================
+                SECOND ROW
+======================================================= -->
+
+<section class="dashboard-grid bottom-grid">
+
+    <!-- ===========================================
+                LATEST PRODUCTS
+    ============================================ -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>Latest Products</h3>
+
+            <a href="products.html">
+                Manage Products
+            </a>
+
+        </div>
+
+        <div
+            id="latestProductsList"
+            class="latest-products">
+
+            <div class="loading-state">
+
+                Loading latest products...
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===========================================
+                RECENT ACTIVITY
+    ============================================ -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h3>
+
+                Recent Activity
+
+            </h3>
+
+        </div>
+
+        <ul
+            id="notificationsList"
+            class="activity-list">
+
+            <li class="loading-state">
+
+                Loading activity...
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!-- ======================================================
+            LUCIDE ICONS
+======================================================= -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    lucide.createIcons();
+</script>
+
+<!-- Dashboard JS -->
+
+<script type="module" src="admin-js/dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Categories | Kheyal Khusi Admin</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="dashboard.css">
+
+    <link rel="stylesheet"
+          href="admin-categories.css">
+
+</head>
+
+<body>
+
+<div class="sidebar-overlay"
+     id="sidebarOverlay"></div>
+
+<div class="admin-layout">
+
+<!-- ==========================================================
+                        SIDEBAR
+========================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="../assets/logo/logo.png"
+             alt="Kheyal Khusi"
+             class="brand-logo">
+
+        <div class="brand-text">
+
+            <h2>Kheyal Khusi</h2>
+
+            <span>ADMIN PANEL</span>
+
+        </div>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <ul>
+
+            <li class="nav-item">
+
+                <a href="dashboard.html">
+
+                    <i data-lucide="layout-dashboard"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="products.html">
+
+                    <i data-lucide="package"></i>
+
+                    <span>Products</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="add-product.html">
+
+                    <i data-lucide="plus-circle"></i>
+
+                    <span>Add Product</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item active">
+
+                <a href="categories.html">
+
+                    <i data-lucide="folder-tree"></i>
+
+                    <span>Categories</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="orders.html">
+
+                    <i data-lucide="shopping-bag"></i>
+
+                    <span>Orders</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="customers.html">
+
+                    <i data-lucide="users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="settings.html">
+
+                    <i data-lucide="settings"></i>
+
+                    <span>Settings</span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            <i data-lucide="log-out"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ==========================================================
+                        MAIN CONTENT
+========================================================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            id="sidebarToggle"
+            class="sidebar-toggle">
+
+            <i data-lucide="menu"></i>
+
+        </button>
+
+        <div>
+
+            <h1 class="page-title">
+
+                Categories
+
+            </h1>
+
+            <p class="page-subtitle">
+
+                Organize your handmade collections
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <button
+            id="openCategoryModal"
+            class="primary-btn">
+
+            <i data-lucide="plus"></i>
+
+            Add Category
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ==========================================================
+                    PAGE CONTENT
+========================================================== -->
+
+<section class="page-content">
+
+<div class="page-header">
+
+    <div>
+
+        <h2>
+
+            Product Categories
+
+        </h2>
+
+        <p>
+
+            Create and manage categories used throughout your store.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+                    SEARCH
+========================================================== -->
+
+<div class="filter-bar">
+
+    <div class="search-box">
+
+        <i data-lucide="search"></i>
+
+        <input
+            type="text"
+            id="searchCategory"
+            placeholder="Search categories...">
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+                    CATEGORY TABLE
+========================================================== -->
+
+<div class="dashboard-card">
+
+<div class="table-wrapper">
+
+<table id="categoriesTable">
+
+<thead>
+
+<tr>
+
+<th>Image</th>
+
+<th>Category</th>
+
+<th>Slug</th>
+
+<th>Products</th>
+
+<th>Status</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="categoriesTableBody">
+
+<tr>
+
+<td colspan="6"
+    class="loading">
+
+Loading Categories...
+
+</td>
+
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    EMPTY STATE
+========================================================== -->
+
+<div
+    id="emptyCategories"
+    class="empty-state"
+    hidden>
+
+    <i data-lucide="folder-open"></i>
+
+    <h3>
+
+        No Categories Found
+
+    </h3>
+
+    <p>
+
+        Create your first category to organize your handmade products.
+
+    </p>
+
+    <button
+        class="primary-btn"
+        id="emptyAddCategory">
+
+        <i data-lucide="plus"></i>
+
+        Add Category
+
+    </button>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    CATEGORY SUMMARY
+========================================================== -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon brown">
+
+            <i data-lucide="folder-tree"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Total Categories
+
+            </span>
+
+            <h2 id="totalCategories">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon green">
+
+            <i data-lucide="package"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Total Products
+
+            </span>
+
+            <h2 id="categoryProducts">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon orange">
+
+            <i data-lucide="eye"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Active Categories
+
+            </span>
+
+            <h2 id="activeCategories">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon purple">
+
+            <i data-lucide="archive"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Archived
+
+            </span>
+
+            <h2 id="archivedCategories">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+</section>
+
+</main>
+
+</div>
+
+
+
+<!-- ==========================================================
+                ADD / EDIT CATEGORY MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="categoryModal"
+    hidden>
+
+    <div class="modal-content large">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+
+                Add Category
+
+            </h2>
+
+            <button
+                id="closeCategoryModal"
+                class="icon-btn">
+
+                <i data-lucide="x"></i>
+
+            </button>
+
+        </div>
+
+        <form
+            id="categoryForm">
+
+            <div class="form-group">
+
+                <label>
+
+                    Category Name *
+
+                </label>
+
+                <input
+                    type="text"
+                    id="categoryName"
+                    placeholder="Resin Clock"
+                    required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Description
+
+                </label>
+
+                <textarea
+                    id="categoryDescription"
+                    rows="4"
+                    placeholder="Short description about this category"></textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Category Image
+
+                </label>
+
+                <input
+                    type="file"
+                    id="categoryImage"
+                    accept="image/*">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <select id="categoryStatus">
+
+                    <option value="active">
+
+                        Active
+
+                    </option>
+
+                    <option value="hidden">
+
+                        Hidden
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    id="cancelCategory">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    Save Category
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                DELETE MODAL
+========================================================== -->
+
+<div
+    class="modal"
+    id="deleteModal"
+    hidden>
+
+    <div class="modal-content">
+
+        <div class="modal-icon">
+
+            <i data-lucide="triangle-alert"></i>
+
+        </div>
+
+        <h3>
+
+            Archive Category?
+
+        </h3>
+
+        <p>
+
+            This category will be archived.
+            Products inside it will not be deleted.
+
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelDelete"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="confirmDelete"
+                class="danger-btn">
+
+                Archive
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    LUCIDE ICONS
+========================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+
+
+<!-- ==========================================================
+                    JAVASCRIPT
+========================================================== -->
+
+<script
+    type="module"
+    src="categories.js">
+
+</script>
+
+</body>
+
+</html>

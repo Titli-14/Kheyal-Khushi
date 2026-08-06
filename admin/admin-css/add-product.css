@@ -1,0 +1,527 @@
+/* ==========================================================
+   ADD PRODUCT — page-specific styles
+   Loads AFTER admin-global.css. Uses the shared --admin-* tokens
+   so this page stays visually consistent with the rest of the
+   admin panel. Selectors below are scoped as .ap-* (Add Product)
+   so nothing here can collide with admin-global.css or other
+   page stylesheets (Orders, Customers, etc. will each get their
+   own ap-style prefix, e.g. .ord-, .cust-).
+========================================================== */
+
+/* ---------------------------------------------------------- */
+
+.ap-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--admin-space-8);
+}
+
+.ap-page-header h2 {
+  font-family: var(--admin-font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--admin-color-text);
+  margin-bottom: var(--admin-space-2);
+}
+
+.ap-page-header p {
+  font-size: 0.95rem;
+  color: var(--admin-color-text-muted);
+}
+
+/* ---------------------------------------------------------- */
+
+.ap-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-space-8);
+  /* Prevents any child from stretching past the viewport and
+     dragging the page into horizontal scroll (which visually
+     drags content out from under the fixed sidebar). */
+  min-width: 0;
+}
+
+/* ---------------------------------------------------------- */
+
+.ap-card {
+  background: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--admin-transition-base), transform var(--admin-transition-base);
+}
+
+.ap-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--admin-shadow-md);
+}
+
+/* ---------------------------------------------------------- */
+
+.ap-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--admin-color-border);
+  background: var(--admin-color-card);
+}
+
+.ap-card-header::before {
+  content: '';
+  width: 5px;
+  height: 26px;
+  flex-shrink: 0;
+  background: var(--admin-color-primary);
+  border-radius: var(--admin-radius-pill);
+}
+
+.ap-card-header h3 {
+  font-family: var(--admin-font-heading);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--admin-color-text);
+}
+
+/* If a header ever needs a right-side action (e.g. a "Clear" link),
+   give that element .ap-card-header-action and it will push right
+   without disturbing the title/accent-bar pairing above. */
+.ap-card-header-action {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------- */
+
+.ap-card-body {
+  padding: 28px;
+}
+
+/* ---------------------------------------------------------- */
+
+/* Form Grid */
+
+.ap-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  padding: 28px;
+}
+
+/* minmax(0,1fr) above already prevents overflow, this is a second
+   safety net for any element dropped directly into the grid. */
+.ap-form-grid > * {
+  min-width: 0;
+}
+
+/* Full Width */
+
+.ap-full-width {
+  grid-column: 1 / -1;
+}
+
+/* Form Group */
+
+.ap-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Labels */
+
+.ap-form-group label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--admin-color-text);
+  letter-spacing: 0.2px;
+}
+
+/* Inputs */
+
+.ap-form-group input,
+.ap-form-group select,
+.ap-form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--admin-color-border);
+  border-radius: 12px;
+  background: var(--admin-color-bg);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--admin-color-text);
+  transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s;
+  outline: none;
+}
+
+/* Placeholder */
+
+.ap-form-group input::placeholder,
+.ap-form-group textarea::placeholder {
+  color: var(--admin-color-text-soft);
+}
+
+/* Textarea */
+
+.ap-form-group textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.7;
+}
+
+/* Select */
+
+.ap-form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%238B6A4E' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+/* Focus */
+
+.ap-form-group input:focus,
+.ap-form-group textarea:focus,
+.ap-form-group select:focus {
+  border-color: var(--admin-color-primary);
+  background: var(--admin-color-card);
+  box-shadow: var(--admin-shadow-focus);
+}
+
+/* Readonly */
+
+.ap-form-group input[readonly] {
+  background: var(--admin-color-bg);
+  color: var(--admin-color-text-muted);
+  cursor: not-allowed;
+}
+
+/* Disabled */
+
+.ap-form-group input:disabled,
+.ap-form-group textarea:disabled,
+.ap-form-group select:disabled {
+  background: var(--admin-color-accent);
+  opacity: 0.6;
+}
+
+/* Number Inputs */
+
+.ap-form-group input[type='number'] {
+  appearance: textfield;
+}
+
+.ap-form-group input[type='number']::-webkit-inner-spin-button,
+.ap-form-group input[type='number']::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------- */
+
+.ap-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  padding: 28px;
+}
+
+.ap-checkbox-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  background: var(--admin-color-bg);
+  border: 1px solid var(--admin-color-border);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s, transform 0.25s;
+}
+
+.ap-checkbox-card:hover {
+  border-color: var(--admin-color-secondary);
+  background: var(--admin-color-accent);
+  transform: translateY(-2px);
+}
+
+.ap-checkbox-card input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--admin-color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ap-checkbox-card span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--admin-color-text);
+}
+
+/* ==========================================================
+   IMAGE UPLOAD
+========================================================== */
+
+.ap-upload-area {
+  margin: 28px;
+  border: 2px dashed var(--admin-color-border);
+  border-radius: 18px;
+  background: var(--admin-color-bg);
+  transition: border-color 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.ap-upload-area:hover,
+.ap-upload-area.is-dragover {
+  border-color: var(--admin-color-primary);
+  background: var(--admin-color-accent);
+}
+
+.ap-upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px 30px;
+}
+
+.ap-upload-content svg {
+  width: 56px;
+  height: 56px;
+  color: var(--admin-color-primary);
+  margin-bottom: 18px;
+}
+
+.ap-upload-content h4 {
+  font-family: var(--admin-font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--admin-color-text);
+  margin-bottom: 8px;
+}
+
+.ap-upload-content p {
+  color: var(--admin-color-text-muted);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* ==========================================================
+   IMAGE PREVIEW
+========================================================== */
+
+.ap-image-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px;
+  padding: 0 28px 28px;
+}
+
+.ap-image-preview-item {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--admin-color-border);
+  background: var(--admin-color-card);
+  aspect-ratio: 1;
+}
+
+.ap-image-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ap-remove-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(47, 42, 38, 0.75);
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s, transform 0.25s;
+}
+
+.ap-remove-image:hover {
+  background: var(--admin-color-danger);
+  transform: scale(1.08);
+}
+
+/* ---------------------------------------------------------- */
+
+.ap-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-top: 36px;
+  padding: 24px 0 10px;
+  border-top: 1px solid var(--admin-color-border);
+}
+
+/* ==========================================================
+   BUTTONS
+   (Prefer .admin-btn / .admin-btn-primary / .admin-btn-outline
+   from admin-global.css for new markup. These two classes are
+   kept only so this page's existing buttons keep working, and
+   are now aliased to the shared brand tokens.)
+========================================================== */
+
+.ap-primary-btn,
+.ap-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 170px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+/* Publish Button */
+
+.ap-primary-btn {
+  border: none;
+  background: var(--admin-color-primary);
+  color: var(--admin-color-text-on-primary);
+  box-shadow: var(--admin-shadow-sm);
+}
+
+.ap-primary-btn:hover {
+  background: var(--admin-color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--admin-shadow-md);
+}
+
+/* Secondary Buttons */
+
+.ap-secondary-btn {
+  background: var(--admin-color-card);
+  color: var(--admin-color-text);
+  border: 1px solid var(--admin-color-border);
+}
+
+.ap-secondary-btn:hover {
+  background: var(--admin-color-accent);
+  border-color: var(--admin-color-secondary);
+  color: var(--admin-color-primary);
+}
+
+/* Click */
+
+.ap-primary-btn:active,
+.ap-secondary-btn:active {
+  transform: scale(0.98);
+}
+
+/* Disabled */
+
+.ap-primary-btn:disabled,
+.ap-secondary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   LOADING STATE
+========================================================== */
+
+.ap-primary-btn.is-loading {
+  position: relative;
+  color: transparent;
+}
+
+.ap-primary-btn.is-loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+  animation: ap-btn-spin 0.7s linear infinite;
+}
+
+@keyframes ap-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 768px) {
+  .ap-page-header {
+    margin-bottom: 24px;
+  }
+
+  .ap-page-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .ap-card-header {
+    padding: 18px 20px;
+  }
+
+  .ap-card-body,
+  .ap-form-grid {
+    padding: 20px;
+  }
+
+  .ap-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ap-full-width {
+    grid-column: auto;
+  }
+
+  .ap-checkbox-grid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .ap-upload-area {
+    margin: 20px;
+  }
+
+  .ap-image-preview-grid {
+    padding: 0 20px 20px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .ap-form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .ap-primary-btn,
+  .ap-secondary-btn {
+    width: 100%;
+  }
+}

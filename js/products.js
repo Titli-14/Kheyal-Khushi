@@ -14,13 +14,25 @@
    ============================================================ */
 
 const KK_PRODUCTS = [
-  { id: 'p1', name: 'Hand-thrown Terracotta Vase', category: 'Pottery', categorySlug: 'pottery', price: 1450, originalPrice: null, rating: 5, reviews: 48, tag: 'New', createdAt: '2026-06-20',
-    shortDescription: 'A hand-thrown terracotta vase with a soft, earthy glaze — no two are ever quite the same.',
-    description: 'Every curve of this vase is shaped on a potter\'s wheel in a small studio outside Kolkata, then left to dry naturally before a single firing. The unglazed terracotta finish is left intentionally raw, letting the clay\'s natural warmth come through. Perfect on its own or filled with dried flowers.',
-    image: 'https://picsum.photos/seed/kk-vase/700/730',
-    images: ['https://picsum.photos/seed/kk-vase/700/730', 'https://picsum.photos/seed/kk-vase-2/700/730', 'https://picsum.photos/seed/kk-vase-3/700/730', 'https://picsum.photos/seed/kk-vase-4/700/730'] },
-
-  { id: 'p2', name: 'Hand-embroidered Kantha Stole', category: 'Textile', categorySlug: 'textile', price: 980, originalPrice: 1300, rating: 4, reviews: 31, tag: 'Sale', createdAt: '2026-05-14',
+  {
+  id: 'p1',
+  name: 'Moon Night Lamp',
+  category: 'Handmade Lights',
+  categorySlug: 'handmade-lights',
+  price: 1499,
+  originalPrice: 1799,
+  rating: 5,
+  reviews: 18,
+  tag: 'Best Seller',
+  createdAt: '2026-07-30',
+  shortDescription: 'A handcrafted moon-themed lamp that creates a warm and cozy ambience.',
+  description: 'Made using premium resin, wooden base, and LED lighting. Perfect for bedrooms, study tables, and gifting.',
+  image: 'assets/images/products/moon-lamp.jpg',
+  images: [
+    'assets/images/products/moon-lamp.jpg']
+}
+,
+{ id: 'p2', name: 'Hand-embroidered Kantha Stole', category: 'Textile', categorySlug: 'textile', price: 980, originalPrice: 1300, rating: 4, reviews: 31, tag: 'Sale', createdAt: '2026-05-14',
     shortDescription: 'A lightweight cotton stole hand-stitched with traditional running-stitch kantha embroidery.',
     description: 'Kantha embroidery has been passed down through generations of Bengal\'s needleworkers. This stole takes an embroiderer nearly two weeks of careful, hand-guided stitching to complete. Soft, breathable cotton makes it wearable through most of the year.',
     image: 'https://picsum.photos/seed/kk-stole/700/730',

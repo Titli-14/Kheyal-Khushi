@@ -181,7 +181,7 @@ function initSignupForm() {
         try {
           // merge: true so a retry after a previous partial failure
           // doesn't clobber any fields that did make it through.
-          setDoc(doc(db, "users", credential.user.uid), {
+          await setDoc(doc(db, "users", credential.user.uid), {
             name: name,
             email: email,
             phone: "",
@@ -244,12 +244,34 @@ function initLoginForm() {
 
     try {
       if (isFirebaseConfigured) {
-        await signInWithEmailAndPassword(auth, email, password);
-      } else {
-        demoSignIn(email);
-      }
-      window.location.href = 'profile.html';
-    } catch (error) {
+
+    const credential = await signInWithEmailAndPassword(auth, email, password);
+
+    const userRef = doc(db, "users", credential.user.uid);
+    const userSnap = await getDoc(userRef);
+
+    if (!userSnap.exists()) {
+        showFormBanner(banner, "error", "User profile not found.");
+        await signOut(auth);
+        setButtonLoading(submitBtn, false, "", "Log In");
+        return;
+    }
+
+    const userData = userSnap.data();
+
+    if (userData.role === "admin") {
+        window.location.href = "admin/dashboard.html";
+    } else {
+        window.location.href = "profile.html";
+    }
+
+} else {
+
+    demoSignIn(email);
+    window.location.href = "profile.html";
+
+   }
+  } catch (error) {
       showFormBanner(banner, 'error', friendlyError(error));
       setButtonLoading(submitBtn, false, '', 'Log In');
     }

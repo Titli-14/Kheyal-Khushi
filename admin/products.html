@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Products | Kheyal Khusi Admin</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="admin-css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="admin-css/admin-global.css">
+
+    <link rel="stylesheet"
+          href="admin-css/products.css">
+
+</head>
+
+<body>
+
+<div class="sidebar-overlay"
+     id="sidebarOverlay"></div>
+
+<div class="admin-layout">
+
+<!-- ==========================================================
+                        SIDEBAR
+========================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="../assets/logo/logo.png"
+             alt="Kheyal Khusi"
+             class="brand-logo">
+
+        <div class="brand-text">
+
+            <h2>Kheyal Khusi</h2>
+
+            <span>ADMIN PANEL</span>
+
+        </div>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <ul>
+
+            <li class="nav-item">
+
+                <a href="dashboard.html">
+
+                    <i data-lucide="layout-dashboard"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item active">
+
+                <a href="products.html">
+
+                    <i data-lucide="package"></i>
+
+                    <span>Products</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="add-product.html">
+
+                    <i data-lucide="plus-circle"></i>
+
+                    <span>Add Product</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="orders.html">
+
+                    <i data-lucide="shopping-bag"></i>
+
+                    <span>Orders</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="customers.html">
+
+                    <i data-lucide="users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="settings.html">
+
+                    <i data-lucide="settings"></i>
+
+                    <span>Settings</span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <button
+            class="logout-btn"
+            id="logoutBtn">
+
+            <i data-lucide="log-out"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ==========================================================
+                        MAIN CONTENT
+========================================================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            class="sidebar-toggle"
+            id="sidebarToggle">
+
+            <i data-lucide="menu"></i>
+
+        </button>
+
+        <div>
+
+            <h1 class="page-title">
+
+                Products
+
+            </h1>
+
+            <p class="page-subtitle">
+
+                Manage your handmade collection
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <a href="add-product.html"
+           class="primary-btn">
+
+            <i data-lucide="plus"></i>
+
+            Add Product
+
+        </a>
+
+    </div>
+
+</header>
+
+<!-- ==========================================================
+                        PAGE CONTENT
+========================================================== -->
+
+<section class="page-content">
+
+<div class="page-header">
+
+    <div>
+
+        <h2>
+
+            Product Management
+
+        </h2>
+
+        <p>
+
+            Search, edit and manage all products.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+                        FILTER BAR
+========================================================== -->
+
+<div class="filter-bar">
+
+    <div class="search-box">
+
+        <i data-lucide="search"></i>
+
+        <input
+            type="text"
+            id="searchProduct"
+            placeholder="Search by name...">
+
+    </div>
+
+    <select id="categoryFilter">
+
+        <option value="">
+
+            All Categories
+
+        </option>
+
+        <option>Resin Clock</option>
+
+        <option>Resin Lamp</option>
+
+        <option>Resin Art</option>
+
+        <option>Resin Keychain</option>
+
+        <option>Ribbon Rose Bouquet</option>
+
+        <option>Gift Hamper</option>
+
+    </select>
+
+    <select id="statusFilter">
+
+        <option value="">
+
+            All Status
+
+        </option>
+
+        <option value="active">
+
+            Active
+
+        </option>
+
+        <option value="draft">
+
+            Draft
+
+        </option>
+
+        <option value="hidden">
+
+            Hidden
+
+        </option>
+
+    </select>
+
+    <select id="sortProducts">
+
+        <option value="newest">
+
+            Newest
+
+        </option>
+
+        <option value="oldest">
+
+            Oldest
+
+        </option>
+
+        <option value="priceLow">
+
+            Price: Low to High
+
+        </option>
+
+        <option value="priceHigh">
+
+            Price: High to Low
+
+        </option>
+
+        <option value="stock">
+
+            Stock
+
+        </option>
+
+    </select>
+
+</div>
+
+<!-- ==========================================================
+                    PRODUCTS TABLE
+========================================================== -->
+
+<div class="dashboard-card">
+
+<div class="table-wrapper">
+
+<table id="productsTable">
+
+<thead>
+
+<tr>
+
+<th>Image</th>
+
+<th>Product</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Stock</th>
+
+<th>Status</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productsTableBody">
+
+<tr>
+
+<td colspan="7"
+    class="loading">
+
+Loading Products...
+
+</td>
+
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ==========================================================
+                    EMPTY STATE
+========================================================== -->
+
+<div id="emptyState"
+     class="empty-state"
+     hidden>
+
+    <i data-lucide="package-x"></i>
+
+    <h3>
+
+        No Products Found
+
+    </h3>
+
+    <p>
+
+        Start by adding your first handmade product.
+
+    </p>
+
+    <a href="add-product.html"
+       class="primary-btn">
+
+        <i data-lucide="plus"></i>
+
+        Add Product
+
+    </a>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    PAGINATION
+========================================================== -->
+
+<div class="pagination">
+
+    <button
+        id="prevPage"
+        class="pagination-btn">
+
+        <i data-lucide="chevron-left"></i>
+
+        Previous
+
+    </button>
+
+    <div
+        class="page-numbers"
+        id="pageNumbers">
+
+        <!-- Generated by JS -->
+
+    </div>
+
+    <button
+        id="nextPage"
+        class="pagination-btn">
+
+        Next
+
+        <i data-lucide="chevron-right"></i>
+
+    </button>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    DELETE MODAL
+========================================================== -->
+
+<div class="modal"
+     id="deleteModal"
+     hidden>
+
+    <div class="modal-content">
+
+        <div class="modal-icon">
+
+            <i data-lucide="triangle-alert"></i>
+
+        </div>
+
+        <h3>
+
+            Archive Product?
+
+        </h3>
+
+        <p>
+
+            This product will be moved to the archive.
+            You can restore it later.
+
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelDelete"
+                class="secondary-btn">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="confirmDelete"
+                class="danger-btn">
+
+                Archive Product
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    IMAGE PREVIEW MODAL
+========================================================== -->
+
+<div class="modal"
+     id="imageModal"
+     hidden>
+
+    <div class="image-modal">
+
+        <button
+            class="close-modal"
+            id="closeImageModal">
+
+            <i data-lucide="x"></i>
+
+        </button>
+
+        <img
+            id="previewImage"
+            src=""
+            alt="Product Image">
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    LUCIDE
+========================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+
+<!-- ==========================================================
+                    PRODUCTS JS
+========================================================== -->
+
+<script type="module"
+        src="products.js"></script>
+
+</body>
+
+</html>

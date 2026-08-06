@@ -1,0 +1,656 @@
+/* ==========================================================
+   KHEYAL KHUSI ADMIN PANEL
+   Customers Stylesheet
+   Loads AFTER dashboard.css — reuses its tokens (--color-*,
+   --radius-*, --shadow-*, --transition) and its shared
+   .dashboard-card / .stats-grid / .stat-card / .empty-state /
+   .search-box / .loading classes rather than redefining them.
+   Only page-specific pieces (page header, filter bar, table,
+   pagination, drawer) are added here.
+========================================================== */
+
+
+/* ==========================================================
+   1. PAGE HEADER
+   (not defined in dashboard.css yet — safe to add here;
+   move it into dashboard.css later if other pages need it too)
+========================================================== */
+
+.page-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.page-header h2{
+
+    font-size:26px;
+    margin-bottom:6px;
+
+}
+
+.page-header p{
+
+    font-size:13.5px;
+    color:var(--color-muted);
+
+}
+
+
+
+/* ==========================================================
+   2. FILTER BAR
+========================================================== */
+
+.filter-bar{
+
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+
+    gap:14px;
+
+}
+
+/* .search-box is already styled by dashboard.css. Let it grow
+   here so it leads the filter row instead of sitting at a
+   fixed 300px. */
+
+.filter-bar .search-box{
+
+    flex:1;
+    min-width:220px;
+    width:auto;
+
+}
+
+.filter-bar select{
+
+    height:48px;
+
+    padding:0 40px 0 18px;
+
+    background-color:var(--color-surface);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%237A5C46' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+    appearance:none;
+
+    border:1px solid var(--color-border);
+    border-radius:var(--radius-pill);
+
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--color-text);
+
+    cursor:pointer;
+
+    min-width:180px;
+
+    transition:var(--transition);
+
+}
+
+.filter-bar select:hover{
+
+    border-color:var(--color-primary);
+
+}
+
+.filter-bar select:focus-visible{
+
+    border-color:var(--color-primary);
+    box-shadow:0 0 0 3px rgba(122,92,70,.12);
+
+}
+
+
+
+/* ==========================================================
+   3. CUSTOMERS TABLE
+========================================================== */
+
+/* .dashboard-card already gives the white surface, radius and
+   shadow. Its default padding is removed here (only for the
+   card wrapping the table) so the table can run edge-to-edge. */
+
+.dashboard-card:has(.table-wrapper){
+
+    padding:0;
+
+}
+
+.table-wrapper{
+
+    width:100%;
+    overflow-x:auto;
+
+}
+
+#customersTable{
+
+    width:100%;
+    min-width:760px;
+
+    border-collapse:collapse;
+
+    font-size:13.5px;
+
+}
+
+#customersTable thead th{
+
+    text-align:left;
+
+    padding:14px 20px;
+
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+
+    color:var(--color-muted);
+
+    border-bottom:1px solid var(--color-border);
+
+    white-space:nowrap;
+
+}
+
+#customersTable tbody td{
+
+    padding:16px 20px;
+
+    border-bottom:1px solid var(--color-border);
+
+    color:var(--color-text);
+
+    vertical-align:middle;
+
+}
+
+#customersTable tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+#customersTable tbody tr{
+
+    transition:var(--transition);
+
+}
+
+#customersTable tbody tr:hover{
+
+    background:var(--color-bg);
+
+}
+
+/* Customer identity cell: avatar + name + email/join sub-line.
+   customers.js can build this as:
+   <div class="customer-cell">
+     <img src="..." alt="">
+     <div>
+       <h4>Name</h4>
+       <span>Member since Jan 2026</span>
+     </div>
+   </div>
+*/
+
+.customer-cell{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
+.customer-cell img{
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:1px solid var(--color-border);
+
+    flex-shrink:0;
+
+}
+
+.customer-cell h4{
+
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--color-heading);
+
+}
+
+.customer-cell span{
+
+    font-size:12px;
+    color:var(--color-muted);
+
+}
+
+/* Status badges — apply alongside a modifier, e.g.
+   <span class="status-badge status-active">Active</span> */
+
+.status-badge{
+
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+
+    padding:5px 12px;
+
+    border-radius:var(--radius-pill);
+
+    font-size:11.5px;
+    font-weight:600;
+
+}
+
+.status-badge::before{
+
+    content:"";
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:currentColor;
+
+}
+
+.status-active{
+
+    background:var(--color-success-bg);
+    color:var(--color-success);
+
+}
+
+.status-new{
+
+    background:var(--color-info-bg);
+    color:var(--color-info);
+
+}
+
+.status-vip{
+
+    background:#F3E8DC;
+    color:var(--color-primary-dark);
+
+}
+
+.status-inactive{
+
+    background:#F1EDE8;
+    color:var(--color-muted);
+
+}
+
+/* Row action buttons */
+
+.table-actions{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+}
+
+.table-action-btn{
+
+    width:34px;
+    height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:var(--color-bg);
+    color:var(--color-text);
+
+    transition:var(--transition);
+
+}
+
+.table-action-btn:hover{
+
+    background:var(--color-primary);
+    color:#fff;
+
+}
+
+.table-action-btn.danger:hover{
+
+    background:var(--color-danger);
+
+}
+
+.table-action-btn svg,
+.table-action-btn i{
+
+    width:16px;
+    height:16px;
+
+}
+
+
+
+/* ==========================================================
+   4. PAGINATION
+========================================================== */
+
+.pagination{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:14px;
+    flex-wrap:wrap;
+
+    padding:4px 4px;
+
+}
+
+.pagination-btn{
+
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:11px 20px;
+
+    border-radius:var(--radius-pill);
+
+    background:var(--color-surface);
+    border:1px solid var(--color-border);
+
+    font-size:13px;
+    font-weight:600;
+    color:var(--color-text);
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+.pagination-btn:hover{
+
+    border-color:var(--color-primary);
+    color:var(--color-primary);
+
+}
+
+.pagination-btn:disabled{
+
+    opacity:.5;
+    cursor:not-allowed;
+
+}
+
+.pagination-btn svg,
+.pagination-btn i{
+
+    width:16px;
+    height:16px;
+
+}
+
+.page-numbers{
+
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+}
+
+.page-numbers button{
+
+    min-width:38px;
+    height:38px;
+
+    padding:0 10px;
+
+    border-radius:12px;
+
+    font-size:13px;
+    font-weight:600;
+    color:var(--color-text);
+
+    background:transparent;
+
+    transition:var(--transition);
+
+}
+
+.page-numbers button:hover{
+
+    background:#F5EFE7;
+
+}
+
+.page-numbers button.active{
+
+    background:var(--color-primary);
+    color:#fff;
+
+}
+
+
+
+/* ==========================================================
+   5. CUSTOMER SUMMARY
+   (.stats-grid / .stat-card / .stat-icon variants are already
+   fully styled by dashboard.css — only spacing added here)
+========================================================== */
+
+.customer-summary{
+
+    margin-top:4px;
+
+}
+
+
+
+/* ==========================================================
+   6. EMPTY STATE
+   dashboard.css styles .empty-state h4 — this page uses <h3>,
+   so that one heading level is extended here.
+========================================================== */
+
+.empty-state[hidden]{
+    display: none !important;
+}
+
+
+/* ==========================================================
+   7. CUSTOMER DRAWER
+========================================================== */
+
+.drawer{
+
+    position:fixed;
+
+    top:0;
+    right:0;
+
+    width:420px;
+    max-width:92vw;
+
+    height:100vh;
+
+    background:var(--color-surface);
+
+    box-shadow:var(--shadow-lg);
+
+    z-index:200;
+
+    display:flex;
+    flex-direction:column;
+
+    transform:translateX(100%);
+
+    transition:transform .35s ease;
+
+}
+
+.drawer.open{
+
+    transform:translateX(0);
+
+}
+
+.drawer-header{
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:24px 28px;
+
+    border-bottom:1px solid var(--color-border);
+
+}
+
+.drawer-header h3{
+
+    font-size:18px;
+
+}
+
+.drawer-header button{
+
+    width:36px;
+    height:36px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:var(--color-muted);
+
+    transition:var(--transition);
+
+}
+
+.drawer-header button:hover{
+
+    background:var(--color-bg);
+    color:var(--color-heading);
+
+}
+
+.drawer-content{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:28px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+/* Backdrop for the drawer. customers.js can toggle both
+   #sidebarOverlay's "show" class and this state on the same
+   element if a dedicated drawer backdrop is preferred; reusing
+   .sidebar-overlay.show also works since it's already global. */
+
+.drawer-backdrop{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    z-index:190;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s ease;
+
+}
+
+.drawer-backdrop.show{
+
+    opacity:1;
+    visibility:visible;
+
+}
+
+
+
+/* ==========================================================
+   8. RESPONSIVE
+========================================================== */
+
+@media (max-width:992px){
+
+    .filter-bar{
+
+        flex-direction:column;
+        align-items:stretch;
+
+    }
+
+    .filter-bar .search-box,
+    .filter-bar select{
+
+        width:100%;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .page-header{
+
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+
+    }
+
+    #customersTable{
+
+        min-width:640px;
+
+    }
+
+    .pagination{
+
+        justify-content:center;
+
+    }
+
+    .drawer{
+
+        width:100%;
+        max-width:100%;
+
+    }
+
+}

@@ -1,0 +1,463 @@
+/* ==========================================================
+   KHEYAL KHUSI ADMIN PANEL
+   Settings Page Stylesheet
+   Theme: Luxury Handmade
+   (Uses design tokens from dashboard.css)
+========================================================== */
+
+
+
+/* ==========================================================
+   1. FORM LAYOUT
+========================================================== */
+
+#settingsForm{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:24px;
+
+}
+
+
+
+/* ==========================================================
+   2. FORM CARD
+========================================================== */
+
+.form-card{
+
+    background:var(--color-surface);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-sm);
+
+    padding:28px;
+
+}
+
+.form-card .card-header{
+
+    margin-bottom:22px;
+
+    padding-bottom:18px;
+
+    border-bottom:1px solid var(--color-border);
+
+}
+
+.form-card .card-header h3{
+
+    font-size:17px;
+
+}
+
+
+
+/* ==========================================================
+   3. FORM GRID
+========================================================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:22px 24px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.form-group.full-width{
+
+    grid-column:1 / -1;
+
+}
+
+
+
+/* ==========================================================
+   4. LABELS
+========================================================== */
+
+.form-group label{
+
+    font-size:13px;
+
+    font-weight:500;
+
+    color:var(--color-heading);
+
+}
+
+
+
+/* ==========================================================
+   5. INPUTS / TEXTAREAS / SELECTS
+========================================================== */
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="url"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select{
+
+    width:100%;
+
+    padding:13px 16px;
+
+    background:var(--color-bg);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-md);
+
+    font-size:14px;
+
+    color:var(--color-text);
+
+    transition:var(--transition);
+
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder{
+
+    color:var(--color-muted);
+
+}
+
+.form-group textarea{
+
+    resize:vertical;
+
+    line-height:1.6;
+
+    font-family:var(--font-body);
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+
+    border-color:var(--color-primary);
+
+    background:var(--color-surface);
+
+    box-shadow:0 0 0 3px rgba(122,92,70,.12);
+
+}
+
+.form-group select{
+
+    appearance:none;
+
+    cursor:pointer;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%237A5C46' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 16px center;
+
+    padding-right:40px;
+
+}
+
+
+
+/* ==========================================================
+   6. FILE INPUTS (Branding)
+========================================================== */
+
+.form-group input[type="file"]{
+
+    width:100%;
+
+    padding:12px 16px;
+
+    background:var(--color-bg);
+
+    border:1.5px dashed var(--color-border);
+
+    border-radius:var(--radius-md);
+
+    font-size:13px;
+
+    color:var(--color-muted);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.form-group input[type="file"]:hover{
+
+    border-color:var(--color-primary);
+
+    color:var(--color-primary);
+
+}
+
+.form-group input[type="file"]::file-selector-button{
+
+    padding:8px 16px;
+
+    margin-right:14px;
+
+    border-radius:999px;
+
+    background:var(--color-primary);
+
+    color:#fff;
+
+    font-size:12.5px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.form-group input[type="file"]::file-selector-button:hover{
+
+    background:var(--color-primary-dark);
+
+}
+
+
+
+/* ==========================================================
+   7. CHECKBOX GRID (Store Preferences)
+========================================================== */
+
+.checkbox-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+.checkbox-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:16px 18px;
+
+    background:var(--color-bg);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-md);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.checkbox-card:hover{
+
+    border-color:var(--color-primary);
+
+}
+
+.checkbox-card span{
+
+    font-size:13.5px;
+
+    font-weight:500;
+
+    color:var(--color-heading);
+
+}
+
+.checkbox-card input[type="checkbox"]{
+
+    appearance:none;
+
+    width:20px;
+
+    height:20px;
+
+    flex-shrink:0;
+
+    border:1.5px solid var(--color-border);
+
+    border-radius:7px;
+
+    background:var(--color-surface);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.checkbox-card input[type="checkbox"]:checked{
+
+    background:var(--color-primary);
+
+    border-color:var(--color-primary);
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='10' viewBox='0 0 12 10'%3E%3Cpath d='M1 5L4.3 8.3L11 1' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:center;
+
+}
+
+.checkbox-card:has(input:checked){
+
+    border-color:var(--color-primary);
+
+    background:#F8F1E9;
+
+}
+
+
+
+/* ==========================================================
+   8. FORM ACTIONS
+========================================================== */
+
+.form-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:14px;
+
+    padding-top:4px;
+
+}
+
+.secondary-btn,
+.primary-btn{
+
+    padding:14px 28px;
+
+    border-radius:14px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.secondary-btn{
+
+    background:var(--color-surface);
+
+    color:var(--color-text);
+
+    border:1px solid var(--color-border);
+
+}
+
+.secondary-btn:hover{
+
+    background:var(--color-bg);
+
+    border-color:var(--color-muted);
+
+}
+
+.primary-btn{
+
+    background:var(--color-primary);
+
+    color:#fff;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.primary-btn:hover{
+
+    background:var(--color-primary-dark);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+
+
+/* ==========================================================
+   9. RESPONSIVE
+========================================================== */
+
+@media (max-width:900px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .checkbox-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .form-card{
+
+        padding:20px;
+
+    }
+
+    .form-actions{
+
+        flex-direction:column-reverse;
+
+    }
+
+    .secondary-btn,
+    .primary-btn{
+
+        width:100%;
+
+    }
+
+}

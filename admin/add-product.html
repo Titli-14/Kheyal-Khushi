@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product | Kheyal Khusi Admin</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="admin-css/admin-global.css">
+
+    <link rel="stylesheet"
+          href="admin-css/add-product.css">
+
+</head>
+
+<body>
+
+<div class="sidebar-overlay"
+     id="sidebarOverlay"></div>
+
+<div class="admin-layout">
+
+<!-- ==========================================================
+                        SIDEBAR
+=========================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="sidebar-header">
+
+        <div class="logo">
+
+            <img src="../assets/logos/logo.png"
+                 alt="Kheyal Khusi">
+
+            <span class="logo-text">Kheyal Khusi</span>
+
+        </div>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <div class="nav-item">
+
+            <a href="dashboard.html" class="nav-link">
+
+                <i data-lucide="layout-dashboard" class="nav-icon"></i>
+
+                <span class="nav-label">Dashboard</span>
+
+            </a>
+
+        </div>
+
+        <div class="nav-item">
+
+            <a href="products.html" class="nav-link">
+
+                <i data-lucide="package" class="nav-icon"></i>
+
+                <span class="nav-label">Products</span>
+
+            </a>
+
+        </div>
+
+        <div class="nav-item active">
+
+            <a href="add-product.html" class="nav-link">
+
+                <i data-lucide="plus-circle" class="nav-icon"></i>
+
+                <span class="nav-label">Add Product</span>
+
+            </a>
+
+        </div>
+
+        <div class="nav-item">
+
+            <a href="orders.html" class="nav-link">
+
+                <i data-lucide="shopping-bag" class="nav-icon"></i>
+
+                <span class="nav-label">Orders</span>
+
+            </a>
+
+        </div>
+
+        <div class="nav-item">
+
+            <a href="customers.html" class="nav-link">
+
+                <i data-lucide="users" class="nav-icon"></i>
+
+                <span class="nav-label">Customers</span>
+
+            </a>
+
+        </div>
+
+        <div class="nav-item">
+
+            <a href="settings.html" class="nav-link">
+
+                <i data-lucide="settings" class="nav-icon"></i>
+
+                <span class="nav-label">Settings</span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <button class="sidebar-logout-btn"
+                id="logoutBtn">
+
+            <i data-lucide="log-out" class="nav-icon"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ==========================================================
+                        MAIN CONTENT
+=========================================================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button class="hamburger-btn"
+                id="sidebarToggle">
+
+            <i data-lucide="menu"></i>
+
+        </button>
+
+        <div>
+
+            <h1 class="page-title">
+
+                Add Product
+
+            </h1>
+
+            <p class="page-subtitle">
+
+                Create a new handmade product
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <a href="settings.html" class="topbar-icon-btn" title="Settings">
+
+            <i data-lucide="settings"></i>
+
+        </a>
+
+        <button id="dropdownLogout" class="topbar-logout-btn">
+
+            <i data-lucide="log-out"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- ==========================================================
+                    PAGE CONTENT
+=========================================================== -->
+
+<section class="page-content">
+
+<div class="ap-page-header">
+
+    <div>
+
+        <h2>
+
+            Product Information
+
+        </h2>
+
+        <p>
+
+            Fill in the details below to add a new product.
+
+        </p>
+
+    </div>
+
+</div>
+
+<form id="productForm"
+      class="ap-form">
+
+<!-- ==========================================================
+                BASIC INFORMATION
+=========================================================== -->
+
+<div class="ap-card">
+
+<div class="ap-card-header">
+
+<h3>
+
+Basic Information
+
+</h3>
+
+</div>
+
+<div class="ap-form-grid">
+
+<div class="ap-form-group">
+
+<label>
+
+Product Name *
+
+</label>
+
+<input
+type="text"
+id="productName"
+placeholder="Resin Wall Clock"
+required>
+
+</div>
+
+<div class="ap-form-group">
+
+<label>
+
+Category *
+
+</label>
+
+<select id="category"
+required>
+
+<option value="">
+
+Select Category
+
+</option>
+
+<option>
+
+Resin Clock
+
+</option>
+
+<option>
+
+Resin Lamp
+
+</option>
+
+<option>
+
+Resin Keychain
+
+</option>
+
+<option>
+
+Resin Art
+
+</option>
+
+<option>
+
+Ribbon Rose Bouquet
+
+</option>
+
+<option>
+
+Gift Hamper
+
+</option>
+
+<option>
+
+Other
+
+</option>
+
+</select>
+
+</div>
+
+<div class="ap-form-group ap-full-width">
+
+<label>
+
+Short Description
+
+</label>
+
+<textarea
+id="shortDescription"
+rows="3"
+placeholder="Short product description"></textarea>
+
+</div>
+
+<div class="ap-form-group ap-full-width">
+
+<label>
+
+Product Description
+
+</label>
+
+<textarea
+id="description"
+rows="7"
+placeholder="Detailed description"></textarea>
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================================================
+                    PRICING
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            Pricing
+
+        </h3>
+
+    </div>
+
+    <div class="ap-form-grid">
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Selling Price *
+
+            </label>
+
+            <input
+                type="number"
+                id="price"
+                min="0"
+                placeholder="899"
+                required>
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Original Price
+
+            </label>
+
+            <input
+                type="number"
+                id="originalPrice"
+                min="0"
+                placeholder="1099">
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Discount %
+
+            </label>
+
+            <input
+                type="number"
+                id="discount"
+                min="0"
+                max="100"
+                placeholder="20">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    INVENTORY
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            Inventory
+
+        </h3>
+
+    </div>
+
+    <div class="ap-form-grid">
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Stock Quantity *
+
+            </label>
+
+            <input
+                type="number"
+                id="stock"
+                min="0"
+                value="1"
+                required>
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                SKU
+
+            </label>
+
+            <input
+                type="text"
+                id="sku"
+                placeholder="Auto Generated"
+                readonly>
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Availability
+
+            </label>
+
+            <select id="availability">
+
+                <option>
+
+                    In Stock
+
+                </option>
+
+                <option>
+
+                    Made To Order
+
+                </option>
+
+                <option>
+
+                    Out Of Stock
+
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    PRODUCT DETAILS
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            Product Details
+
+        </h3>
+
+    </div>
+
+    <div class="ap-form-grid">
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Material
+
+            </label>
+
+            <input
+                type="text"
+                id="material"
+                placeholder="Resin, Wood, Epoxy">
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Color
+
+            </label>
+
+            <input
+                type="text"
+                id="color"
+                placeholder="White & Gold">
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Weight
+
+            </label>
+
+            <input
+                type="text"
+                id="weight"
+                placeholder="500 g">
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Dimensions
+
+            </label>
+
+            <input
+                type="text"
+                id="dimensions"
+                placeholder="12 x 12 inches">
+
+        </div>
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Processing Time
+
+            </label>
+
+            <input
+                type="text"
+                id="processingTime"
+                placeholder="3 - 5 Days">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    PRODUCT VISIBILITY
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            Product Visibility
+
+        </h3>
+
+    </div>
+
+    <div class="ap-checkbox-grid">
+
+        <label class="ap-checkbox-card">
+
+            <input
+                type="checkbox"
+                id="featured">
+
+            <span>
+
+                Featured Product
+
+            </span>
+
+        </label>
+
+        <label class="ap-checkbox-card">
+
+            <input
+                type="checkbox"
+                id="bestSeller">
+
+            <span>
+
+                Best Seller
+
+            </span>
+
+        </label>
+
+        <label class="ap-checkbox-card">
+
+            <input
+                type="checkbox"
+                id="newArrival">
+
+            <span>
+
+                New Arrival
+
+            </span>
+
+        </label>
+
+        <label class="ap-checkbox-card">
+
+            <input
+                type="checkbox"
+                id="active"
+                checked>
+
+            <span>
+
+                Active Product
+
+            </span>
+
+        </label>
+
+    </div>
+
+</div>
+<!-- ==========================================================
+                    PRODUCT IMAGES
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            Product Images
+
+        </h3>
+
+    </div>
+
+    <div class="ap-upload-area" id="uploadArea">
+
+        <input
+            type="file"
+            id="productImages"
+            accept="image/*"
+            multiple
+            hidden>
+
+        <div class="ap-upload-content">
+
+            <i data-lucide="image-plus"></i>
+
+            <h4>
+
+                Upload Product Images
+
+            </h4>
+
+            <p>
+
+                Drag & Drop images here or click to browse
+
+            </p>
+
+            <button
+                type="button"
+                class="ap-secondary-btn"
+                id="browseImages">
+
+                Browse Images
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div
+        id="imagePreview"
+        class="ap-image-preview-grid">
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    SEO SETTINGS
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            SEO Settings
+
+        </h3>
+
+    </div>
+
+    <div class="ap-form-grid">
+
+        <div class="ap-form-group ap-full-width">
+
+            <label>
+
+                Product Slug
+
+            </label>
+
+            <input
+                type="text"
+                id="slug"
+                placeholder="resin-wall-clock">
+
+        </div>
+
+        <div class="ap-form-group ap-full-width">
+
+            <label>
+
+                Meta Title
+
+            </label>
+
+            <input
+                type="text"
+                id="metaTitle"
+                maxlength="60"
+                placeholder="SEO Title">
+
+        </div>
+
+        <div class="ap-form-group ap-full-width">
+
+            <label>
+
+                Meta Description
+
+            </label>
+
+            <textarea
+                id="metaDescription"
+                rows="4"
+                maxlength="160"
+                placeholder="SEO Description"></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    PRODUCT STATUS
+=========================================================== -->
+
+<div class="ap-card">
+
+    <div class="ap-card-header">
+
+        <h3>
+
+            Publishing
+
+        </h3>
+
+    </div>
+
+    <div class="ap-form-grid">
+
+        <div class="ap-form-group">
+
+            <label>
+
+                Product Status
+
+            </label>
+
+            <select id="status">
+
+                <option value="active">
+
+                    Active
+
+                </option>
+
+                <option value="draft">
+
+                    Draft
+
+                </option>
+
+                <option value="hidden">
+
+                    Hidden
+
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    ACTION BUTTONS
+=========================================================== -->
+
+<div class="ap-form-actions">
+
+    <a
+        href="products.html"
+        class="ap-secondary-btn">
+
+        Cancel
+
+    </a>
+
+    <button
+        type="button"
+        class="ap-secondary-btn"
+        id="saveDraft">
+
+        Save Draft
+
+    </button>
+
+    <button
+        type="submit"
+        class="ap-primary-btn">
+
+        Publish Product
+
+    </button>
+
+</div>
+
+</form>
+
+</section>
+
+</main>
+
+</div>
+
+<!-- ==========================================================
+                    LUCIDE ICONS
+=========================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+<script type="module" src="add-product.js"></script>
+
+</body>
+
+</html>

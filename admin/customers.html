@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Customers | Kheyal Khusi Admin</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="admin-css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="admin-css/customer.css">
+
+</head>
+
+<body>
+
+<div class="sidebar-overlay"
+     id="sidebarOverlay"></div>
+
+<div class="admin-layout">
+
+<!-- ==========================================================
+                        SIDEBAR
+========================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="../assets/logo/logo.png"
+             alt="Kheyal Khusi"
+             class="brand-logo">
+
+        <div class="brand-text">
+
+            <h2>Kheyal Khusi</h2>
+
+            <span>ADMIN PANEL</span>
+
+        </div>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <ul>
+
+            <li class="nav-item">
+
+                <a href="dashboard.html">
+
+                    <i data-lucide="layout-dashboard"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="products.html">
+
+                    <i data-lucide="package"></i>
+
+                    <span>Products</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="add-product.html">
+
+                    <i data-lucide="plus-circle"></i>
+
+                    <span>Add Product</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="orders.html">
+
+                    <i data-lucide="shopping-bag"></i>
+
+                    <span>Orders</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item active">
+
+                <a href="customers.html">
+
+                    <i data-lucide="users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="settings.html">
+
+                    <i data-lucide="settings"></i>
+
+                    <span>Settings</span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            <i data-lucide="log-out"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ==========================================================
+                    MAIN CONTENT
+========================================================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            class="sidebar-toggle"
+            id="sidebarToggle">
+
+            <i data-lucide="menu"></i>
+
+        </button>
+
+        <div>
+
+            <h1 class="page-title">
+
+                Customers
+
+            </h1>
+
+            <p class="page-subtitle">
+
+                Manage your customer database
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <div class="profile-menu">
+
+            <button
+                id="profileTrigger"
+                class="profile-trigger">
+
+
+                <div class="profile-info">
+
+                    <h4 id="profileName">
+
+                        Loading...
+
+                    </h4>
+
+                </div>
+
+                <i data-lucide="chevron-down"></i>
+
+            </button>
+
+            <div
+                id="profileDropdown"
+                class="profile-dropdown">
+
+                <a href="admin-profile.html">
+
+                    <i data-lucide="user"></i>
+
+                    My Profile
+
+                </a>
+
+                <a href="settings.html">
+
+                    <i data-lucide="settings"></i>
+
+                    Settings
+
+                </a>
+
+                <button id="dropdownLogout">
+
+                    <i data-lucide="log-out"></i>
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ==========================================================
+                    PAGE CONTENT
+========================================================== -->
+
+<section class="page-content">
+
+<div class="page-header">
+
+    <div>
+
+        <h2>
+
+            Customer Management
+
+        </h2>
+
+        <p>
+
+            View customer profiles and purchase history.
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+                    FILTER BAR
+========================================================== -->
+
+<div class="filter-bar">
+
+    <div class="search-box">
+
+        <i data-lucide="search"></i>
+
+        <input
+            type="text"
+            id="searchCustomer"
+            placeholder="Search customer...">
+
+    </div>
+
+    <select id="customerFilter">
+
+        <option value="">
+
+            All Customers
+
+        </option>
+
+        <option value="new">
+
+            New Customers
+
+        </option>
+
+        <option value="returning">
+
+            Returning Customers
+
+        </option>
+
+        <option value="vip">
+
+            VIP Customers
+
+        </option>
+
+    </select>
+
+    <select id="sortCustomers">
+
+        <option value="latest">
+
+            Recently Joined
+
+        </option>
+
+        <option value="orders">
+
+            Most Orders
+
+        </option>
+
+        <option value="spent">
+
+            Highest Spending
+
+        </option>
+
+        <option value="name">
+
+            Name (A-Z)
+
+        </option>
+
+    </select>
+
+</div>
+
+<!-- ==========================================================
+                    CUSTOMERS TABLE
+========================================================== -->
+
+<div class="dashboard-card">
+
+<div class="table-wrapper">
+
+<table id="customersTable">
+
+<thead>
+
+<tr>
+
+<th>Customer</th>
+
+<th>Email</th>
+
+<th>Phone</th>
+
+<th>Orders</th>
+
+<th>Total Spent</th>
+
+<th>Joined</th>
+
+<th>Status</th>
+
+<th>Actions</th>
+
+</tr>
+
+</thead>
+
+<tbody id="customersTableBody">
+
+<tr>
+
+<td colspan="8"
+    class="loading">
+
+Loading Customers...
+
+</td>
+
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    EMPTY STATE
+========================================================== -->
+
+<div
+    id="emptyCustomers"
+    class="empty-state"
+    hidden>
+
+    <i data-lucide="users-round"></i>
+
+    <h3>
+
+        No Customers Found
+
+    </h3>
+
+    <p>
+
+        Customers will automatically appear here after placing their first order.
+
+    </p>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    PAGINATION
+========================================================== -->
+
+<div class="pagination">
+
+    <button
+        id="prevPage"
+        class="pagination-btn">
+
+        <i data-lucide="chevron-left"></i>
+
+        Previous
+
+    </button>
+
+    <div
+        id="pageNumbers"
+        class="page-numbers">
+
+    </div>
+
+    <button
+        id="nextPage"
+        class="pagination-btn">
+
+        Next
+
+        <i data-lucide="chevron-right"></i>
+
+    </button>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    CUSTOMER SUMMARY
+========================================================== -->
+
+<section class="stats-grid customer-summary">
+
+    <div class="stat-card">
+
+        <div class="stat-icon brown">
+
+            <i data-lucide="users"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Total Customers
+
+            </span>
+
+            <h2 id="totalCustomers">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon green">
+
+            <i data-lucide="user-plus"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                New This Month
+
+            </span>
+
+            <h2 id="newCustomers">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon orange">
+
+            <i data-lucide="repeat"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Returning Customers
+
+            </span>
+
+            <h2 id="returningCustomers">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon purple">
+
+            <i data-lucide="badge-indian-rupee"></i>
+
+        </div>
+
+        <div class="stat-content">
+
+            <span class="stat-title">
+
+                Total Revenue
+
+            </span>
+
+            <h2 id="customerRevenue">
+
+                ₹0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+</section>
+
+</section>
+
+</main>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    CUSTOMER DRAWER
+========================================================== -->
+
+<aside
+    id="customerDrawer"
+    class="drawer">
+
+    <div class="drawer-header">
+
+        <h3>
+
+            Customer Profile
+
+        </h3>
+
+        <button id="closeDrawer">
+
+            <i data-lucide="x"></i>
+
+        </button>
+
+    </div>
+
+    <div
+        id="drawerContent"
+        class="drawer-content">
+
+        <!-- Filled dynamically -->
+
+    </div>
+
+</aside>
+
+<td>
+    <span class="status-badge active">
+        Active
+    </span>
+</td>
+
+<td>
+    <div class="table-actions">
+
+        <button
+            class="table-action-btn view-btn"
+            data-id="${customer.id}">
+
+            View
+
+        </button>
+
+    </div>
+</td>
+
+
+<!-- ==========================================================
+                    LUCIDE
+========================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+lucide.createIcons();
+
+</script>
+
+
+
+<!-- ==========================================================
+                    JAVASCRIPT
+========================================================== -->
+
+<script type="module"
+        src="admin-js/customers.js"></script>
+
+</body>
+
+</html>

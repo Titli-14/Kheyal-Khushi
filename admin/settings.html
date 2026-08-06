@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Settings | Kheyal Khusi Admin</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="admin-css/dashboard.css">
+
+    <link rel="stylesheet"
+          href="admin-css/admin-global.css">
+
+    <link rel="stylesheet"
+          href="admin-css/settings.css">
+
+</head>
+
+<body>
+
+<div class="sidebar-overlay"
+     id="sidebarOverlay"></div>
+
+<div class="admin-layout">
+
+<!-- ==========================================================
+                        SIDEBAR
+========================================================== -->
+
+<aside class="sidebar"
+       id="sidebar">
+
+    <div class="sidebar-brand">
+
+        <img src="../assets/logo/logo.png"
+             alt="Kheyal Khusi"
+             class="brand-logo">
+
+        <div class="brand-text">
+
+            <h2>Kheyal Khusi</h2>
+
+            <span>ADMIN PANEL</span>
+
+        </div>
+
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <ul>
+
+            <li class="nav-item">
+
+                <a href="dashboard.html">
+
+                    <i data-lucide="layout-dashboard"></i>
+
+                    <span>Dashboard</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="products.html">
+
+                    <i data-lucide="package"></i>
+
+                    <span>Products</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="add-product.html">
+
+                    <i data-lucide="plus-circle"></i>
+
+                    <span>Add Product</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="categories.html">
+
+                    <i data-lucide="folder-tree"></i>
+
+                    <span>Categories</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="orders.html">
+
+                    <i data-lucide="shopping-bag"></i>
+
+                    <span>Orders</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a href="customers.html">
+
+                    <i data-lucide="users"></i>
+
+                    <span>Customers</span>
+
+                </a>
+
+            </li>
+
+            <li class="nav-item active">
+
+                <a href="settings.html">
+
+                    <i data-lucide="settings"></i>
+
+                    <span>Settings</span>
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+        <button
+            id="logoutBtn"
+            class="logout-btn">
+
+            <i data-lucide="log-out"></i>
+
+            Logout
+
+        </button>
+
+    </div>
+
+</aside>
+
+<!-- ==========================================================
+                    MAIN CONTENT
+========================================================== -->
+
+<main class="main-content">
+
+<header class="topbar">
+
+    <div class="topbar-left">
+
+        <button
+            id="sidebarToggle"
+            class="sidebar-toggle">
+
+            <i data-lucide="menu"></i>
+
+        </button>
+
+        <div>
+
+            <h1 class="page-title">
+
+                Settings
+
+            </h1>
+
+            <p class="page-subtitle">
+
+                Configure your store information
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+
+        <div class="profile-menu">
+
+            <button
+                id="profileTrigger"
+                class="profile-trigger">
+
+                <img
+                    id="adminAvatar"
+                    src="../assets/images/default-avatar.png"
+                    alt="Admin">
+
+                <div class="profile-info">
+
+                    <h4 id="profileName">
+
+                        Loading...
+
+                    </h4>
+
+                    <span>
+
+                        Administrator
+
+                    </span>
+
+                </div>
+
+                <i data-lucide="chevron-down"></i>
+
+            </button>
+
+            <div
+                id="profileDropdown"
+                class="profile-dropdown">
+
+                <a href="admin-profile.html">
+
+                    <i data-lucide="user"></i>
+
+                    My Profile
+
+                </a>
+
+                <button id="dropdownLogout">
+
+                    <i data-lucide="log-out"></i>
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ==========================================================
+                    PAGE CONTENT
+========================================================== -->
+
+<section class="page-content">
+
+<form id="settingsForm">
+
+<!-- ==========================================================
+                    STORE INFORMATION
+========================================================== -->
+
+<div class="form-card">
+
+    <div class="card-header">
+
+        <h3>
+
+            Store Information
+
+        </h3>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+
+                Store Name
+
+            </label>
+
+            <input
+                type="text"
+                id="storeName"
+                placeholder="Kheyal Khusi">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Business Email
+
+            </label>
+
+            <input
+                type="email"
+                id="businessEmail"
+                placeholder="contact@kheyalkhusi.com">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Business Phone
+
+            </label>
+
+            <input
+                type="tel"
+                id="businessPhone"
+                placeholder="+91 XXXXX XXXXX">
+
+        </div>
+
+        <div class="form-group full-width">
+
+            <label>
+
+                Store Address
+
+            </label>
+
+            <textarea
+                id="storeAddress"
+                rows="3"
+                placeholder="Store Address"></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+                    CONTACT & SOCIAL MEDIA
+========================================================== -->
+
+<div class="form-card">
+
+    <div class="card-header">
+
+        <h3>
+
+            Contact & Social Links
+
+        </h3>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+
+                WhatsApp
+
+            </label>
+
+            <input
+                type="text"
+                id="whatsapp">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Instagram
+
+            </label>
+
+            <input
+                type="url"
+                id="instagram">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Facebook
+
+            </label>
+
+            <input
+                type="url"
+                id="facebook">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                YouTube
+
+            </label>
+
+            <input
+                type="url"
+                id="youtube">
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ==========================================================
+                    BRANDING
+========================================================== -->
+
+<div class="form-card">
+
+    <div class="card-header">
+
+        <h3>
+
+            Branding
+
+        </h3>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+
+                Store Logo
+
+            </label>
+
+            <input
+                type="file"
+                id="storeLogo"
+                accept="image/*">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Favicon
+
+            </label>
+
+            <input
+                type="file"
+                id="favicon"
+                accept="image/*">
+
+        </div>
+
+        <div class="form-group full-width">
+
+            <label>
+
+                Store Description
+
+            </label>
+
+            <textarea
+                id="storeDescription"
+                rows="4"
+                placeholder="Tell customers about your store..."></textarea>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    SHIPPING
+========================================================== -->
+
+<div class="form-card">
+
+    <div class="card-header">
+
+        <h3>
+
+            Shipping & Delivery
+
+        </h3>
+
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+
+            <label>
+
+                Standard Shipping Charge
+
+            </label>
+
+            <input
+                type="number"
+                id="shippingCharge"
+                placeholder="50">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Free Shipping Above
+
+            </label>
+
+            <input
+                type="number"
+                id="freeShipping"
+                placeholder="999">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Delivery Time
+
+            </label>
+
+            <input
+                type="text"
+                id="deliveryTime"
+                placeholder="5 - 7 Business Days">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+
+                Cash on Delivery
+
+            </label>
+
+            <select id="codStatus">
+
+                <option value="enabled">
+
+                    Enabled
+
+                </option>
+
+                <option value="disabled">
+
+                    Disabled
+
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    STORE PREFERENCES
+========================================================== -->
+
+<div class="form-card">
+
+    <div class="card-header">
+
+        <h3>
+
+            Store Preferences
+
+        </h3>
+
+    </div>
+
+    <div class="checkbox-grid">
+
+        <label class="checkbox-card">
+
+            <input
+                type="checkbox"
+                id="maintenanceMode">
+
+            <span>
+
+                Maintenance Mode
+
+            </span>
+
+        </label>
+
+        <label class="checkbox-card">
+
+            <input
+                type="checkbox"
+                id="acceptOrders"
+                checked>
+
+            <span>
+
+                Accept New Orders
+
+            </span>
+
+        </label>
+
+        <label class="checkbox-card">
+
+            <input
+                type="checkbox"
+                id="showOutOfStock"
+                checked>
+
+            <span>
+
+                Show Out of Stock Products
+
+            </span>
+
+        </label>
+
+        <label class="checkbox-card">
+
+            <input
+                type="checkbox"
+                id="enableReviews"
+                checked>
+
+            <span>
+
+                Enable Product Reviews
+
+            </span>
+
+        </label>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    ACTION BUTTONS
+========================================================== -->
+
+<div class="form-actions">
+
+    <button
+        type="reset"
+        class="secondary-btn">
+
+        Reset
+
+    </button>
+
+    <button
+        type="submit"
+        class="primary-btn">
+
+        Save Changes
+
+    </button>
+
+</div>
+
+</form>
+
+</section>
+
+</main>
+
+</div>
+
+
+
+<!-- ==========================================================
+                    LUCIDE ICONS
+========================================================== -->
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+
+    lucide.createIcons();
+
+</script>
+
+
+
+<!-- ==========================================================
+                    SETTINGS JAVASCRIPT
+========================================================== -->
+
+<script type="module"
+        src="settings.js"></script>
+
+</body>
+
+</html>

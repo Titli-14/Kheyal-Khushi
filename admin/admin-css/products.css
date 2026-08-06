@@ -1,0 +1,914 @@
+/* ==========================================================
+   KHEYAL KHUSI ADMIN PANEL
+   Products Page Stylesheet
+   Theme: Luxury Handmade
+   (Uses design tokens from dashboard.css)
+========================================================== */
+
+
+
+/* ==========================================================
+   1. BUTTONS (shared across this page)
+========================================================== */
+
+.primary-btn,
+.secondary-btn,
+.danger-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:13px 22px;
+
+    border-radius:14px;
+
+    font-size:13.5px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    transition:var(--transition);
+
+}
+
+.primary-btn svg,
+.primary-btn i,
+.secondary-btn svg,
+.secondary-btn i,
+.danger-btn svg,
+.danger-btn i{
+
+    width:17px;
+
+    height:17px;
+
+}
+
+.primary-btn{
+
+    background:var(--color-primary);
+
+    color:#fff;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.primary-btn:hover{
+
+    background:var(--color-primary-dark);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.secondary-btn{
+
+    background:var(--color-surface);
+
+    color:var(--color-text);
+
+    border:1px solid var(--color-border);
+
+}
+
+.secondary-btn:hover{
+
+    background:var(--color-bg);
+
+    border-color:var(--color-muted);
+
+}
+
+.danger-btn{
+
+    background:var(--color-danger);
+
+    color:#fff;
+
+}
+
+.danger-btn:hover{
+
+    background:#B04949;
+
+}
+
+
+
+/* ==========================================================
+   2. PAGE HEADER
+========================================================== */
+
+.page-header{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:16px;
+
+}
+
+.page-header h2{
+
+    font-size:22px;
+
+    line-height:1.2;
+
+}
+
+.page-header p{
+
+    margin-top:4px;
+
+    color:var(--color-muted);
+
+    font-size:13.5px;
+
+}
+
+
+
+/* ==========================================================
+   3. FILTER BAR
+========================================================== */
+
+.filter-bar{
+
+    display:flex;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+
+}
+
+.filter-bar .search-box{
+
+    flex:1 1 240px;
+
+    width:auto;
+
+    min-width:220px;
+
+}
+
+.filter-bar select{
+
+    height:48px;
+
+    padding:0 40px 0 18px;
+
+    background-color:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    border-radius:999px;
+
+    font-size:13.5px;
+
+    color:var(--color-text);
+
+    cursor:pointer;
+
+    appearance:none;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%237A5C46' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 16px center;
+
+    transition:var(--transition);
+
+}
+
+.filter-bar select:hover{
+
+    border-color:var(--color-primary);
+
+}
+
+.filter-bar select:focus{
+
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 3px rgba(122,92,70,.12);
+
+}
+
+
+
+/* ==========================================================
+   4. PRODUCTS TABLE
+========================================================== */
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
+
+#productsTable{
+
+    width:100%;
+
+    min-width:760px;
+
+    border-collapse:collapse;
+
+    font-size:13.5px;
+
+}
+
+#productsTable thead th{
+
+    text-align:left;
+
+    padding:14px 16px;
+
+    font-size:11.5px;
+
+    font-weight:600;
+
+    letter-spacing:.06em;
+
+    text-transform:uppercase;
+
+    color:var(--color-muted);
+
+    border-bottom:1px solid var(--color-border);
+
+    white-space:nowrap;
+
+}
+
+#productsTable tbody td{
+
+    padding:14px 16px;
+
+    border-bottom:1px solid var(--color-border);
+
+    color:var(--color-text);
+
+    vertical-align:middle;
+
+}
+
+#productsTable tbody tr{
+
+    transition:var(--transition);
+
+}
+
+#productsTable tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+#productsTable tbody tr:hover{
+
+    background:#FBF8F4;
+
+}
+
+#productsTable td.loading{
+
+    text-align:center;
+
+    padding:32px 16px;
+
+    color:var(--color-muted);
+
+}
+
+.product-thumb{
+
+    width:52px;
+
+    height:52px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+    border:1px solid var(--color-border);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.product-thumb:hover{
+
+    transform:scale(1.06);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.product-name{
+
+    font-weight:500;
+
+    color:var(--color-heading);
+
+}
+
+.product-sku{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:11.5px;
+
+    color:var(--color-muted);
+
+}
+
+.product-price{
+
+    font-weight:600;
+
+    color:var(--color-heading);
+
+}
+
+.product-price-old{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:11.5px;
+
+    color:var(--color-muted);
+
+    text-decoration:line-through;
+
+}
+
+.stock-count{
+
+    font-weight:500;
+
+}
+
+.stock-low{
+
+    color:var(--color-warning);
+
+}
+
+.stock-out{
+
+    color:var(--color-danger);
+
+}
+
+
+
+/* ==========================================================
+   5. STATUS BADGES
+========================================================== */
+
+.status-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:5px 13px;
+
+    border-radius:999px;
+
+    font-size:11.5px;
+
+    font-weight:600;
+
+    letter-spacing:.02em;
+
+    white-space:nowrap;
+
+}
+
+.status-badge::before{
+
+    content:'';
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:currentColor;
+
+}
+
+.status-active{
+
+    background:var(--color-success-bg);
+
+    color:var(--color-success);
+
+}
+
+.status-draft{
+
+    background:#EEE9E3;
+
+    color:var(--color-muted);
+
+}
+
+.status-hidden{
+
+    background:var(--color-danger-bg);
+
+    color:var(--color-danger);
+
+}
+
+
+
+/* ==========================================================
+   6. ROW ACTIONS
+========================================================== */
+
+.row-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.row-action-btn{
+
+    width:36px;
+
+    height:36px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:10px;
+
+    background:var(--color-bg);
+
+    color:var(--color-text);
+
+    transition:var(--transition);
+
+}
+
+.row-action-btn svg,
+.row-action-btn i{
+
+    width:16px;
+
+    height:16px;
+
+}
+
+.row-action-btn:hover{
+
+    background:#F3E8DC;
+
+    color:var(--color-primary);
+
+}
+
+.row-action-btn.danger:hover{
+
+    background:var(--color-danger-bg);
+
+    color:var(--color-danger);
+
+}
+
+
+
+/* ==========================================================
+   7. PAGINATION
+========================================================== */
+
+.pagination{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    padding:8px 4px;
+
+}
+
+.pagination-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:500;
+
+    color:var(--color-text);
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    transition:var(--transition);
+
+}
+
+.pagination-btn svg,
+.pagination-btn i{
+
+    width:16px;
+
+    height:16px;
+
+}
+
+.pagination-btn:hover{
+
+    border-color:var(--color-primary);
+
+    color:var(--color-primary);
+
+}
+
+.pagination-btn:disabled{
+
+    opacity:.45;
+
+    cursor:not-allowed;
+
+}
+
+.pagination-btn:disabled:hover{
+
+    border-color:var(--color-border);
+
+    color:var(--color-text);
+
+}
+
+.page-numbers{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+}
+
+.page-number{
+
+    min-width:36px;
+
+    height:36px;
+
+    padding:0 10px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    font-weight:500;
+
+    color:var(--color-muted);
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    transition:var(--transition);
+
+}
+
+.page-number:hover{
+
+    border-color:var(--color-primary);
+
+    color:var(--color-primary);
+
+}
+
+.page-number.active{
+
+    background:var(--color-primary);
+
+    border-color:var(--color-primary);
+
+    color:#fff;
+
+}
+
+
+
+/* ==========================================================
+   8. EMPTY STATE (extends dashboard.css .empty-state)
+========================================================== */
+
+.empty-state .primary-btn{
+
+    margin-top:6px;
+
+}
+
+
+
+/* ==========================================================
+   9. MODAL BASE
+========================================================== */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(61,43,31,.45);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:300;
+
+}
+
+.modal[hidden]{
+
+    display:none;
+
+}
+
+
+
+/* ==========================================================
+   10. CONFIRM / DELETE MODAL
+========================================================== */
+
+.modal-content{
+
+    width:100%;
+
+    max-width:400px;
+
+    background:var(--color-surface);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-lg);
+
+    padding:32px;
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.modal-icon{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:50%;
+
+    background:var(--color-warning-bg);
+
+    color:var(--color-warning);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:8px;
+
+}
+
+.modal-icon svg,
+.modal-icon i{
+
+    width:26px;
+
+    height:26px;
+
+}
+
+.modal-content h3{
+
+    font-size:18px;
+
+}
+
+.modal-content p{
+
+    color:var(--color-muted);
+
+    font-size:13.5px;
+
+    max-width:300px;
+
+}
+
+.modal-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:16px;
+
+    width:100%;
+
+}
+
+.modal-actions button{
+
+    flex:1;
+
+}
+
+
+
+/* ==========================================================
+   11. IMAGE PREVIEW MODAL
+========================================================== */
+
+.image-modal{
+
+    position:relative;
+
+    max-width:90vw;
+
+    max-height:90vh;
+
+}
+
+.image-modal img{
+
+    max-width:90vw;
+
+    max-height:90vh;
+
+    width:auto;
+
+    border-radius:var(--radius-md);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.close-modal{
+
+    position:absolute;
+
+    top:-16px;
+
+    right:-16px;
+
+    width:38px;
+
+    height:38px;
+
+    border-radius:50%;
+
+    background:var(--color-surface);
+
+    color:var(--color-text);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:var(--shadow-md);
+
+    transition:var(--transition);
+
+}
+
+.close-modal:hover{
+
+    background:var(--color-danger);
+
+    color:#fff;
+
+}
+
+.close-modal svg,
+.close-modal i{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+
+
+/* ==========================================================
+   12. RESPONSIVE
+========================================================== */
+
+@media (max-width:768px){
+
+    .filter-bar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .filter-bar .search-box,
+    .filter-bar select{
+
+        width:100%;
+
+    }
+
+    .pagination{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .page-numbers{
+
+        justify-content:center;
+
+    }
+}
+
+@media (max-width:576px){
+
+    .close-modal{
+
+        top:-14px;
+
+        right:0;
+
+    }
+}
