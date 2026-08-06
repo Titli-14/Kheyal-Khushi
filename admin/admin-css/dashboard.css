@@ -154,19 +154,25 @@
 
 /* ==========================================================
    4. MOBILE SIDEBAR TOGGLE
-   (dashboard.js drives .sidebar.open / .sidebar-overlay.show
-   directly — kept as-is rather than admin-global's
-   .is-open/.is-visible naming, to avoid breaking existing JS)
+   Supports BOTH class-naming conventions — dashboard.js's own
+   .sidebar.open / .sidebar-overlay.show AND admin-global.css's
+   .sidebar.is-open / .sidebar-overlay.is-visible — so this
+   works no matter which one the JS actually toggles. Written
+   with 2-class specificity so it always beats admin-global's
+   1-class .sidebar{transform:translateX(-100%)} default.
 ========================================================== */
 
-.sidebar-overlay.show {
+.sidebar-overlay.show,
+.sidebar-overlay.is-visible {
   display: block;
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
-.sidebar.open {
-  transform: translateX(0);
+.sidebar.open,
+.sidebar.is-open {
+  transform: translateX(0) !important;
 }
 
 .menu-btn {
@@ -177,9 +183,16 @@
   justify-content: center;
   border-radius: var(--admin-radius-md);
   background-color: var(--admin-color-card);
+  border: 1px solid var(--admin-color-border);
   box-shadow: var(--admin-shadow-sm);
   color: var(--admin-color-text);
+  flex-shrink: 0;
   transition: background-color var(--admin-transition-fast);
+}
+
+.menu-btn i {
+  width: 20px;
+  height: 20px;
 }
 
 .menu-btn:hover {
@@ -188,7 +201,7 @@
 
 @media (max-width: 992px) {
   .menu-btn {
-    display: flex;
+    display: flex !important;
   }
 }
 
