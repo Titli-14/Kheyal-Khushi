@@ -101,10 +101,6 @@
     position: static;
   }
 
-  .filter-card {
-    position: static;
-  }
-
   .wishlist-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -148,6 +144,8 @@
 
   .hero {
     min-height: 560px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .hero-content {
@@ -163,11 +161,15 @@
     display: none;
   }
 
+  /* On mobile there isn't enough room for the badge to float over the
+     stats without overlapping them, so it becomes a normal stacked card
+     underneath the hero content instead of an absolute overlay. */
   .hero-badge {
     left: 16px;
     right: 16px;
     bottom: 16px;
     max-width: none;
+    margin: 0 20px 28px;
   }
 
   .category-grid {

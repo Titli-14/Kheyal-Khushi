@@ -1,129 +1,99 @@
 /* ============================================================
    PRODUCTS.JS
-   The shared demo product catalog PLUS every helper the Shop,
+   The shared, live product catalog PLUS every helper the Shop,
    Category, Product Details, Wishlist, Cart, and Search pages
    use to filter, sort, paginate, and render products.
 
-   PHASE NOTE: This is static demo data (16 products). Once
-   Firestore is connected (Phase 6), replace getAllProducts()
-   with a real query — e.g.
-   getDocs(collection(db, "products"))
-   — and keep every field name below exactly as-is, so none of
-   the rendering code in shop.js / cart.js / wishlist.js /
-   product-detail.js needs to change.
+   Products now come from the same Firestore "products" collection
+   the admin panel writes to — there is no more static demo data.
+   Every helper below keeps its original name and signature, so
+   shop.js / cart.js / wishlist.js / product-detail markup did not
+   need to change.
+
+   NOTE ON THE FIRESTORE IMPORT BELOW: this file was converted to
+   an ES module (needed for the Firestore modular SDK), and it
+   pulls `db` from ./firebase.js. Since firebase.js wasn't part of
+   the files reviewed for this refactor, double check two things:
+     1) firebase.js actually exports `db` (the initialized
+        Firestore instance) — e.g. `export const db = getFirestore(app);`
+     2) the firebase-firestore.js CDN version below matches whatever
+        version firebase.js initializes the app with.
    ============================================================ */
 
-const KK_PRODUCTS = [
-  {
-  id: 'p1',
-  name: 'Moon Night Lamp',
-  category: 'Handmade Lights',
-  categorySlug: 'handmade-lights',
-  price: 1499,
-  originalPrice: 1799,
-  rating: 5,
-  reviews: 18,
-  tag: 'Best Seller',
-  createdAt: '2026-07-30',
-  shortDescription: 'A handcrafted moon-themed lamp that creates a warm and cozy ambience.',
-  description: 'Made using premium resin, wooden base, and LED lighting. Perfect for bedrooms, study tables, and gifting.',
-  image: 'assets/images/products/moon-lamp.jpg',
-  images: [
-    'assets/images/products/moon-lamp.jpg']
+import { db } from './firebase.js';
+import {
+  collection,
+  query,
+  orderBy,
+  getDocs,
+  onSnapshot,
+} from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+/* ---------- Live product store ----------
+   KK_PRODUCTS starts empty and is populated (and kept in sync)
+   by the onSnapshot listener set up in initializeProducts(). */
+let KK_PRODUCTS = [];
+let productsReady = false;   // true once the first snapshot (or an error) has arrived
+let productsError = null;    // holds the Firestore error, if any
+let unsubscribeProducts = null;
+
+function notify(eventName, detail) {
+  window.dispatchEvent(new CustomEvent(eventName, { detail }));
 }
-,
-{ id: 'p2', name: 'Hand-embroidered Kantha Stole', category: 'Textile', categorySlug: 'textile', price: 980, originalPrice: 1300, rating: 4, reviews: 31, tag: 'Sale', createdAt: '2026-05-14',
-    shortDescription: 'A lightweight cotton stole hand-stitched with traditional running-stitch kantha embroidery.',
-    description: 'Kantha embroidery has been passed down through generations of Bengal\'s needleworkers. This stole takes an embroiderer nearly two weeks of careful, hand-guided stitching to complete. Soft, breathable cotton makes it wearable through most of the year.',
-    image: 'https://picsum.photos/seed/kk-stole/700/730',
-    images: ['https://picsum.photos/seed/kk-stole/700/730', 'https://picsum.photos/seed/kk-stole-2/700/730', 'https://picsum.photos/seed/kk-stole-3/700/730'] },
 
-  { id: 'p3', name: 'Dokra Metal Craft Earrings', category: 'Jewellery', categorySlug: 'jewellery', price: 650, originalPrice: null, rating: 5, reviews: 76, tag: null, createdAt: '2026-04-02',
-    shortDescription: 'Lightweight earrings cast using the 4,000-year-old lost-wax dokra technique.',
-    description: 'Dokra metal casting is one of the oldest known methods of non-ferrous metal casting, still practiced by artisan families in West Bengal. Each pair starts life as a wax model, wrapped in clay, and cast in molten brass — meaning every piece is genuinely one-of-a-kind.',
-    image: 'https://picsum.photos/seed/kk-earrings/700/730',
-    images: ['https://picsum.photos/seed/kk-earrings/700/730', 'https://picsum.photos/seed/kk-earrings-2/700/730', 'https://picsum.photos/seed/kk-earrings-3/700/730'] },
+/**
+ * Subscribes to the "products" collection in Firestore, ordered by
+ * createdAt descending — the same collection the admin panel writes
+ * to. Uses onSnapshot() (not a one-time getDocs()) so every customer
+ * page reflects admin edits/adds/removals live, without a refresh.
+ */
+async function initializeProducts() {
+  try {
+    const productsQuery = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
 
-  { id: 'p4', name: 'Hand-painted Madhubani Canvas', category: 'Wall Art', categorySlug: 'wall-art', price: 2200, originalPrice: null, rating: 5, reviews: 19, tag: 'New', createdAt: '2026-06-25',
-    shortDescription: 'A canvas hand-painted in the vivid, folk-style lines of Madhubani art.',
-    description: 'Madhubani painting originates from the Mithila region and is traditionally passed from mother to daughter. This piece is painted entirely by hand with natural pigments, using the bold outlines and nature motifs the style is known for. Arrives ready to frame.',
-    image: 'https://picsum.photos/seed/kk-madhubani/700/730',
-    images: ['https://picsum.photos/seed/kk-madhubani/700/730', 'https://picsum.photos/seed/kk-madhubani-2/700/730', 'https://picsum.photos/seed/kk-madhubani-3/700/730'] },
+    unsubscribeProducts = onSnapshot(
+      productsQuery,
+      (snapshot) => {
+        // If Firestore has no products, this resolves to an empty
+        // array — existing empty-state UI on every page already
+        // knows how to handle a zero-length result.
+        KK_PRODUCTS = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        productsReady = true;
+        productsError = null;
+        notify('kk:products-updated', { products: KK_PRODUCTS });
+      },
+      (error) => {
+        console.error('[products.js] Firestore onSnapshot error:', error);
+        productsReady = true; // stop showing "loading" — surface the error state instead
+        productsError = error;
+        notify('kk:products-error', { error });
+      }
+    );
+  } catch (error) {
+    console.error('[products.js] Failed to initialize products:', error);
+    productsReady = true;
+    productsError = error;
+    notify('kk:products-error', { error });
+  }
+}
 
-  { id: 'p5', name: 'Hand-woven Bamboo Basket', category: 'Home Decor', categorySlug: 'home-decor', price: 890, originalPrice: null, rating: 4, reviews: 24, tag: null, createdAt: '2026-03-11',
-    shortDescription: 'A sturdy storage basket, hand-woven from sustainably sourced bamboo.',
-    description: 'Woven strip by strip by basket-makers in rural Bengal, this piece is as functional as it is beautiful. Use it for storage, laundry, or simply as a decorative accent — the natural bamboo tone works with almost any interior.',
-    image: 'https://picsum.photos/seed/kk-basket/700/730',
-    images: ['https://picsum.photos/seed/kk-basket/700/730', 'https://picsum.photos/seed/kk-basket-2/700/730', 'https://picsum.photos/seed/kk-basket-3/700/730'] },
+/**
+ * Optional one-off fetch (not used by the live pages below, but
+ * available for anything — e.g. a build script — that just wants a
+ * single snapshot instead of a live subscription).
+ */
+async function fetchProductsOnce() {
+  const productsQuery = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
+  const snapshot = await getDocs(productsQuery);
+  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+}
 
-  { id: 'p6', name: 'Hand-painted Clay Diya Set', category: 'Gift Hampers', categorySlug: 'gifts', price: 420, originalPrice: 550, rating: 5, reviews: 102, tag: 'Sale', createdAt: '2026-02-18',
-    shortDescription: 'A set of six clay diyas, hand-painted in warm festival colors.',
-    description: 'Shaped from local clay and fired in small batches, then hand-painted one at a time — no two diyas in the set are identical. A lovely gift set for festivals, housewarmings, or anyone who loves a bit of warm, flickering light.',
-    image: 'https://picsum.photos/seed/kk-diyas/700/730',
-    images: ['https://picsum.photos/seed/kk-diyas/700/730', 'https://picsum.photos/seed/kk-diyas-2/700/730', 'https://picsum.photos/seed/kk-diyas-3/700/730'] },
+initializeProducts();
 
-  { id: 'p7', name: 'Hand-stitched Jute Tote Bag', category: 'Textile', categorySlug: 'textile', price: 550, originalPrice: null, rating: 4, reviews: 58, tag: null, createdAt: '2026-01-29',
-    shortDescription: 'A durable, everyday tote hand-stitched from natural jute fiber.',
-    description: 'Woven from jute — one of the most sustainable natural fibers there is — and finished with hand-stitched leather-look handles. Roomy enough for groceries, a beach day, or just carrying your everyday essentials.',
-    image: 'https://picsum.photos/seed/kk-jutebag/700/730',
-    images: ['https://picsum.photos/seed/kk-jutebag/700/730', 'https://picsum.photos/seed/kk-jutebag-2/700/730', 'https://picsum.photos/seed/kk-jutebag-3/700/730'] },
-
-  { id: 'p8', name: 'Hand-carved Wooden Mirror', category: 'Home Decor', categorySlug: 'home-decor', price: 1850, originalPrice: null, rating: 5, reviews: 37, tag: null, createdAt: '2026-05-30',
-    shortDescription: 'A round mirror framed in hand-carved sheesham wood.',
-    description: 'Local woodcarvers hand-chisel each frame from solid sheesham wood, a dense, richly grained hardwood native to the Indian subcontinent. The carving pattern is inspired by traditional Bengali temple motifs.',
-    image: 'https://picsum.photos/seed/kk-mirror/700/730',
-    images: ['https://picsum.photos/seed/kk-mirror/700/730', 'https://picsum.photos/seed/kk-mirror-2/700/730', 'https://picsum.photos/seed/kk-mirror-3/700/730'] },
-
-  { id: 'p9', name: 'Hand-thrown Terracotta Planter', category: 'Pottery', categorySlug: 'pottery', price: 780, originalPrice: null, rating: 4, reviews: 22, tag: null, createdAt: '2026-06-02',
-    shortDescription: 'A breathable terracotta planter, wheel-thrown and left unglazed.',
-    description: 'Terracotta\'s natural porosity helps roots breathe and prevents overwatering, making this planter as practical as it is handsome. Comes with a built-in drainage hole and a matching saucer.',
-    image: 'https://picsum.photos/seed/kk-planter/700/730',
-    images: ['https://picsum.photos/seed/kk-planter/700/730', 'https://picsum.photos/seed/kk-planter-2/700/730', 'https://picsum.photos/seed/kk-planter-3/700/730'] },
-
-  { id: 'p10', name: 'Block-printed Cotton Cushion Cover', category: 'Textile', categorySlug: 'textile', price: 620, originalPrice: 780, rating: 4, reviews: 41, tag: 'Sale', createdAt: '2026-04-19',
-    shortDescription: 'A cushion cover hand block-printed with a traditional Bengal motif.',
-    description: 'Hand-carved wooden blocks are dipped in natural dye and pressed one at a time to build this pattern — a slow process that gives each cover slight, lovely variations. Cotton canvas backing with a hidden zip closure.',
-    image: 'https://picsum.photos/seed/kk-cushion/700/730',
-    images: ['https://picsum.photos/seed/kk-cushion/700/730', 'https://picsum.photos/seed/kk-cushion-2/700/730', 'https://picsum.photos/seed/kk-cushion-3/700/730'] },
-
-  { id: 'p11', name: 'Silver Filigree Pendant', category: 'Jewellery', categorySlug: 'jewellery', price: 1250, originalPrice: null, rating: 5, reviews: 29, tag: 'New', createdAt: '2026-06-28',
-    shortDescription: 'A delicate pendant hand-formed from fine silver wire filigree.',
-    description: 'Filigree work involves twisting and soldering hair-thin silver wire into lace-like patterns entirely by hand. This pendant takes a skilled artisan several hours to complete and arrives on a fine silver chain.',
-    image: 'https://picsum.photos/seed/kk-pendant/700/730',
-    images: ['https://picsum.photos/seed/kk-pendant/700/730', 'https://picsum.photos/seed/kk-pendant-2/700/730', 'https://picsum.photos/seed/kk-pendant-3/700/730'] },
-
-  { id: 'p12', name: 'Hand-painted Terracotta Wall Plates', category: 'Wall Art', categorySlug: 'wall-art', price: 1600, originalPrice: null, rating: 4, reviews: 15, tag: null, createdAt: '2026-03-25',
-    shortDescription: 'A set of three decorative terracotta plates, hand-painted for wall display.',
-    description: 'Wheel-thrown, bisque-fired, then hand-painted with folk motifs before a final glaze firing. Comes as a set of three in graduated sizes with wall-mounting hardware included.',
-    image: 'https://picsum.photos/seed/kk-plates/700/730',
-    images: ['https://picsum.photos/seed/kk-plates/700/730', 'https://picsum.photos/seed/kk-plates-2/700/730', 'https://picsum.photos/seed/kk-plates-3/700/730'] },
-
-  { id: 'p13', name: 'Macramé Wall Hanging', category: 'Home Decor', categorySlug: 'home-decor', price: 1100, originalPrice: 1400, rating: 5, reviews: 33, tag: 'Sale', createdAt: '2026-05-08',
-    shortDescription: 'A hand-knotted macramé wall hanging in natural cotton cord.',
-    description: 'Every knot in this piece is tied by hand using undyed cotton cord, finished with a driftwood dowel. A soft, textural accent for any bare wall.',
-    image: 'https://picsum.photos/seed/kk-macrame/700/730',
-    images: ['https://picsum.photos/seed/kk-macrame/700/730', 'https://picsum.photos/seed/kk-macrame-2/700/730', 'https://picsum.photos/seed/kk-macrame-3/700/730'] },
-
-  { id: 'p14', name: 'Artisan Tea & Snack Gift Hamper', category: 'Gift Hampers', categorySlug: 'gifts', price: 1350, originalPrice: null, rating: 5, reviews: 47, tag: null, createdAt: '2026-06-10',
-    shortDescription: 'A curated hamper of Bengal tea, hand-rolled sweets, and a small craft item.',
-    description: 'A thoughtfully packed gift box featuring single-origin Bengal tea, traditional hand-rolled sweets, and a small handmade keepsake — wrapped in reusable cotton fabric instead of plastic.',
-    image: 'https://picsum.photos/seed/kk-hamper/700/730',
-    images: ['https://picsum.photos/seed/kk-hamper/700/730', 'https://picsum.photos/seed/kk-hamper-2/700/730', 'https://picsum.photos/seed/kk-hamper-3/700/730'] },
-
-  { id: 'p15', name: 'Hand-poured Botanical Candle', category: 'Gift Hampers', categorySlug: 'gifts', price: 480, originalPrice: null, rating: 4, reviews: 64, tag: 'New', createdAt: '2026-06-30',
-    shortDescription: 'A soy wax candle hand-poured with real dried botanicals.',
-    description: 'Poured in small batches using soy wax and cotton wicks, then finished with a scatter of dried flowers across the top. Clean-burning, and the jar is reusable once the candle is done.',
-    image: 'https://picsum.photos/seed/kk-candle/700/730',
-    images: ['https://picsum.photos/seed/kk-candle/700/730', 'https://picsum.photos/seed/kk-candle-2/700/730', 'https://picsum.photos/seed/kk-candle-3/700/730'] },
-
-  { id: 'p16', name: 'Resin Coaster Set with Dried Flowers', category: 'Home Decor', categorySlug: 'home-decor', price: 690, originalPrice: null, rating: 4, reviews: 18, tag: null, createdAt: '2026-04-27',
-    shortDescription: 'A set of four resin coasters, each with real pressed flowers sealed inside.',
-    description: 'Real dried flowers are hand-arranged and sealed in food-safe resin, then polished to a glass-like finish. Each coaster in the set is a little different, since the flowers never fall exactly the same way twice.',
-    image: 'https://picsum.photos/seed/kk-coasters/700/730',
-    images: ['https://picsum.photos/seed/kk-coasters/700/730', 'https://picsum.photos/seed/kk-coasters-2/700/730', 'https://picsum.photos/seed/kk-coasters-3/700/730'] },
-];
-
-/** Returns the full demo catalog. Swap for a Firestore query later. */
+/** Returns the full live catalog. */
 function getAllProducts() {
   return KK_PRODUCTS;
 }
@@ -133,12 +103,13 @@ function getProductById(id) {
   return KK_PRODUCTS.find((product) => product.id === id) || null;
 }
 
-/** Very small demo search: matches name or category, case-insensitive. */
-function searchProducts(query) {
-  const q = (query || '').trim().toLowerCase();
+/** Matches name or category, case-insensitive. */
+function searchProducts(searchQuery) {
+  const q = (searchQuery || '').trim().toLowerCase();
   if (!q) return [];
   return KK_PRODUCTS.filter((product) =>
-    product.name.toLowerCase().includes(q) || product.category.toLowerCase().includes(q)
+    (product.name || '').toLowerCase().includes(q) ||
+    (product.category || '').toLowerCase().includes(q)
   );
 }
 
@@ -182,7 +153,7 @@ function filterAndSortProducts(options = {}) {
       list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       break;
     default:
-      // "Featured" — keep catalog order
+      // "Featured" — keep Firestore order (createdAt desc)
       break;
   }
 
@@ -210,9 +181,9 @@ function getRelatedProducts(product, limit = 4) {
 }
 
 /* ---------- Recently viewed (localStorage) ----------
-   PHASE NOTE: fine to keep in localStorage even after Firestore
-   is connected — this is a per-browser convenience feature, not
-   account data that needs to follow the user across devices. */
+   Stays in localStorage even with Firestore connected — this is a
+   per-browser convenience feature, not account data that needs to
+   follow the user across devices. */
 const RECENTLY_VIEWED_KEY = 'kheyalkhusi_recently_viewed';
 const RECENTLY_VIEWED_MAX = 8;
 
@@ -285,70 +256,188 @@ function renderProductCard(product) {
   `;
 }
 
+/** Small loading/error placeholder used by the search + shop grids
+ *  while the first Firestore snapshot is still in flight, or if it
+ *  failed. Kept as plain markup so no CSS file needs to change. */
+function renderProductsStatusMessage(kind) {
+  if (kind === 'error') {
+    return '<p class="products-status products-status-error" style="grid-column:1/-1;text-align:center;padding:2rem 0;">We couldn\'t load products right now. Please refresh the page.</p>';
+  }
+  return '<p class="products-status products-status-loading" style="grid-column:1/-1;text-align:center;padding:2rem 0;">Loading products…</p>';
+}
+
+/* ---------- Expose everything the classic (non-module) page
+   scripts — shop.js, cart.js, wishlist.js — call as globals.
+   Module scripts don't leak declarations onto window automatically,
+   so this is the bridge that keeps every other page unchanged. ---------- */
+window.getAllProducts = getAllProducts;
+window.getProductById = getProductById;
+window.searchProducts = searchProducts;
+window.filterAndSortProducts = filterAndSortProducts;
+window.paginate = paginate;
+window.getRelatedProducts = getRelatedProducts;
+window.renderProductCard = renderProductCard;
+window.renderStars = renderStars;
+window.trackRecentlyViewed = trackRecentlyViewed;
+window.getRecentlyViewed = getRecentlyViewed;
+window.renderProductsStatusMessage = renderProductsStatusMessage;
+window.isProductsReady = () => productsReady;
+window.getProductsError = () => productsError;
+window.fetchProductsOnce = fetchProductsOnce;
+
+/* ============================================================
+   HOMEPAGE — FEATURED PRODUCTS (index.html)
+   Renders up to 8 products from the live Firestore catalog into
+   the [data-home-featured-products] grid. Re-renders whenever
+   products.js pushes a fresh snapshot or an error. No-op on any
+   page that doesn't have that container.
+   ============================================================ */
+const HOME_FEATURED_LIMIT = 8;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('[data-home-featured-products]');
+  if (!grid) return;
+
+  function renderFeatured() {
+    if (!productsReady) {
+      grid.innerHTML = renderProductsStatusMessage('loading');
+      return;
+    }
+
+    if (productsError) {
+      grid.innerHTML = renderProductsStatusMessage('error');
+      return;
+    }
+
+    const featured = getAllProducts().slice(0, HOME_FEATURED_LIMIT);
+
+    if (!featured.length) {
+      // No products yet in Firestore — hide the section's grid area
+      // rather than show a broken empty box.
+      grid.innerHTML = '';
+      return;
+    }
+
+    grid.innerHTML = featured.map(renderProductCard).join('');
+  }
+
+  renderFeatured();
+  window.addEventListener('kk:products-updated', renderFeatured);
+  window.addEventListener('kk:products-error', renderFeatured);
+});
+
 /* ---------- Search results page ----------
-   Reads ?search=<query> from the URL, filters the demo catalog,
-   and renders results.html — including the "no results" state.
-   Runs itself on DOMContentLoaded so no page-specific script tag
-   is needed beyond this file. */
+   Reads ?search=<query> from the URL, filters the live catalog,
+   and renders results.html — including the "no results" and
+   loading/error states. Re-renders automatically whenever Firestore
+   pushes an update. Runs itself on DOMContentLoaded so no
+   page-specific script tag is needed beyond this file. */
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('[data-search-page]');
   if (!page) return;
 
   const params = new URLSearchParams(window.location.search);
-  const query = params.get('search') || '';
+  const searchQuery = params.get('search') || '';
 
   const queryLabel = page.querySelector('[data-search-query]');
-  if (queryLabel) queryLabel.textContent = query;
-
-  const results = searchProducts(query);
+  if (queryLabel) queryLabel.textContent = searchQuery;
 
   const grid = page.querySelector('[data-search-results]');
   const countEl = page.querySelector('[data-search-count]');
   const emptyState = page.querySelector('[data-search-empty]');
 
-  if (countEl) countEl.textContent = results.length;
+  function renderSearchResults() {
+    if (!productsReady) {
+      if (countEl) countEl.textContent = '0';
+      if (emptyState) emptyState.style.display = 'none';
+      if (grid) {
+        grid.style.display = 'grid';
+        grid.innerHTML = renderProductsStatusMessage('loading');
+      }
+      return;
+    }
 
-  if (results.length === 0) {
-    if (grid) grid.style.display = 'none';
-    if (emptyState) emptyState.style.display = 'flex';
-    return;
+    if (productsError) {
+      if (countEl) countEl.textContent = '0';
+      if (emptyState) emptyState.style.display = 'none';
+      if (grid) {
+        grid.style.display = 'grid';
+        grid.innerHTML = renderProductsStatusMessage('error');
+      }
+      return;
+    }
+
+    const results = searchProducts(searchQuery);
+    if (countEl) countEl.textContent = results.length;
+
+    if (results.length === 0) {
+      if (grid) grid.style.display = 'none';
+      if (emptyState) emptyState.style.display = 'flex';
+      return;
+    }
+
+    if (emptyState) emptyState.style.display = 'none';
+    if (grid) {
+      grid.style.display = 'grid';
+      grid.innerHTML = results.map(renderProductCard).join('');
+    }
   }
 
-  if (emptyState) emptyState.style.display = 'none';
-  if (grid) {
-    grid.style.display = 'grid';
-    grid.innerHTML = results.map(renderProductCard).join('');
-  }
+  renderSearchResults();
+  window.addEventListener('kk:products-updated', renderSearchResults);
+  window.addEventListener('kk:products-error', renderSearchResults);
 });
 
 /* ============================================================
    PRODUCT DETAILS PAGE (product.html)
    Reads ?id=<productId> from the URL and renders everything:
    gallery + zoom + lightbox, info panel, tabs, related products,
-   and the recently-viewed strip. No-op on every other page.
+   and the recently-viewed strip. Waits for the first Firestore
+   snapshot before deciding whether the product exists, so shoppers
+   aren't bounced to the 404 page while data is still loading.
+   No-op on every other page.
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   const page = document.querySelector('[data-product-detail-page]');
   if (!page) return;
 
   const params = new URLSearchParams(window.location.search);
-  const product = getProductById(params.get('id'));
+  const productId = params.get('id');
 
-  // If the id is missing or doesn't match a real product, send
-  // shoppers to the friendly 404 page instead of a broken layout.
-  if (!product) {
-    window.location.href = '404.html';
-    return;
+  function initDetailPage() {
+    if (!productsReady) return; // still loading — wait for the next event
+
+    window.removeEventListener('kk:products-updated', initDetailPage);
+    window.removeEventListener('kk:products-error', initDetailPage);
+
+    if (productsError) {
+      console.error('[product.html] Failed to load products:', productsError);
+      window.location.href = '404.html';
+      return;
+    }
+
+    const product = getProductById(productId);
+
+    // If the id is missing or doesn't match a real product, send
+    // shoppers to the friendly 404 page instead of a broken layout.
+    if (!product) {
+      window.location.href = '404.html';
+      return;
+    }
+
+    document.title = `${product.name} — Kheyal Khusi`;
+    trackRecentlyViewed(product.id);
+
+    renderGallery(page, product);
+    renderInfoPanel(page, product);
+    renderTabs(page, product);
+    renderRelated(page, product);
+    renderRecentlyViewedStrip(page, product);
   }
 
-  document.title = `${product.name} — Kheyal Khusi`;
-  trackRecentlyViewed(product.id);
-
-  renderGallery(page, product);
-  renderInfoPanel(page, product);
-  renderTabs(page, product);
-  renderRelated(page, product);
-  renderRecentlyViewedStrip(page, product);
+  initDetailPage();
+  window.addEventListener('kk:products-updated', initDetailPage);
+  window.addEventListener('kk:products-error', initDetailPage);
 });
 
 function renderGallery(page, product) {
@@ -460,6 +549,7 @@ function renderInfoPanel(page, product) {
   // Add to cart (uses addToCart from cart.js)
   const addBtn = page.querySelector('[data-detail-add-to-cart]');
   addBtn?.addEventListener('click', () => {
+    if (window.kkRequireAuth && !window.kkRequireAuth('Please sign up to add items to your cart')) return;
     if (typeof addToCart === 'function') addToCart(product.id, qty);
     if (window.showToast) window.showToast(`Added ${qty} to cart`);
   });

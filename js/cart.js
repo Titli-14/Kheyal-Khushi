@@ -297,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!btn) return;
     const id = btn.dataset.productId;
     if (!id) return;
+    if (window.kkRequireAuth && !window.kkRequireAuth('Please sign up to add items to your cart')) return;
     addToCart(id, 1);
     if (window.showToast) window.showToast('Added to cart');
     renderCartPage();

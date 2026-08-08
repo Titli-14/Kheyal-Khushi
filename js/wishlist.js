@@ -134,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const id = btn.dataset.productId;
     if (!id) return;
 
+    if (window.kkRequireAuth && !window.kkRequireAuth('Please sign up to save items to your wishlist')) return;
+
     const isNowActive = toggleWishlist(id);
     btn.classList.toggle('is-active', isNowActive);
 

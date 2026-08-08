@@ -84,86 +84,8 @@
           <p>Choose a collection and explore pieces created with care, colour and a little bit of kheyal.</p>
         </div>
 
-        <div class="collection-grid">
-         <a class="collection-card collection-card--wide collection-card--lights" href="shop.html?shop=handmade-lights">
-            <div class="collection-card-media">
-              <img src="assets\images\nightlamp.png" alt="Handmade decorative lights" loading="lazy">
-            </div>
-            <div class="collection-card-overlay"></div>
-            <div class="collection-card-content">
-              <span class="collection-number">01</span>
-              <h3>Handmade Lights</h3>
-              <p>Warm little glows made to make your favourite corners feel magical.</p>
-              <span class="collection-link">Explore collection <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="collection-card collection-card--tall collection-card--resin" href="shop.html?shop=resin-art"
-">
-            <div class="collection-card-media">
-              <img src="assets\images\resin art.png" alt="Handmade resin art" loading="lazy">
-            </div>
-            <div class="collection-card-overlay"></div>
-            <div class="collection-card-content">
-              <span class="collection-number">02</span>
-              <h3>Resin Art</h3>
-              <p>Colour, flowers and memories preserved in resin.</p>
-              <span class="collection-link">Explore collection <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="collection-card collection-card--keychains" href="shop.html?shop=resin-keychains">
-            <div class="collection-card-media">
-              <img src="assets\images\resin keychain.png" alt="Personalized resin keychains" loading="lazy">
-            </div>
-            <div class="collection-card-overlay"></div>
-            <div class="collection-card-content">
-              <span class="collection-number">03</span>
-              <h3>Resin Keychains</h3>
-              <p>Tiny keepsakes with a personal touch.</p>
-              <span class="collection-link">Explore collection <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="collection-card collection-card--bouquet collection-card--wide" href="shop.html?shop=ribbon-rose-bouquets">
-            <div class="collection-card-media">
-              <img src="assets\images\ribbon rose bouquet.png" alt="Handmade ribbon rose bouquets" loading="lazy">
-            </div>
-            <div class="collection-card-overlay"></div>
-            <div class="collection-card-content">
-              <span class="collection-number">04</span>
-              <h3>Ribbon Rose Bouquets</h3>
-              <p>Flowers that stay beautiful long after the celebration ends.</p>
-              <span class="collection-link">Explore collection <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="collection-card collection-card--clock" href="shop.html?shop=resin-clocks">
-            <div class="collection-card-media">
-              <img src="assets\images\resin clock.png" alt="Decorative handmade resin clocks" loading="lazy">
-            </div>
-            <div class="collection-card-overlay"></div>
-            <div class="collection-card-content">
-              <span class="collection-number">05</span>
-              <h3>Resin Clocks</h3>
-              <p>Functional decor, handcrafted one clock at a time.</p>
-              <span class="collection-link">Explore collection <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-
-          <a class="collection-card collection-card--custom" href="shop.html?shop=custom-gifts">
-            <div class="collection-card-media">
-              <img src="assets\images\personalised gift.png" alt="Custom personalized handmade gifts" loading="lazy">
-            </div>
-            <div class="collection-card-overlay"></div>
-            <div class="collection-card-content">
-              <span class="collection-number">06</span>
-              <h3>Personalized Gifts</h3>
-              <p>Made for one person, one memory and one special moment.</p>
-              <span class="collection-link">Explore collection <span aria-hidden="true">→</span></span>
-            </div>
-          </a>
-        </div>
+        <!-- Populated live from Firestore by js/categories.js -->
+        <div class="collection-grid" data-category-collections></div>
 
         <div class="category-shop-all">
           <span>Not sure where to start?</span>
@@ -254,6 +176,7 @@
   <script src="js/wishlist.js"></script>
   <script src="js/shop.js"></script>
   <script type="module" src="js/firebase.js"></script>
+  <script type="module" src="js/categories.js"></script>
   <script type="module" src="js/auth.js"></script>
 </body>
 </html>

@@ -4,6 +4,12 @@
    same filter/sort/pagination markup, so one script renders both.
    On category.html, the URL's ?c=<slug> pre-applies a category
    filter and updates the page title automatically.
+
+   Product data now comes from Firestore via products.js
+   (getAllProducts / filterAndSortProducts / etc. are exposed on
+   window there). Since that data loads — and updates — live,
+   render() below re-runs whenever products.js dispatches
+   'kk:products-updated' or 'kk:products-error', not just once.
    ============================================================ */
 
 const PRODUCTS_PER_PAGE = 8;
@@ -116,12 +122,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function render() {
-    const filtered = filterAndSortProducts(state);
-    const { items, page: currentPage, totalPages, totalItems } = paginate(filtered, state.page, PRODUCTS_PER_PAGE);
-
     const grid = page.querySelector('[data-shop-results]');
     const emptyState = page.querySelector('[data-shop-empty]');
     const countEl = page.querySelector('[data-shop-count]');
+
+    // Products load live from Firestore (see products.js). Until the
+    // first snapshot arrives — or if it errors out — show a status
+    // message in the grid instead of an incorrect "no products" empty state.
+    const isReady = typeof window.isProductsReady === 'function' && window.isProductsReady();
+    const loadError = typeof window.getProductsError === 'function' && window.getProductsError();
+
+    if (!isReady || loadError) {
+      if (countEl) countEl.textContent = '0';
+      if (emptyState) emptyState.style.display = 'none';
+      if (grid) {
+        grid.style.display = 'grid';
+        grid.innerHTML = typeof window.renderProductsStatusMessage === 'function'
+          ? window.renderProductsStatusMessage(loadError ? 'error' : 'loading')
+          : '';
+      }
+      renderPagination(0, 0);
+      return;
+    }
+
+    const filtered = filterAndSortProducts(state);
+    const { items, page: currentPage, totalPages, totalItems } = paginate(filtered, state.page, PRODUCTS_PER_PAGE);
 
     if (countEl) countEl.textContent = totalItems;
 
@@ -180,4 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   render();
+
+  // Re-render whenever products.js pushes a fresh Firestore snapshot
+  // (first load, or any later admin-panel add/edit/delete) or hits an error.
+  window.addEventListener('kk:products-updated', render);
+  window.addEventListener('kk:products-error', render);
 });

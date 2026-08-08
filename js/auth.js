@@ -84,6 +84,48 @@ function setButtonLoading(btn, isLoading, loadingText, defaultText) {
   btn.textContent = isLoading ? loadingText : defaultText;
 }
 
+/* ---------- Global auth-state tracking ----------
+   Exposed on window so plain (non-module) scripts — cart.js,
+   wishlist.js, and the product-detail handlers in products.js —
+   can check "is someone signed in?" synchronously before letting
+   an action (add to cart, add to wishlist, checkout) go through. */
+let kkAuthUser = null;
+let kkAuthReady = false;
+
+function applyGlobalAuthState(user) {
+  kkAuthUser = user || null;
+  kkAuthReady = true;
+  window.dispatchEvent(new CustomEvent('kk:auth-state-changed', { detail: { user: kkAuthUser } }));
+}
+
+if (isFirebaseConfigured) {
+  onAuthStateChanged(auth, applyGlobalAuthState);
+} else {
+  applyGlobalAuthState(demoCurrentUser());
+}
+
+function kkIsSignedIn() {
+  return !!kkAuthUser;
+}
+
+/**
+ * Guard for actions that require an account — add to cart, add to
+ * wishlist, checkout/place order. If nobody's signed in, shows an
+ * optional toast, sends the shopper to signup.html (remembering
+ * where to come back to), and returns false so the caller can skip
+ * the action. Returns true when it's safe to proceed.
+ */
+function kkRequireAuth(message) {
+  if (kkIsSignedIn()) return true;
+  if (message && window.showToast) window.showToast(message);
+  const returnTo = window.location.pathname + window.location.search;
+  window.location.href = `signup.html?redirect=${encodeURIComponent(returnTo)}`;
+  return false;
+}
+
+window.kkIsSignedIn = kkIsSignedIn;
+window.kkRequireAuth = kkRequireAuth;
+
 /* ---------- Password show/hide toggle (shared by every auth form) ---------- */
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.password-toggle').forEach((toggle) => {
@@ -103,7 +145,29 @@ document.addEventListener('DOMContentLoaded', () => {
   initForgotPasswordForm();
   initLogoutButtons();
   initHeaderAuthState();
+  guardCheckoutPage();
 });
+
+/* ---------- Checkout guard ----------
+   checkout.html should never be reachable while signed out — bounce
+   to signup with a redirect back to checkout once they finish, same
+   as the add-to-cart / add-to-wishlist guard below. */
+function guardCheckoutPage() {
+  const page = document.querySelector('[data-checkout-page]');
+  if (!page) return;
+
+  function check(user) {
+    if (!user) {
+      window.location.href = `signup.html?redirect=${encodeURIComponent('checkout.html')}`;
+    }
+  }
+
+  if (isFirebaseConfigured) {
+    onAuthStateChanged(auth, check);
+  } else {
+    check(demoCurrentUser());
+  }
+}
 
 /* ---------- Demo-mode helpers (used only when Firebase isn't configured yet) ---------- */
 function demoSignUp(name, email) {
@@ -208,12 +272,20 @@ function initSignupForm() {
       } else {
         demoSignUp(name, email);
       }
-      window.location.href = 'profile.html';
+      window.location.href = getPostAuthRedirect();
     } catch (error) {
       showFormBanner(banner, 'error', friendlyError(error));
       setButtonLoading(submitBtn, false, '', 'Create Account');
     }
   });
+}
+
+/** Reads ?redirect=<path> from the URL (set by kkRequireAuth / the
+ *  checkout guard) so signup/login send shoppers back to whatever
+ *  they were trying to do, instead of always to profile.html. */
+function getPostAuthRedirect(fallback = 'profile.html') {
+  const redirectTo = new URLSearchParams(window.location.search).get('redirect');
+  return redirectTo || fallback;
 }
 
 /* ---------- Login ---------- */
@@ -262,13 +334,13 @@ function initLoginForm() {
     if (userData.role === "admin") {
         window.location.href = "admin/dashboard.html";
     } else {
-        window.location.href = "profile.html";
+        window.location.href = getPostAuthRedirect();
     }
 
 } else {
 
     demoSignIn(email);
-    window.location.href = "profile.html";
+    window.location.href = getPostAuthRedirect();
 
    }
   } catch (error) {
